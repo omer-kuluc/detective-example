@@ -97,6 +97,15 @@ const Home = () => {
         ease: "power4.out"
       });
 
+      // 1. Scroll to deduce
+      gsap.to(".scroll-hint p", {
+        y: 50,
+        duration: 3.25,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+
       // 2. Art of Deduction
       const deductionTl = gsap.timeline({
         scrollTrigger: {
