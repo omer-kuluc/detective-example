@@ -10,7 +10,7 @@
   --slate-800: #1e293b;
 }
 
-.app-container {
+.home-container {
   background-color: black;
   color: var(--slate-200);
   overflow-x: hidden;

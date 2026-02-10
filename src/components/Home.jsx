@@ -132,7 +132,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="app-container" style={{ backgroundColor: 'black' }}>
+    <div ref={containerRef} className="home-container" style={{ backgroundColor: 'black' }}>
       <BouncingCharacters />
 
       {/* Glow Layer */}
