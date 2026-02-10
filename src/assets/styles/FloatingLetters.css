@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+.floating-letter {
+  position: absolute;
+  font-size: 8rem;
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  color: #ffffff;
+  font-style: italic;
+  filter: blur(1.5px);
+  transform-origin: center center;
+  opacity: 0;
+  visibility: hidden;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+}
+
+@media(width>=768px) {
+  .floating-letter {
+    font-size: 10rem;
+    filter: blur(2px);
+  }
+}
+
+@media(width>=1280px) {
+  .floating-letter {
+    font-size: 12rem;
+    filter: blur(2.5px);
+  }
+}
