@@ -11,7 +11,6 @@ const Password = ({ onUnlock }) => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-
       // 1. ADIM: Başlangıç
       gsap.set(containerRef.current, { visibility: "hidden", opacity: 0 });
       gsap.set(phoneRef.current, { opacity: 0, y: 30 });
@@ -53,7 +52,6 @@ const Password = ({ onUnlock }) => {
         });
       };
 
-      // Geçiş yapacağımız için repeat: -1 kaldırıldı
       const tl = gsap.timeline({ delay: 1 });
 
       // --- 1. HAK: 1895 (Hata) ---
@@ -120,11 +118,11 @@ const Password = ({ onUnlock }) => {
         })
         .to(guessMsgRef.current, { opacity: 1, color: '#22c55e', duration: 0.3 })
         .to(inputRef.current, { scale: 1.1, duration: 0.4 })
-        .to({}, { duration: 1.5 })
-        // Home'a geçiş için yumuşak bir kararma
-        .to(containerRef.current, { opacity: 0, duration: 1, ease: "power2.inOut" })
+        .to({}, { duration: 1 })
+        // Home'a geçmeden önce ekranı karartıyoruz
+        .to(containerRef.current, { opacity: 0, duration: 0.8, ease: "power2.inOut" })
         .call(() => {
-          if (onUnlock) onUnlock(); // Home bileşenine geçişi tetikler
+          if (onUnlock) onUnlock();
         });
 
     }, containerRef);
@@ -133,7 +131,7 @@ const Password = ({ onUnlock }) => {
   }, [onUnlock]);
 
   return (
-    <div ref={containerRef} className="password-main-container">
+    <div ref={containerRef} className="password-main-container" style={{ backgroundColor: 'black' }}>
       <div className="floating-letters-container">
         <FloatingLetters char="S" />
         <FloatingLetters char="H" />

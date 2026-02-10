@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Search, Fingerprint, Eye, Zap } from 'lucide-react';
@@ -25,10 +25,8 @@ const BouncingCharacters = () => {
         const d = data[i];
         d.x += d.vx;
         d.y += d.vy;
-
         if (d.x <= 0 || d.x >= window.innerWidth - 100) d.vx *= -1;
         if (d.y <= 0 || d.y >= window.innerHeight - 100) d.vy *= -1;
-
         el.style.transform = `translate(${d.x}px, ${d.y}px)`;
       });
       animationFrameId = requestAnimationFrame(update);
@@ -56,8 +54,14 @@ const BouncingCharacters = () => {
 const Home = () => {
   const containerRef = useRef(null);
 
-  useEffect(() => {
+  // Flash engelleme için useLayoutEffect
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+
+      // Sayfa yüklenir yüklenmez görünmez yap ve sonra fade-in yap
+      gsap.set(containerRef.current, { opacity: 0 });
+      gsap.to(containerRef.current, { opacity: 1, duration: 1.2, ease: "power2.out" });
+
       // 1. Hero Reveal
       gsap.from(".hero-text span", {
         y: 100,
@@ -128,7 +132,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="app-container">
+    <div ref={containerRef} className="app-container" style={{ backgroundColor: 'black' }}>
       <BouncingCharacters />
 
       {/* Glow Layer */}
@@ -242,7 +246,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Global Overlays */}
       <div className="scroll-progress-container">
         <div className="scroll-progress-bar"></div>
       </div>

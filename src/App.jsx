@@ -7,13 +7,13 @@ function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
 
   return (
-    <>
+    <div style={{ backgroundColor: 'black', minHeight: '100vh' }}>
       {!isUnlocked ? (
         <Password onUnlock={() => setIsUnlocked(true)} />
       ) : (
         <Home />
       )}
-    </>
+    </div>
   )
 }
 
