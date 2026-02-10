@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import FloatingLetters from './FloatingLetters';
 
-const Password = () => {
+const Password = ({ onUnlock }) => {
   const containerRef = useRef(null);
   const phoneRef = useRef(null);
   const inputRef = useRef(null);
@@ -53,7 +53,8 @@ const Password = () => {
         });
       };
 
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 2, delay: 1 });
+      // Geçiş yapacağımız için repeat: -1 kaldırıldı
+      const tl = gsap.timeline({ delay: 1 });
 
       // --- 1. HAK: 1895 (Hata) ---
       tl.to({}, { duration: 0.5 })
@@ -120,20 +121,16 @@ const Password = () => {
         .to(guessMsgRef.current, { opacity: 1, color: '#22c55e', duration: 0.3 })
         .to(inputRef.current, { scale: 1.1, duration: 0.4 })
         .to({}, { duration: 1.5 })
-        .to(phoneRef.current, { opacity: 0, duration: 1.75 })
+        // Home'a geçiş için yumuşak bir kararma
+        .to(containerRef.current, { opacity: 0, duration: 1, ease: "power2.inOut" })
         .call(() => {
-          clearSlots();
-          setPassColor('#ffffff');
-          setMessage('');
-          gsap.set(inputRef.current, { scale: 1, x: 0 });
-          gsap.set(guessMsgRef.current, { color: '#ffffff' });
-        })
-        .to(phoneRef.current, { opacity: 1, duration: 1.75 });
+          if (onUnlock) onUnlock(); // Home bileşenine geçişi tetikler
+        });
 
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [onUnlock]);
 
   return (
     <div ref={containerRef} className="password-main-container">

@@ -4,10 +4,15 @@ import Password from './components/Password'
 import Home from './components/Home'
 
 function App() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   return (
     <>
-      <Home />
+      {!isUnlocked ? (
+        <Password onUnlock={() => setIsUnlocked(true)} />
+      ) : (
+        <Home />
+      )}
     </>
   )
 }
