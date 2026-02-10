@@ -1,0 +1,472 @@
+/* Mobil Kodları (Varsayılan) */
+:root {
+  --cyan-500: #06b6d4;
+  --cyan-400: #22d3ee;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+}
+
+.app-container {
+  background-color: black;
+  color: var(--slate-200);
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+/* Bouncing Elements */
+.bouncing-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.bouncing-char {
+  position: absolute;
+  color: rgba(6, 182, 212, 0.1);
+  font-weight: 900;
+  font-size: 100px;
+  line-height: 1;
+  will-change: transform;
+}
+
+/* Glow Background */
+.glow-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.glow-top {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(22, 78, 99, 0.3);
+  border-radius: 9999px;
+  filter: blur(80px);
+}
+
+.glow-bottom {
+  position: absolute;
+  bottom: 25%;
+  right: 25%;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(30, 58, 138, 0.3);
+  border-radius: 9999px;
+  filter: blur(80px);
+}
+
+.floating-detail {
+  position: absolute;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(34, 211, 238, 0.4);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.hero-text {
+  font-size: 3.5rem;
+  font-weight: 700;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  padding: 0 1rem;
+  text-transform: uppercase;
+}
+
+.hero-text .spacer {
+  width: 1.5rem;
+}
+
+.hero-divider-wrapper {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--slate-500);
+}
+
+.divider-line {
+  height: 1px;
+  width: 3rem;
+  background-color: var(--slate-800);
+}
+
+.search-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--cyan-500);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  animation: bounce 1s infinite;
+}
+
+.scroll-hint p {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
+/* Deduction Section */
+.deduction-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.deduction-bg-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.deduction-bg-text h2 {
+  font-size: 15vw;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  font-family: monospace;
+}
+
+.deduction-content {
+  position: relative;
+  text-align: center;
+}
+
+.deduction-title-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  padding: 0 1rem;
+}
+
+.deduction-title-grid .spacer {
+  width: 2rem;
+}
+
+.deduction-underline {
+  height: 4px;
+  background-color: var(--cyan-500);
+  margin: 1rem auto 0;
+  width: 75%;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+}
+
+.deduction-icons-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.5rem;
+  opacity: 0.6;
+}
+
+.icon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-box .icon {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--cyan-400);
+}
+
+.icon-box p {
+  font-size: 10px;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+/* Sociopath Section */
+.sociopath-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background-color: #050505;
+}
+
+.sociopath-container {
+  max-width: 72rem;
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sociopath-main {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: var(--slate-400);
+  font-style: italic;
+}
+
+.psychopath-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 1rem;
+  font-weight: 700;
+  color: rgba(127, 29, 29, 0.4);
+}
+
+.psychopath-strikethrough {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 4px;
+  background-color: #dc2626;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+.sociopath-secondary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.secondary-label {
+  font-size: 1.25rem;
+  color: var(--slate-500);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.high-functioning {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1;
+}
+
+.research-badge {
+  margin-top: 2rem;
+  background-color: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+}
+
+.research-badge p {
+  color: var(--cyan-400);
+  font-size: 12px;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+/* Outro Section */
+.outro-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+
+.outro-group {
+  text-align: center;
+  cursor: pointer;
+}
+
+.outro-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.outro-title-wrapper h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: color 0.5s;
+  text-transform: uppercase;
+}
+
+.outro-group:hover h3 {
+  color: var(--cyan-400);
+}
+
+.title-glow {
+  position: absolute;
+  inset: -0.5rem;
+  background-color: rgba(6, 182, 212, 0.2);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.7s;
+  border-radius: 9999px;
+}
+
+.outro-group:hover .title-glow {
+  opacity: 1;
+}
+
+.outro-tagline {
+  color: var(--slate-600);
+  letter-spacing: 0.8em;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-top: 1rem;
+}
+
+.outro-footer {
+  margin-top: 6rem;
+}
+
+.footer-line {
+  height: 80px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan-500), transparent);
+  margin: 0 auto 1rem;
+}
+
+.outro-footer p {
+  font-size: 10px;
+  color: var(--slate-700);
+  font-family: monospace;
+}
+
+/* Overlays */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(6, 182, 212, 0.3);
+  z-index: 50;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background-color: var(--cyan-400);
+  box-shadow: 0 0 10px var(--cyan-400);
+  width: 0;
+}
+
+.scanline-effect {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  background-size: 100% 2px, 3px 100%;
+  opacity: 0.2;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media(width>=768px) {
+  .bouncing-char {
+    font-size: 150px;
+  }
+
+  .glow-top,
+  .glow-bottom {
+    width: 384px;
+    height: 384px;
+    filter: blur(120px);
+  }
+
+  .hero-text {
+    font-size: 6rem;
+    gap: 1rem;
+  }
+
+  .hero-text .spacer {
+    width: 3rem;
+  }
+
+  .deduction-title-grid {
+    font-size: 5rem;
+  }
+
+  .deduction-icons-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sociopath-main {
+    font-size: 3rem;
+  }
+
+  .high-functioning {
+    font-size: 5rem;
+  }
+
+  .outro-title-wrapper h3 {
+    font-size: 4rem;
+  }
+}
+
+@media(width>=1280px) {
+  .hero-text {
+    font-size: 8rem;
+  }
+
+  .high-functioning {
+    font-size: 8rem;
+  }
+}
