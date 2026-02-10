@@ -10,11 +10,12 @@ const BouncingCharacters = () => {
   const elementsRef = useRef([]);
 
   useEffect(() => {
+    // Başlangıç verilerini oluştur
     const data = chars.map(() => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      vx: (Math.random() - 0.5) * 2,
-      vy: (Math.random() - 0.5) * 2,
+      x: Math.random() * (window.innerWidth - 150),
+      y: Math.random() * (window.innerHeight - 150),
+      vx: (Math.random() - 0.5) * 3, // Hızı biraz artırdık
+      vy: (Math.random() - 0.5) * 3,
     }));
 
     let animationFrameId;
@@ -23,10 +24,37 @@ const BouncingCharacters = () => {
       elementsRef.current.forEach((el, i) => {
         if (!el) return;
         const d = data[i];
+
+        // Pozisyonu güncelle
         d.x += d.vx;
         d.y += d.vy;
-        if (d.x <= 0 || d.x >= window.innerWidth - 100) d.vx *= -1;
-        if (d.y <= 0 || d.y >= window.innerHeight - 100) d.vy *= -1;
+
+        // Karakter genişlik ve yükseklik tahmini (150px font boyutu için)
+        const size = 150;
+
+        // Kenarlara çarpma kontrolü ve "Takılma" önleyici düzeltme
+        // Sol kenar
+        if (d.x <= 0) {
+          d.vx = Math.abs(d.vx); // Hızı pozitif yap
+          d.x = 0; // Pozisyonu sıfıra sabitle
+        }
+        // Sağ kenar
+        else if (d.x >= window.innerWidth - size) {
+          d.vx = -Math.abs(d.vx); // Hızı negatif yap
+          d.x = window.innerWidth - size; // Pozisyonu içeri çek
+        }
+
+        // Üst kenar
+        if (d.y <= 0) {
+          d.vy = Math.abs(d.vy);
+          d.y = 0;
+        }
+        // Alt kenar
+        else if (d.y >= window.innerHeight - size) {
+          d.vy = -Math.abs(d.vy);
+          d.y = window.innerHeight - size;
+        }
+
         el.style.transform = `translate(${d.x}px, ${d.y}px)`;
       });
       animationFrameId = requestAnimationFrame(update);
@@ -54,10 +82,8 @@ const BouncingCharacters = () => {
 const Home = () => {
   const containerRef = useRef(null);
 
-  // Flash engelleme için useLayoutEffect
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-
       // Sayfa yüklenir yüklenmez görünmez yap ve sonra fade-in yap
       gsap.set(containerRef.current, { opacity: 0 });
       gsap.to(containerRef.current, { opacity: 1, duration: 1.2, ease: "power2.out" });
@@ -135,7 +161,6 @@ const Home = () => {
     <div ref={containerRef} className="home-container" style={{ backgroundColor: 'black' }}>
       <BouncingCharacters />
 
-      {/* Glow Layer */}
       <div className="glow-layer">
         <div className="glow-top" />
         <div className="glow-bottom" />
@@ -150,7 +175,6 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="text-center">
           <h1 className="hero-text">
@@ -171,7 +195,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Deduction Section */}
       <section className="deduction-section">
         <div className="deduction-bg-text">
           <h2>DATA DATA DATA</h2>
@@ -207,7 +230,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Sociopath Section */}
       <section className="sociopath-section">
         <div className="sociopath-container">
           <div className="sociopath-main">
@@ -231,7 +253,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Outro Section */}
       <section className="outro-section">
         <div className="outro-group">
           <div className="outro-title-wrapper">
