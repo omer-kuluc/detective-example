@@ -100,6 +100,23 @@
   width: 1.1rem;
 }
 
+/* Hero Section altındaki yeni stiller */
+.hero-description {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-description-text {
+  color: var(--slate-400);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
 .hero-divider-wrapper {
   margin-top: 3rem;
   display: flex;
@@ -222,7 +239,6 @@
 
 /* Sociopath Section */
 .sociopath-section {
-  position: relative;
   min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;
@@ -242,12 +258,27 @@
   align-items: center;
 }
 
+/* Sociopath Section İçindeki Yeni Tanıtım Metni */
+.sociopath-intro-text {
+  font-size: 1rem;
+  color: var(--slate-500);
+  text-align: center;
+  max-width: 80%;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  border-left: 2px solid var(--cyan-500);
+  padding-left: 1rem;
+}
+
 .sociopath-main {
   font-size: 1.5rem;
   font-weight: 300;
   margin-bottom: 1rem;
   color: var(--slate-400);
   font-style: italic;
+  text-align: center;
 }
 
 .psychopath-wrapper {
@@ -326,7 +357,7 @@
 }
 
 .outro-title-wrapper h3 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   transition: color 0.5s;
@@ -353,10 +384,12 @@
 
 .outro-tagline {
   color: var(--slate-600);
-  letter-spacing: 0.8em;
-  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
   text-transform: uppercase;
   margin-top: 1rem;
+  font-style: italic;
+  font-weight: 700;
 }
 
 .outro-footer {
@@ -368,12 +401,16 @@
   width: 1px;
   background: linear-gradient(to bottom, var(--cyan-500), transparent);
   margin: 0 auto 1rem;
+
 }
 
 .outro-footer p {
-  font-size: 10px;
+  font-size: 1rem;
+  font-style: italic;
   color: var(--slate-700);
   font-family: "Lato", sans-serif;
+  color: var(--slate-500);
+  font-weight: 900;
 }
 
 /* Overlays */
@@ -465,7 +502,7 @@
   }
 
   .sociopath-section {
-    padding-top: 75px;
+    padding-top: 100px;
   }
 
   .high-functioning {

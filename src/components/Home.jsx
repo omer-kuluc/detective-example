@@ -10,11 +10,10 @@ const BouncingCharacters = () => {
   const elementsRef = useRef([]);
 
   useEffect(() => {
-    // Başlangıç verilerini oluştur
     const data = chars.map(() => ({
       x: Math.random() * (window.innerWidth - 150),
       y: Math.random() * (window.innerHeight - 150),
-      vx: (Math.random() - 0.5) * 3, // Hızı biraz artırdık
+      vx: (Math.random() - 0.5) * 3,
       vy: (Math.random() - 0.5) * 3,
     }));
 
@@ -24,36 +23,15 @@ const BouncingCharacters = () => {
       elementsRef.current.forEach((el, i) => {
         if (!el) return;
         const d = data[i];
-
-        // Pozisyonu güncelle
         d.x += d.vx;
         d.y += d.vy;
-
-        // Karakter genişlik ve yükseklik tahmini (150px font boyutu için)
         const size = 150;
 
-        // Kenarlara çarpma kontrolü ve "Takılma" önleyici düzeltme
-        // Sol kenar
-        if (d.x <= 0) {
-          d.vx = Math.abs(d.vx); // Hızı pozitif yap
-          d.x = 0; // Pozisyonu sıfıra sabitle
-        }
-        // Sağ kenar
-        else if (d.x >= window.innerWidth - size) {
-          d.vx = -Math.abs(d.vx); // Hızı negatif yap
-          d.x = window.innerWidth - size; // Pozisyonu içeri çek
-        }
+        if (d.x <= 0) { d.vx = Math.abs(d.vx); d.x = 0; }
+        else if (d.x >= window.innerWidth - size) { d.vx = -Math.abs(d.vx); d.x = window.innerWidth - size; }
 
-        // Üst kenar
-        if (d.y <= 0) {
-          d.vy = Math.abs(d.vy);
-          d.y = 0;
-        }
-        // Alt kenar
-        else if (d.y >= window.innerHeight - size) {
-          d.vy = -Math.abs(d.vy);
-          d.y = window.innerHeight - size;
-        }
+        if (d.y <= 0) { d.vy = Math.abs(d.vy); d.y = 0; }
+        else if (d.y >= window.innerHeight - size) { d.vy = -Math.abs(d.vy); d.y = window.innerHeight - size; }
 
         el.style.transform = `translate(${d.x}px, ${d.y}px)`;
       });
@@ -84,20 +62,28 @@ const Home = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Sayfa yüklenir yüklenmez görünmez yap ve sonra fade-in yap
       gsap.set(containerRef.current, { opacity: 0 });
       gsap.to(containerRef.current, { opacity: 1, duration: 1.2, ease: "power2.out" });
 
       // 1. Hero Reveal
-      gsap.from(".hero-text span", {
+      const heroTl = gsap.timeline();
+
+      heroTl.from(".hero-text span", {
         y: 100,
         opacity: 0,
         duration: 1.5,
         stagger: 0.1,
         ease: "power4.out"
-      });
+      })
+        // Yeni Tanıtım Yazısı Animasyonu
+        .from(".hero-description-text", {
+          opacity: 0,
+          y: 50,
+          duration: 1.5,
+          stagger: 0.4,
+          ease: "power2.out"
+        }, "-=1.75");
 
-      // 1. Scroll to deduce
       gsap.to(".scroll-hint p", {
         y: 50,
         duration: 3.25,
@@ -142,8 +128,15 @@ const Home = () => {
       });
 
       sociopathTl
-        .from(".sociopath-main", { xPercent: -100, opacity: 0, duration: 1.5 })
-        .from(".sociopath-secondary", { xPercent: 100, opacity: 0, duration: 1.5 }, "-=1.5")
+        // Yeni: Giriş metni yukarıdan yavaşça belirsin
+        .from(".sociopath-intro-text", {
+          y: -50,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out"
+        })
+        .from(".sociopath-main", { xPercent: -125, opacity: 0, duration: 1.5 }, "-=0.5")
+        .from(".sociopath-secondary", { xPercent: 125, opacity: 0, duration: 1.5 }, "-=1.5")
         .to(".psychopath-strikethrough", { width: "100%", duration: 1, ease: "none" })
         .from(".high-functioning", {
           scale: 0.8,
@@ -186,6 +179,10 @@ const Home = () => {
 
       <section className="hero-section">
         <div className="text-center">
+          <div className="hero-description">
+            <p className='hero-description-text'>A consulting mind navigating the fog of logic.</p>
+          </div>
+
           <h1 className="hero-text">
             {"THE DETECTIVE".split("").map((char, i) => (
               <span key={i} className={char === ' ' ? 'spacer' : ''}>
@@ -193,6 +190,12 @@ const Home = () => {
               </span>
             ))}
           </h1>
+
+          {/* Yeni Tanıtım Bölümü */}
+          <div className="hero-description">
+            <p className='hero-description-text'>Where you only see, he observes.</p>
+          </div>
+
           <div className="hero-divider-wrapper">
             <div className="divider-line" />
             <Search className="search-icon" />
@@ -241,17 +244,20 @@ const Home = () => {
 
       <section className="sociopath-section">
         <div className="sociopath-container">
+          <div className="sociopath-intro-text">
+            For who wonders, <br />although he may seem devoid of emotions, don't be
+            afraid.
+          </div>
           <div className="sociopath-main">
-            "I'm not a
+            He's not a
             <span className="psychopath-wrapper">
               psychopath
               <span className="psychopath-strikethrough"></span>
             </span>
-            Anderson,"
           </div>
 
           <div className="sociopath-secondary">
-            <p className="secondary-label">I'm a</p>
+            <p className="secondary-label">just a </p>
             <h2 className="high-functioning">
               HIGH-FUNCTIONING <br /> SOCIOPATH
             </h2>
@@ -268,10 +274,10 @@ const Home = () => {
             <h3>THE DETECTIVE</h3>
             <div className="title-glow"></div>
           </div>
-          <p className="outro-tagline">The Game is Afoot</p>
+          <p className="outro-tagline">You know where he is</p>
           <div className="outro-footer">
             <div className="footer-line"></div>
-            <p>Deduction sequence complete</p>
+            <p>The chair is waiting for you</p>
           </div>
         </div>
       </section>
