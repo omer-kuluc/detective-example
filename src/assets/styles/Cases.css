@@ -1,9 +1,460 @@
+/* --- GENEL KONTEYNER --- */
 .cases-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  font-size: 2rem;
-  background-color: #fff;
+  background-color: #000;
+  padding: 80px 1.5rem 5rem;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
 
+.cases-intro {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.dossier-id {
+  color: #06b6d4;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 1rem;
+}
+
+.cases-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.title-underline {
+  height: 2px;
+  width: 50px;
+  background: #06b6d4;
+  margin: 1rem auto;
+}
+
+.case-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 5rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.case-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  background: #080808;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1. Pink Case */
+.pink-case-art .suitcase-body {
+  width: 90px;
+  height: 120px;
+  background: #db2777;
+  border-radius: 8px;
+  position: relative;
+}
+
+.pink-case-art .handle {
+  width: 25px;
+  height: 12px;
+  border: 4px solid #db2777;
+  border-bottom: 0;
+  position: absolute;
+  top: -12px;
+  left: 32px;
+  border-radius: 4px 4px 0 0;
+}
+
+.pink-case-art .wheel-l,
+.pink-case-art .wheel-r {
+  width: 10px;
+  height: 10px;
+  background: #222;
+  position: absolute;
+  bottom: -5px;
+  border-radius: 50%;
+}
+
+.pink-case-art .wheel-l {
+  left: 15px;
+}
+
+.pink-case-art .wheel-r {
+  right: 15px;
+}
+
+/* 2. Shoe Art (Frontal Çift Ayakkabı) */
+.shoe-pair {
+  display: flex;
+  gap: 20px;
+}
+
+.shoe-frontal {
+  width: 60px;
+  height: 100px;
+  background: #1e3a8a;
+  border-radius: 30px 30px 10px 10px;
+  position: relative;
+  border: 2px solid #2563eb;
+}
+
+.shoe-toe {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: #f8fafc;
+  border-radius: 5px 5px 10px 10px;
+}
+
+.shoe-laces-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.lace {
+  width: 30px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* 3. Phone Art (Detaylı Sherlocked) */
+.phone-visual-art .phone-chassis {
+  width: 110px;
+  height: 200px;
+  background: #1a1a1a;
+  border: 4px solid #333;
+  border-radius: 20px;
+  position: relative;
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.phone-screen-display {
+  width: 100%;
+  height: 160px;
+  background: #000;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sherlocked-ui {
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.ui-iam {
+  font-size: 0.6rem;
+  color: #fff;
+  letter-spacing: 4px;
+  display: block;
+  opacity: 0.8;
+}
+
+.ui-sher {
+  font-size: 1.4rem;
+  color: #06b6d4;
+  font-weight: 900;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.ui-locked {
+  font-size: 0.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: 300;
+}
+
+.ui-lock-icon {
+  margin-top: 15px;
+  color: #444;
+}
+
+.phone-home-btn {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 4. Hospital Art (Gerçekçi Çatı & Lazarus) */
+.hospital-rooftop-art {
+  background: linear-gradient(#0f172a, #000);
+}
+
+.hospital-building {
+  width: 220px;
+  height: 180px;
+  position: relative;
+  bottom: -50px;
+}
+
+.building-face {
+  width: 100%;
+  height: 100%;
+  background: #1e293b;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+.windows-grid {
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle, #334155 20%, transparent 20%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.roof-top-ledge {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 20px;
+  background: #0f172a;
+  border-bottom: 3px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lazarus-graffiti {
+  color: rgba(239, 68, 68, 0.6);
+  font-family: monospace;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.falling-sherlock {
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  box-shadow: 0 0 10px #fff;
+}
+
+/* 5. Camera Art */
+.camera-body {
+  width: 130px;
+  height: 85px;
+  background: #1a1a1a;
+  border-radius: 8px;
+  position: relative;
+}
+
+.lens-outer {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #111;
+  position: absolute;
+  top: 15px;
+  left: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #222;
+}
+
+.lens-inner {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid #06b6d4;
+}
+
+.camera-shutter {
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 25px;
+  height: 8px;
+  background: #334155;
+  border-radius: 3px;
+}
+
+.camera-flash {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 18px;
+  height: 12px;
+  background: #475569;
+  border-radius: 2px;
+}
+
+/* 6. Eye Art & Modern Glasses */
+.modern-glasses {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+.glass-lens {
+  width: 85px;
+  height: 50px;
+  background: rgba(6, 182, 212, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-bridge {
+  width: 20px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.rec-overlay {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.eye-left,
+.eye-right {
+  width: 50px;
+  height: 25px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iris {
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #22d3ee 0%, #0891b2 70%, #000 100%);
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+/* --- INFO STİLLERİ --- */
+.case-number {
+  color: #06b6d4;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.case-info h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.case-info p {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.case-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+  color: #475569;
+  font-weight: bold;
+}
+
+.case-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* --- RESPONSIVE --- */
+@media(width>=768px) {
+  .cases-title {
+    font-size: 4rem;
+  }
+
+  .case-item {
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    padding: 40px;
+  }
+
+  .case-item.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .case-graphic,
+  .case-info {
+    width: 50%;
+  }
+
+  .case-info h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media(width>=1280px) {
+  .cases-container {
+    padding: 120px 15% 10rem;
+  }
+
+  .case-item {
+    gap: 6rem;
+  }
 }
