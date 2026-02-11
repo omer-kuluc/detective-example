@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Search, Fingerprint, Eye, Zap } from 'lucide-react';
+import { Search, Eye, Music, HeartOff } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -142,8 +142,8 @@ const Home = () => {
       });
 
       sociopathTl
-        .from(".sociopath-main", { xPercent: -150, opacity: 0, duration: 2 })
-        .from(".sociopath-secondary", { xPercent: 150, opacity: 0, duration: 2 }, "-=1.5")
+        .from(".sociopath-main", { xPercent: -100, opacity: 0, duration: 1.5 })
+        .from(".sociopath-secondary", { xPercent: 100, opacity: 0, duration: 1.5 }, "-=1.5")
         .to(".psychopath-strikethrough", { width: "100%", duration: 1, ease: "none" })
         .from(".high-functioning", {
           scale: 0.8,
@@ -220,20 +220,20 @@ const Home = () => {
 
           <div className="deduction-icons-grid">
             <div className="icon-box">
-              <Fingerprint className="icon" />
-              <p>Biometric Scan</p>
+              <Music className="icon" />
+              <p>To Think</p>
             </div>
             <div className="icon-box">
               <Eye className="icon" />
-              <p>Visual Cortex</p>
+              <p>To Observe</p>
             </div>
             <div className="icon-box">
-              <Zap className="icon" />
-              <p>Synaptic Burst</p>
+              <HeartOff className="icon" />
+              <p>To Not Lose</p>
             </div>
             <div className="icon-box">
               <Search className="icon" />
-              <p>Pattern Recognition</p>
+              <p>To Clue</p>
             </div>
           </div>
         </div>
