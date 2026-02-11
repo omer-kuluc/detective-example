@@ -1,0 +1,120 @@
+/* --- MOBİL KODLARI (Varsayılan) --- */
+.header-container {
+  background-color: #000;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Mobil Menü Linkleri (Gizli) */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  padding: 2rem 0;
+  text-align: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid #222;
+}
+
+.nav-links.mobile-show {
+  display: flex;
+}
+
+.nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Burger Menu İkonu */
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 2px;
+  background-color: white;
+  transition: 0.3s;
+}
+
+/* Burger Animasyonu (Opsiyonel) */
+.bar.open:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+@media(width>=768px) {
+
+  /* --- TABLET KODLARI --- */
+  .burger-menu {
+    display: none;
+    /* Burger menüyü gizle */
+  }
+
+  .nav-links {
+    display: flex;
+    /* Linkleri yan yana getir */
+    flex-direction: row;
+    position: static;
+    width: auto;
+    padding: 0;
+    gap: 1.5rem;
+    border: none;
+  }
+
+  .nav-links a {
+    font-size: 1rem;
+  }
+}
+
+
+@media(width>=1280px) {
+
+  /* --- DESKTOP KODLARI --- */
+  .header-container {
+    padding: 1.5rem 5rem;
+  }
+
+  .nav-links {
+    gap: 3rem;
+  }
+
+  .nav-links a:hover {
+    color: #fff;
+  }
+}
