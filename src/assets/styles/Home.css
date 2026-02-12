@@ -410,6 +410,7 @@
   font-family: "Lato", sans-serif;
   color: var(--slate-500);
   font-weight: 900;
+  margin-bottom: 1rem;
 }
 
 /* Overlays */

@@ -276,6 +276,7 @@ const Home = () => {
           </div>
           <p className="outro-tagline">You know where he is</p>
           <div className="outro-footer">
+            <p>If you want to solve the problem,</p>
             <div className="footer-line"></div>
             <p>The chair is waiting for you</p>
           </div>
