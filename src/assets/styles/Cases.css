@@ -596,6 +596,19 @@
   z-index: 10;
 }
 
+.fall-text {
+  font-style: italic;
+  font-weight: 700;
+}
+
+.staying-text {
+  color: #fff694;
+}
+
+.alive-text {
+  color: #40bee9;
+}
+
 /* Case 5: Wedding (Camera) */
 .camera-body {
   width: 13rem;
@@ -666,213 +679,305 @@
 }
 
 /* Case 6: Mind Palace (Eyes) */
+/* --- Case 6: Mind Palace (Glasses & Dead Eyes) --- */
+
 .mind-palace-art {
   width: 100%;
-  max-width: 460px;
+  max-width: 600px;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  position: relative;
+  perspective: 1000px;
 }
 
-.rec-indicator {
-  position: absolute;
-  top: -4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 40;
-}
-
-.rec-badge {
+/* --- Gözlük İskeleti --- */
+.glasses-structure {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #ef4444;
-  font-weight: 900;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 0.5rem 1.5rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+  justify-content: center;
+  gap: 1.5rem;
+  /* İki cam arası mesafe */
+  padding: 2rem 0;
+  position: relative;
+}
+
+/* Altın Köprü (Görseldeki ince tel) */
+.bridge-gold {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2rem;
+  height: 0.8rem;
+  border-top: 2px solid #d4af37;
+  /* Altın rengi */
+  border-radius: 50% 50% 0 0;
+  z-index: 20;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Burunluklar */
+.nose-pad {
+  position: absolute;
+  top: 48%;
+  width: 6px;
+  height: 10px;
+  background: rgba(255, 255, 220, 0.4);
+  border-radius: 3px;
+  border: 1px solid #d4af37;
+  z-index: 15;
+}
+
+.pad-left {
+  left: 47%;
+  transform: rotate(10deg);
+}
+
+.pad-right {
+  right: 47%;
+  transform: rotate(-10deg);
+}
+
+/* Sap Bağlantı Noktaları (Lug) */
+.temple-lug {
+  position: absolute;
+  top: 42%;
+  width: 10px;
+  height: 4px;
+  background: #d4af37;
+  z-index: 20;
+}
+
+.lug-left {
+  left: 2px;
+}
+
+.lug-right {
+  right: 2px;
+}
+
+/* --- Oval Lens (Görseldeki Elips Gözlük) --- */
+.lens-oval {
+  position: relative;
+  width: 12rem;
+  /* Genişlik */
+  height: 6rem;
+  /* Yükseklik (Tam oval için) */
+  border-radius: 50%;
+  /* Tam oval şekil */
+  /* Çerçevesiz (Rimless) görünüm: Border yok, sadece gölge ve parlama */
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  /* Camın dışına taşan her şeyi kes */
+  transition: transform 0.5s ease;
+}
+
+.group:hover .lens-oval {
+  transform: scale(1.02);
+}
+
+/* Camın kenar parlaması (Kesilmiş cam efekti) */
+.rim-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+/* --- Cam Yüzeyi --- */
+.glass-surface {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05), transparent 60%);
+}
+
+/* --- Göz Maskesi (Eye Aperture) --- */
+/* İrisin yuvarlak kalıp, gözün badem şeklinde görünmesini sağlayan katman */
+.eye-mask {
+  width: 7rem;
+  /* Göz açıklığı genişliği */
+  height: 3.5rem;
+  /* Göz açıklığı yüksekliği (Kısık bakış) */
+  /* Badem şekli oluşturma */
+  border-radius: 100%;
+  /* Bu noktada clip-path kullanarak daha keskin bir badem şekli veriyoruz */
+  clip-path: ellipse(100% 70% at 50% 50%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  /* Göz çukuru karanlığı */
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 1);
+}
+
+/* Göz Akı (Sclera) */
+.eye-sclera {
+  width: 110%;
+  /* Maskeden biraz büyük */
+  height: 110%;
+  background: radial-gradient(circle, #cbd5e1 30%, #475569 80%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- İris (Temiz Daire) --- */
+.iris-clean {
+  width: 3rem;
+  /* İris boyutu */
+  height: 3rem;
+  /* Tam kare boyut */
+  border-radius: 50%;
+  /* Kusursuz daire */
+
+  /* Magnussen Buz Mavisi */
+  background: radial-gradient(circle,
+      #90c6cc 10%,
+      /* En iç açık mavi */
+      #0891b2 50%,
+      /* Orta mavi/yeşil */
+      #164e63 90%
+      /* Dış koyu halka (Limbic ring) */
+    );
+
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: contrast(1.1) brightness(1.1);
+}
+
+/* --- Göz Bebeği (Pupil) --- */
+.pupil-clean {
+  width: 0.8rem;
+  /* Çok küçük, soğuk odaklı */
+  height: 0.8rem;
+  background-color: #000;
+  border-radius: 50%;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Göz Bebeği Işıltısı (Canlılık/Islaklık) */
+.reflection-sharp {
+  position: absolute;
+  top: 25%;
+  right: 25%;
+  width: 3px;
+  height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #fff;
+}
+
+/* Göz Kapağı Gölgeleri (Derinlik katar) */
+.eyelid-shadow {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  z-index: 50;
+  pointer-events: none;
+}
+
+.eyelid-shadow.top {
+  top: 0;
+}
+
+.eyelid-shadow.bottom {
+  bottom: 0;
+  height: 10%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+/* --- Cam Parlaması (Glass Glare) --- */
+.glass-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 40%, rgba(255, 255, 255, 0.1) 45%, transparent 50%);
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* --- REC Arayüzü --- */
+.rec-ui-layer {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 100;
 }
 
 .rec-dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  background-color: #dc2626;
-  border-radius: 9999px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ef4444;
+  animation: blinkRed 1s steps(1) infinite;
 }
 
-.rec-dot.ping {
-  position: absolute;
-  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+.rec-label {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
-@keyframes ping {
-
-  75%,
-  100% {
-    transform: scale(2);
+@keyframes blinkRed {
+  50% {
     opacity: 0;
   }
 }
 
-.eyes-container {
-  position: relative;
-  height: 18rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5rem;
-  z-index: 10;
-}
-
-.eye-socket {
-  width: 7rem;
-  height: 7rem;
-  border-radius: 9999px;
-  background-color: black;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 6px solid var(--neutral-800);
-  box-shadow: 0 0 50px black;
-  transition: transform 0.7s;
-}
-
-.group:hover .eye-socket {
-  transform: scale(1.1);
-}
-
-.eye-iris {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, #00b8d4 0%, #01579b 45%, #000000 100%);
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
-  opacity: 0.9;
-}
-
-.eye-pupil {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: black;
-  border-radius: 9999px;
-  position: relative;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.eye-glint {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 9999px;
-  filter: blur(2px);
-}
-
-.eye-shard {
-  width: 0.25rem;
-  height: 1.5rem;
-  background-color: rgba(34, 211, 238, 0.1);
-  filter: blur(1px);
-  transform: rotate(45deg);
-}
-
-.eye-data-stream {
-  position: absolute;
-  inset: 0;
-  opacity: 0.3;
-  background: conic-gradient(from 0deg, transparent, rgba(0, 229, 255, 0.2), transparent 10%);
-  animation: spin 15s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.eye-hud {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  border-radius: 9999px;
-  pointer-events: none;
-}
-
+/* Alt Yazılar */
 .hud-data-row {
-  position: absolute;
-  bottom: 1rem;
-  left: 3rem;
-  right: 3rem;
+  margin-top: 2rem;
   display: flex;
-  justify-content: space-between;
-  z-index: 30;
+  gap: 1rem;
 }
 
 .hud-tag {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #334155;
+}
+
+.hud-tag.alert {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.mind-palace-text {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--cyan-400);
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  opacity: 0.8;
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  backdrop-filter: blur(4px);
-}
-
-.global-scan-line {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  border-radius: 4rem;
-  z-index: 25;
-}
-
-.scan-bar {
-  width: 100%;
-  height: 0.25rem;
-  background-color: rgba(34, 211, 238, 0.3);
-  position: absolute;
-  top: 50%;
-  box-shadow: 0 0 20px cyan;
-  animation: scan 6s linear infinite;
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(-10rem);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 1;
-  }
-
-  80% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(10rem);
-    opacity: 0;
-  }
+  font-style: italic;
+  font-size: rem;
+  color: #4574b6;
+  margin-top: 2rem;
+  text-align: center;
 }
 
 /* --- FOOTER STYLES --- */

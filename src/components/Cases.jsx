@@ -278,49 +278,83 @@ function Cases() {
         </section>
 
         {/* --- CASE 6: HIS LAST VOW (Mind Palace) --- */}
+        {/* --- CASE 6: HIS LAST VOW (Magnussen - Clean Oval Style) --- */}
         <section className="case-section layout-normal" data-case-id="case-6">
           <div className="case-art-container">
             <div className="bg-number"><span>5</span></div>
-            {/* Mind Palace Art HTML */}
+
             <div className="art-wrapper mind-palace-art group">
-              <div className="rec-indicator">
-                <div className="rec-badge">
-                  <div className="rec-dot ping"></div>
-                  <div className="rec-dot static"></div>
-                  RETINA_SCAN: LIVE
-                </div>
-              </div>
-              <div className="eyes-container">
+
+              {/* Altın Telli Gözlük Yapısı */}
+              <div className="glasses-structure">
+                <div className="bridge-gold"></div>
+                <div className="nose-pad pad-left"></div>
+                <div className="nose-pad pad-right"></div>
+
                 {[1, 2].map(i => (
-                  <div key={i} className="eye-socket">
-                    <div className="eye-iris"></div>
-                    <div className="eye-pupil">
-                      <div className="eye-glint"></div>
-                      <div className="eye-shard"></div>
+                  <div key={i} className={`lens-oval lens-${i === 1 ? 'left' : 'right'}`}>
+
+                    {/* Cam Yüzeyi */}
+                    <div className="glass-surface">
+                      {/* REC Arayüzü (Sadece sağ gözde) */}
+                      {i === 2 && (
+                        <div className="rec-ui-layer">
+                          <div className="rec-dot"></div>
+                          <span className="rec-label">REC</span>
+                        </div>
+                      )}
+
+                      {/* Göz Maskesi (Badem Şekli - İrisi kesen kısım) */}
+                      <div className="eye-mask">
+                        {/* Gözün Beyazı (Sclera) */}
+                        <div className="eye-sclera">
+                          {/* İris (Tam Daire) */}
+                          <div className="iris-clean">
+                            {/* Göz Bebeği */}
+                            <div className="pupil-clean">
+                              <div className="reflection-sharp"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Göz Kapakları (Gölge efekti için) */}
+                        <div className="eyelid-shadow top"></div>
+                        <div className="eyelid-shadow bottom"></div>
+                      </div>
+
+                      {/* Cam Yansıması */}
+                      <div className="glass-glare"></div>
                     </div>
-                    <div className="eye-data-stream"></div>
-                    <div className="eye-hud"></div>
+
+                    {/* Çerçevesiz cam kenarı */}
+                    <div className="rim-highlight"></div>
                   </div>
                 ))}
+
+                {/* Gözlük Sapları (Yanlardan çıkan metal) */}
+                <div className="temple-lug lug-left"></div>
+                <div className="temple-lug lug-right"></div>
               </div>
+
               <div className="hud-data-row">
-                <div className="hud-tag">ANALYZING_CORE: 99%</div>
-                <div className="hud-tag">TRUTH_LIFESPAN: LOW</div>
+                <div className="hud-tag">PURPOSE : PRESSURE</div>
+                <div className="hud-tag alert">PULSE: 0 BPM</div>
               </div>
-              <div className="global-scan-line"><div className="scan-bar"></div></div>
-              <div className="art-glow cyan big"></div>
+
             </div>
           </div>
+
           <div className="case-info-container">
-            <div className="info-header">
+            <div className="case-info-content">
               <div className="status-row">
                 <span className="status-badge classified">CLASSIFIED</span>
                 <span className="case-number">#006</span>
               </div>
-              <h2 className="case-title">His Last Vow</h2>
-              <p className="case-description">Magnussen’s mind palace vs Sherlock’s. The man who knows everyone’s secrets. A final vow that leads to the ultimate sacrifice.</p>
+              <h2 className="case-title">The Devil Eyes</h2>
+              <p className="case-description">Blue, dull eyes with a repulsive <span className='mind-palace-text'>mind. </span>
+                Blackmail is his lifestyle. How could you stop this man even the people in the <span className='mind-palace-text'>palace</span> can't intervene ?
+              </p>
             </div>
-
           </div>
         </section>
 
@@ -350,8 +384,11 @@ function Cases() {
                 <span className="status-badge fatal">FATAL</span>
                 <span className="case-number">#004</span>
               </div>
-              <h2 className="case-title">The Reichenbach Fall</h2>
-              <p className="case-description">The roof of St. Bart’s Hospital. One final jump to save the world from a tarnished reputation. The fall of the genius.</p>
+              <h2 className="case-title">The Fall</h2>
+              <p className="case-description"> Edge of the waterfall or rooftop.
+                How can you <span className='fall-text staying-text'>stayin' </span><span className='fall-text alive-text'>alive</span> when you come face to face with an enemy
+                burning with a deathwish ?
+              </p>
             </div>
           </div>
         </section>
