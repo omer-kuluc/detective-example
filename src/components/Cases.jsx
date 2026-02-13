@@ -203,27 +203,29 @@ function Cases() {
         </section>
 
         {/* --- CASE 3: A SCANDAL IN BELGRAVIA --- */}
-        <section className="case-section layout-normal" data-case-id="case-3">
+        <section className="case-section layout-normal" >
           <div className="case-art-container">
             <div className="bg-number"><span>3</span></div>
             {/* Phone Art HTML */}
             <div className="art-wrapper perspective-container group">
-              <div className="phone-body">
-                <div className="phone-credits top">Inspired by Sir Arthur Conan Doyle & Sherlock TV Series</div>
-                <div className="phone-content">
-                  <div className="passcode-dots">
-                    {[0, 1, 2, 3].map((i) => <div key={i} className="dot">{i === 0 ? '*' : ''}</div>)}
-                  </div>
-                  <div className="sher-text">SHER</div>
-                  <div className="lock-icon-wrapper">
-                    <div className="lock-pulse"></div>
-                    <div className="lock-circle"><Lock className="icon" /></div>
-                  </div>
-                  <div className="locked-text">LOCKED</div>
-                </div>
-                <div className="phone-credits bottom">Non-commercial tribute project</div>
-                <div className="phone-indicator"></div>
-                <div className="phone-reflection"></div>
+              <div className="cases-phone-body">
+                <p className='cases-phone-body-text'>SHER</p>
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="custom-lock-icon"
+                >
+                  {/* Kilit Sapı (Hareket edecek kısım) */}
+                  <path className="lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  {/* Kilit Gövdesi (Sabit kalacak) */}
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                </svg>
               </div>
               <div className="art-glow cyan"></div>
             </div>
@@ -231,10 +233,10 @@ function Cases() {
           <div className="case-info-container">
             <div className="info-header">
               <div className="status-row">
-                <span className="status-badge classified">CLASSIFIED</span>
+                <span className="status-badge private">PRIVATE</span>
                 <span className="case-number">#003</span>
               </div>
-              <h2 className="case-title">'THE' WOMAN</h2>
+              <h2 className="case-title">'THE' <span className='title-woman'> WOMAN</span></h2>
               <p className="case-description">Elevated pulses and dilated pupils. You can find yourself on the losing side
                 because of certain chemical defect. <br />And It's called : SENTIMENT
               </p>
@@ -267,8 +269,10 @@ function Cases() {
                 <span className="status-badge solved">SOLVED</span>
                 <span className="case-number">#005</span>
               </div>
-              <h2 className="case-title">The Sign of Three</h2>
-              <p className="case-description">A hidden blade through a camera lens. A wedding toast and a life to save. Sherlock navigates the complexities of a Best Man’s duty.</p>
+              <h2 className="case-title">The May Fly</h2>
+              <p className="case-description">A wedding toast and a life to save. When The Detective navigates the complexities of a Best Man’s duty, he can solve a case
+                by looking photographs
+              </p>
             </div>
           </div>
         </section>
