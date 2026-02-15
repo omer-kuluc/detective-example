@@ -1,9 +1,551 @@
-.about-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  font-size: 2rem;
-  background-color: #fff;
+/* about.css */
 
+/* =========================================
+   GLOBAL / BASE SETTINGS
+   ========================================= */
+.about-container {
+  width: 100%;
+  background-color: #030303;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   SECTION 0: SOLAR SYSTEM & DELETE
+   ========================================= */
+.solar-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.solar-system-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+/* --- DELETE TEXT STYLES (NEW) --- */
+.delete-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  /* Solar System'in (z-index 10) altında, ama arka planın üstünde */
+  pointer-events: none;
+}
+
+.delete-content {
+  text-align: center;
+  max-width: 40rem;
+  padding: 0 1.5rem;
+  /* GSAP tarafından kontrol edilecek başlangıç değerleri */
+  opacity: 0;
+}
+
+.delete-title {
+  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  /* Başlangıçta beyaz, GSAP kırmızıya çevirecek */
+  transition: color 0.3s;
+}
+
+.delete-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+  /* text-slate-300 */
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Stars */
+.stars-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  border-radius: 9999px;
+  background-color: white;
+  opacity: 0.2;
+}
+
+/* Main System Wrapper */
+.solar-system-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  z-index: 20;
+  /* Delete yazısının üstünde olması için artırdım */
+}
+
+/* Sun */
+.sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5rem;
+  height: 5rem;
+  background-color: #eab308;
+  border-radius: 9999px;
+  filter: blur(2px);
+  box-shadow: 0 0 60px rgba(234, 179, 8, 0.4);
+}
+
+.sun-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top right, #ea580c, #fde047);
+  border-radius: 9999px;
+}
+
+/* Orbit Path */
+.orbit-path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+
+/* Earth & Moon Container */
+.earth-orbit-container {
+  position: absolute;
+  inset: 0;
+}
+
+.earth-position-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Earth */
+.earth {
+  width: 2rem;
+  height: 2rem;
+  background-color: #2563eb;
+  border-radius: 9999px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+}
+
+.earth-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #60a5fa, #047857);
+  border-radius: 9999px;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+/* Moon */
+.moon-orbit-wrapper {
+  position: absolute;
+  inset: -15px;
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #d6d3d1;
+  border-radius: 9999px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #64748b;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+  z-index: 30;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* =========================================
+   SECTION 1: TELEGRAMS
+   ========================================= */
+
+.telegram-section {
+  position: relative;
+  background-color: #000;
+  padding: 10rem 1.5rem 15rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.telegram-header {
+  text-align: center;
+  margin-bottom: 8rem;
+  position: relative;
+  z-index: 20;
+}
+
+.telegram-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.25rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.telegram-subtitle {
+  color: #64748b;
+  max-width: 36rem;
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+}
+
+.telegram-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.telegram-cards-container>div+div {
+  margin-top: -50px;
+}
+
+.telegram-card {
+  width: 16rem;
+  padding: 1.5rem;
+  background-color: #fdf5e6;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-radius: 0.125rem;
+  border-left: 8px solid rgba(6, 182, 212, 0.2);
+  mix-blend-mode: screen;
+  will-change: transform, opacity, filter;
+  position: relative;
+  opacity: 0;
+}
+
+.telegram-card-top {
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.telegram-meta {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.telegram-text {
+  font-family: 'Courier New', Courier, monospace;
+  color: #1e293b;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+
+.telegram-footer {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+  font-size: 8px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.telegram-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #0f172a 0%, transparent 20%, transparent 80%, #0f172a 100%);
+  z-index: 10;
+}
+
+/* =========================================
+   SECTION 2: JANUS
+   ========================================= */
+
+.janus-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #030303;
+}
+
+.janus-visual-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.janus-head {
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+  perspective: 1000px;
+}
+
+.janus-faces-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.face-half {
+  width: 50%;
+  height: 100%;
+}
+
+.face-left {
+  background: linear-gradient(to right, rgba(22, 78, 99, 0.4), transparent);
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  border-left: 1px solid rgba(6, 182, 212, 0.5);
+}
+
+.face-right {
+  background: linear-gradient(to left, rgba(15, 23, 42, 0.4), transparent);
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-right: 1px solid rgba(100, 116, 139, 0.5);
+}
+
+.janus-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.janus-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.janus-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.icon-cyan {
+  color: #06b6d4;
+}
+
+.icon-slate {
+  color: #64748b;
+}
+
+.janus-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  width: 100%;
+  max-width: 72rem;
+  position: relative;
+}
+
+.grid-item {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grid-item:hover .item-label {
+  opacity: 0.8;
+}
+
+.contradiction-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contradiction-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.text-cyan {
+  color: #22d3ee;
+}
+
+.text-slate {
+  color: #64748b;
+}
+
+.connect-line {
+  width: 100%;
+  height: 1px;
+  background-color: #1e293b;
+  margin: 0.5rem 0;
+}
+
+.item-label {
+  font-size: 0.75rem;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.quote-wrapper {
+  margin-top: 5rem;
+  max-width: 42rem;
+  text-align: center;
+}
+
+.quote-text {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* =========================================
+   MEDIA QUERIES (TABLET & DESKTOP)
+   ========================================= */
+
+@media (min-width: 768px) {
+
+  /* Solar System */
+  .solar-system-wrapper {
+    width: 600px;
+    height: 600px;
+  }
+
+  .sun {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .earth {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .moon-orbit-wrapper {
+    inset: -25px;
+  }
+
+  .moon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  /* Delete Text */
+  .delete-title {
+    font-size: 8rem;
+    /* Daha büyük ekranlarda devasa başlık */
+  }
+
+  .delete-quote {
+    font-size: 1.5rem;
+  }
+
+  /* Telegram Updates */
+  .telegram-title {
+    font-size: 3.75rem;
+  }
+
+  .telegram-card {
+    width: 20rem;
+  }
+
+  /* Janus Updates */
+  .janus-head {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .janus-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .janus-title {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .janus-section {
+    padding: 8rem 2rem;
+  }
+
+  .janus-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid-item {
+    gap: 1.5rem;
+  }
 }
