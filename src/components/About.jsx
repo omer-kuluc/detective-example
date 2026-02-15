@@ -51,7 +51,14 @@ const TELEGRAM_TEXTS = [
   "Best wishes for the future - SH",
   "Two's company, three's a crowd - SH",
   "A man's wedding is a man's funeral - SH",
-
+  "The Baker Street era ends - SH",
+  "Good luck with the clinic - SH",
+  "Hope you enjoy the honeymoon - SH",
+  "I shall be at 221B if you need - SH",
+  "A happy event, I suppose - SH",
+  "Remember the Bruce-Partington plans - SH",
+  "Marriage is the end of reason - SH",
+  "Watson, come at once! - SH",
 ];
 
 const About = () => {
@@ -78,39 +85,51 @@ const About = () => {
         scrollTrigger: {
           trigger: ".solar-section",
           start: "top top",
-          end: "+=150%", // Scroll mesafesini biraz artırdık ki okumaya zaman kalsın
+          // Scroll mesafesini artırdık (250%), böylece 
+          // giriş -> okuma -> çıkış için yeterli scroll alanı oluştu.
+          end: "+=250%",
           scrub: 1,
           pin: true,
         }
       });
 
-      // Adım 1: Güneş Sistemi küçülüp kaybolurken...
+      // ADIM 1: Güneş Sistemi küçülüp kayboluyor (Giriş)
       solarTl
         .to(".solar-system-wrapper", {
           scale: 0,
           opacity: 0,
           ease: "power2.inOut",
           duration: 1
-        }, 0) // Başlangıç (0. saniye)
-
+        }, 0)
         .to(".earth-orbit-container", {
           rotation: 360,
           ease: "none",
           duration: 1
         }, 0);
 
-      // Adım 2: DELETE yazısı beliriyor ve Kırmızıya dönüyor
+      // ADIM 2: DELETE yazısı beliriyor ve Kırmızıya dönüyor (Gelişme)
       solarTl
         .fromTo(".delete-content",
           { opacity: 0, scale: 0.8, y: 50 },
           { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" },
-          0.3 // Güneş sistemi kaybolmaya başladıktan biraz sonra başla
+          0.3 // Güneş sistemi giderken gelmeye başlasın
         )
         .to(".delete-title", {
-          color: "#dc2626", // Kırmızıya dönüş (Red-600)
+          color: "#dc2626",
           textShadow: "0 0 30px rgba(220, 38, 38, 0.6)",
           duration: 0.8
-        }, 0.5); // Opacity artarken renk değişimi başlasın
+        }, 0.5);
+
+      // ADIM 3: DELETE yazısı da kayboluyor (Sonuç/Çıkış)
+      // "+=0.5" diyerek yazının ekranda biraz okunması için boşluk bıraktık
+      solarTl.to(".delete-content", {
+        opacity: 0,
+        y: -50, // Yukarı doğru hafifçe süzülerek kaybolsun
+        scale: 1.1, // Hafif büyüyerek silinsin (sinematik etki)
+        duration: 1,
+        ease: "power2.in"
+      }, "+=0.5");
+
 
       // =========================================
       // 2. TELEGRAM ANIMATIONS
@@ -296,7 +315,7 @@ const About = () => {
               <div className="contradiction-pair">
                 <span className="contradiction-text text-cyan">GOOD</span>
                 <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">EVIL</span>
+                <span className="contradiction-text text-slate">EVIL(IF NECESSARY)</span>
               </div>
               <p className="item-label">Necessary Balance</p>
             </div>
