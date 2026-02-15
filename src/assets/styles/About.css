@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #000;
+  background-color: #0f172a;
 }
 
 .solar-system-container {
@@ -34,7 +34,7 @@
   z-index: 10;
 }
 
-/* --- DELETE TEXT STYLES (NEW) --- */
+/* --- DELETE TEXT STYLES --- */
 .delete-overlay {
   position: absolute;
   inset: 0;
@@ -42,7 +42,6 @@
   align-items: center;
   justify-content: center;
   z-index: 5;
-  /* Solar System'in (z-index 10) altında, ama arka planın üstünde */
   pointer-events: none;
 }
 
@@ -50,28 +49,25 @@
   text-align: center;
   max-width: 40rem;
   padding: 0 1.5rem;
-  /* GSAP tarafından kontrol edilecek başlangıç değerleri */
   opacity: 0;
 }
 
 .delete-title {
-  font-family: "Lato", sans-serif;
+  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
   font-size: 5rem;
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 1;
   margin-bottom: 1.5rem;
   color: #ffffff;
-  /* Başlangıçta beyaz, GSAP kırmızıya çevirecek */
   transition: color 0.3s;
 }
 
 .delete-quote {
-  font-family: "Lato", sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.125rem;
   line-height: 1.75;
   color: #cbd5e1;
-  /* text-slate-300 */
   font-style: italic;
   font-weight: 300;
 }
@@ -98,7 +94,6 @@
   width: 300px;
   height: 300px;
   z-index: 20;
-  /* Delete yazısının üstünde olması için artırdım */
 }
 
 /* Sun */
@@ -129,7 +124,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
-  border: 5px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 9999px;
 }
 
@@ -213,7 +208,7 @@
 
 .telegram-section {
   position: relative;
-  background-color: #000;
+  background-color: #0f172a;
   padding: 10rem 1.5rem 15rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -229,7 +224,7 @@
 }
 
 .telegram-title {
-  font-family: "Lato", sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.25rem;
   color: #94a3b8;
   margin-bottom: 2rem;
@@ -286,7 +281,7 @@
 }
 
 .telegram-text {
-  font-family: "Lato", sans-serif;
+  font-family: 'Courier New', Courier, monospace;
   color: #1e293b;
   font-size: 0.875rem;
   font-weight: 700;
@@ -379,13 +374,25 @@
   gap: 1rem;
 }
 
+/* --- JANUS TITLE SPLIT EFFECT --- */
 .janus-title {
   font-size: 3rem;
   font-weight: 900;
-  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -0.05em;
   line-height: 1;
+
+  /* Gradient ile metni tam ortadan ikiye bölüyoruz */
+  /* Sol taraf Beyaz (#ffffff), Sağ taraf Slate (#64748b - Slate 500) */
+  background: linear-gradient(to right, #ffffff 50%, #64748b 50%);
+
+  /* Metin içini transparan yapıp arka planı (gradienti) gösteriyoruz */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* Gradient'in düzgün işlemesi için */
+  display: inline-block;
 }
 
 .janus-icons {
@@ -504,7 +511,6 @@
   /* Delete Text */
   .delete-title {
     font-size: 8rem;
-    /* Daha büyük ekranlarda devasa başlık */
   }
 
   .delete-quote {

@@ -80,13 +80,11 @@ const About = () => {
         ease: "linear"
       });
 
-      // B) Scroll Timeline (Pin & Scrub)
+      // B) Scroll Timeline
       const solarTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".solar-section",
           start: "top top",
-          // Scroll mesafesini artırdık (250%), böylece 
-          // giriş -> okuma -> çıkış için yeterli scroll alanı oluştu.
           end: "+=250%",
           scrub: 1,
           pin: true,
@@ -107,12 +105,12 @@ const About = () => {
           duration: 1
         }, 0);
 
-      // ADIM 2: DELETE yazısı beliriyor ve Kırmızıya dönüyor (Gelişme)
+      // ADIM 2: DELETE yazısı beliriyor (Gelişme)
       solarTl
         .fromTo(".delete-content",
           { opacity: 0, scale: 0.8, y: 50 },
           { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" },
-          0.3 // Güneş sistemi giderken gelmeye başlasın
+          0.3
         )
         .to(".delete-title", {
           color: "#dc2626",
@@ -121,11 +119,10 @@ const About = () => {
         }, 0.5);
 
       // ADIM 3: DELETE yazısı da kayboluyor (Sonuç/Çıkış)
-      // "+=0.5" diyerek yazının ekranda biraz okunması için boşluk bıraktık
       solarTl.to(".delete-content", {
         opacity: 0,
-        y: -50, // Yukarı doğru hafifçe süzülerek kaybolsun
-        scale: 1.1, // Hafif büyüyerek silinsin (sinematik etki)
+        y: -50,
+        scale: 1.1,
         duration: 1,
         ease: "power2.in"
       }, "+=0.5");
@@ -278,6 +275,7 @@ const About = () => {
               <div className="face-half face-right"></div>
             </div>
             <div className="janus-content">
+              {/* Burası güncellenen stil ile etkilenecek */}
               <h3 className="janus-title">JANUS</h3>
               <div className="janus-icons">
                 <History className="icon-cyan" size={32} />
@@ -305,9 +303,9 @@ const About = () => {
             </div>
             <div className="grid-item">
               <div className="contradiction-pair">
-                <span className="contradiction-text text-cyan">RIGHT</span>
+                <span className="contradiction-text text-cyan">BEGIN</span>
                 <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">WRONG</span>
+                <span className="contradiction-text text-slate">END</span>
               </div>
               <p className="item-label">Absolute Logic</p>
             </div>
@@ -315,7 +313,7 @@ const About = () => {
               <div className="contradiction-pair">
                 <span className="contradiction-text text-cyan">GOOD</span>
                 <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">EVIL(IF NECESSARY)</span>
+                <span className="contradiction-text text-slate">EVIL</span>
               </div>
               <p className="item-label">Necessary Balance</p>
             </div>
