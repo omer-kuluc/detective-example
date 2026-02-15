@@ -477,6 +477,23 @@
   font-style: italic;
 }
 
+
+/*waterfall-section*/
+.immortal-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.immortal-section img {
+  width: 25%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
 /* =========================================
    MEDIA QUERIES (TABLET & DESKTOP)
    ========================================= */

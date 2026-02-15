@@ -326,6 +326,10 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <div className="immortal-section">
+        <img src="src/assets/images/waterfall.jpg" alt="" />
+      </div>
     </div>
   );
 };
