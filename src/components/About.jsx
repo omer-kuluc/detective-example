@@ -1,5 +1,5 @@
 // about.jsx
-import React, { useLayoutEffect, useRef, useMemo } from 'react';
+import React, { useLayoutEffect, useRef, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { History, Compass } from 'lucide-react';
@@ -57,12 +57,14 @@ const TELEGRAM_TEXTS = [
 const About = () => {
   const mainContainerRef = useRef(null);
   const janusRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
 
       // =========================================
-      // 1. SOLAR SYSTEM & DELETE TEXT ANIMATIONS
+      // 1. SOLAR SYSTEM & DELETE (GLOBAL)
       // =========================================
 
       gsap.to(".moon-orbit-wrapper", {
@@ -83,19 +85,8 @@ const About = () => {
       });
 
       solarTl
-        .to(".solar-system-wrapper", {
-          scale: 0,
-          opacity: 0,
-          ease: "power2.inOut",
-          duration: 1
-        }, 0)
-        .to(".earth-orbit-container", {
-          rotation: 360,
-          ease: "none",
-          duration: 1
-        }, 0);
-
-      solarTl
+        .to(".solar-system-wrapper", { scale: 0, opacity: 0, ease: "power2.inOut", duration: 1 }, 0)
+        .to(".earth-orbit-container", { rotation: 360, ease: "none", duration: 1 }, 0)
         .fromTo(".delete-content",
           { opacity: 0, scale: 0.8, y: 50 },
           { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" },
@@ -105,113 +96,149 @@ const About = () => {
           color: "#dc2626",
           textShadow: "0 0 30px rgba(220, 38, 38, 0.6)",
           duration: 0.8
-        }, 0.5);
-
-      solarTl.to(".delete-content", {
-        opacity: 0,
-        y: -50,
-        scale: 1.1,
-        duration: 1,
-        ease: "power2.in"
-      }, "+=0.5");
+        }, 0.5)
+        .to(".delete-content", {
+          opacity: 0, y: -50, scale: 1.1, duration: 1, ease: "power2.in"
+        }, "+=0.5");
 
 
       // =========================================
-      // 2. TELEGRAM ANIMATIONS (CREATIVE CLIP-PATH)
+      // 2. TELEGRAM ANIMATIONS (RESPONSIVE)
       // =========================================
 
-      // Pin the section
-      const telegramTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".telegram-section",
-          start: "top top",
-          end: "+=400%",
-          scrub: 1,
-          pin: true,
-        }
-      });
+      // A) DESKTOP (Min-width: 1024px) -> Pinleme ve Sahne Animasyonu
+      // Tabletleri de kapsaması için break point'i yükselttik
+      mm.add("(min-width: 1024px)", () => {
+        setIsMobile(false);
 
-      // Header animasyonu
-      telegramTl
-        .from(".telegram-header", {
-          opacity: 0,
-          y: -100,
-          duration: 1,
-          ease: "power2.out"
+        // Masaüstü ayarlarını geri yükle (Mobil ayarlardan dönüşlerde temizlik)
+        gsap.set(".telegram-section", { clearProps: "height,overflow" });
+        gsap.set(".telegram-cards-container", { clearProps: "height,overflow,position" });
+        gsap.set(".telegram-card", { clearProps: "position,top,left,width,transform,opacity" });
+
+        const telegramTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".telegram-section",
+            start: "top top",
+            end: "+=400%",
+            scrub: 1,
+            pin: true,
+          }
+        });
+
+        telegramTl.from(".telegram-header", {
+          opacity: 0, y: -100, duration: 1, ease: "power2.out",
         }, 0);
 
-      // Kartlar: Clip-path ile "slit" açılma efekti
-      // Başlangıç: inset(0 50% 0 50%) -> Ortadan çizgi gibi başlar
-      // Bitiş: inset(0 0% 0 0%) -> Tam görünür
-      const cards = gsap.utils.toArray('.telegram-card');
-
-      cards.forEach((card, index) => {
-        telegramTl
-          .fromTo(card,
+        const cards = gsap.utils.toArray('.telegram-card');
+        cards.forEach((card, index) => {
+          telegramTl.fromTo(card,
             {
-              clipPath: "inset(0 50% 0 50%)", // Tamamen kapalı (dikey çizgi)
+              clipPath: "inset(0 50% 0 50%)",
               opacity: 0,
               scale: 0.8,
               filter: "brightness(0.8) blur(5px)"
             },
             {
-              clipPath: "inset(0 0% 0 0%)", // Tamamen açık
+              clipPath: "inset(0 0% 0 0%)",
               opacity: 1,
               scale: 1,
               filter: "brightness(1) blur(0px)",
               duration: 1,
               ease: "power4.inOut"
             },
-            1 + (index * 0.4) // Stagger efekti
+            1 + (index * 0.4)
           )
-          .to(card, {
-            // Hafif yukarı kayıp silinme (sonra)
-            y: -30,
-            opacity: 0.3,
-            duration: 0.5,
-            ease: "power1.in"
-          }, 4 + (index * 0.1));
+            .to(card, {
+              y: -30, opacity: 0.3, duration: 0.5, ease: "power1.in"
+            }, 4 + (index * 0.1));
+        });
       });
 
+      // B) MOBILE & TABLET (Max-width: 1023px) -> DOĞAL SCROLL AKIŞI
+      mm.add("(max-width: 1023px)", () => {
+        setIsMobile(true);
+
+        // --- KRİTİK ÇÖZÜM ---
+        // CSS'de sabitlenmiş yükseklikleri ve taşmaları temizleyip
+        // kartların alt alta akmasına izin veriyoruz.
+        gsap.set(".telegram-section", {
+          height: "auto",
+          minHeight: "auto",
+          overflow: "visible",
+          position: "relative"
+        });
+
+        gsap.set(".telegram-cards-container", {
+          height: "auto",
+          overflow: "visible",
+          position: "relative",
+          display: "block" // Flex veya grid ise block yapıp alta almaya zorlayabiliriz
+        });
+
+        gsap.set(".telegram-card", {
+          position: "relative",
+          top: "auto",
+          left: "auto",
+          width: "100%",
+          opacity: 0, // Animasyonla gelsinler
+          transform: "none",
+          marginBottom: "20px" // Kartlar arası boşluk
+        });
+
+        // Header Animasyonu
+        gsap.from(".telegram-header", {
+          scrollTrigger: {
+            trigger: ".telegram-section",
+            start: "top 80%",
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out"
+        });
+
+        // Kartlar için Batch Animasyon
+        ScrollTrigger.batch(".telegram-card", {
+          start: "top 90%", // Ekranın %90'ı girince başlasın
+          onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: true
+          }),
+        });
+      });
+
+
       // =========================================
-      // 3. JANUS ANIMATIONS
+      // 3. JANUS & IMMORTAL (GLOBAL)
       // =========================================
-      gsap.fromTo(janusRef.current,
-        { rotationY: -15 },
-        {
-          rotationY: 15,
-          duration: 4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut"
-        }
-      );
+
+      // JANUS
+      if (janusRef.current) {
+        gsap.fromTo(janusRef.current,
+          { rotationY: -15 },
+          { rotationY: 15, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" }
+        );
+      }
 
       const contradictions = gsap.utils.toArray('.contradiction-text');
       contradictions.forEach(c => {
         gsap.to(c, {
-          opacity: 0.2,
-          duration: 0.1,
-          repeat: -1,
-          yoyo: true,
-          repeatDelay: Math.random() * 5,
+          opacity: 0.2, duration: 0.1, repeat: -1, yoyo: true, repeatDelay: Math.random() * 5,
         });
       });
 
       gsap.from(".connect-line", {
-        scaleX: 0,
-        transformOrigin: "left center",
-        duration: 2,
-        stagger: 0.5,
-        scrollTrigger: {
-          trigger: ".janus-section",
-          start: "top 60%",
-        }
+        scaleX: 0, transformOrigin: "left center", duration: 2, stagger: 0.5,
+        scrollTrigger: { trigger: ".janus-section", start: "top 60%" }
       });
 
-      // =========================================
-      // 4. IMMORTAL SECTION ANIMATIONS
-      // =========================================
+      // IMMORTAL
       const immortalTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".immortal-section",
@@ -224,46 +251,23 @@ const About = () => {
 
       immortalTl
         .fromTo(".immortal-media-wrapper",
-          {
-            clipPath: "circle(0% at 50% 50%)",
-            scale: 1.2
-          },
-          {
-            clipPath: "circle(75% at 50% 50%)",
-            scale: 0.8,
-            duration: 2,
-            ease: "power2.inOut"
-          },
-          0
+          { clipPath: "circle(0% at 50% 50%)", scale: 1.2 },
+          { clipPath: "circle(75% at 50% 50%)", scale: 0.8, duration: 2, ease: "power2.inOut" }, 0
         )
-        .to(".immortal-bg-img", {
-          filter: "brightness(0.6) grayscale(0.3)",
-          duration: 1
-        }, 0.5);
-
-      immortalTl
+        .to(".immortal-bg-img", { filter: "brightness(0.6) grayscale(0.3)", duration: 1 }, 0.5)
         .fromTo(".immortal-title",
           { opacity: 0, y: 100, rotationX: -90 },
-          { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" },
-          1.5
+          { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" }, 1.5
         )
         .fromTo(".immortal-subtitle",
           { opacity: 0, y: 50 },
-          { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" },
-          1.8
+          { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" }, 1.8
         )
         .fromTo(".immortal-quote",
           { opacity: 0, y: 80, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" },
-          2
-        );
-
-      immortalTl
-        .to(".immortal-content-overlay", {
-          opacity: 0,
-          duration: 1,
-          ease: "power2.in"
-        }, 3.5);
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" }, 2
+        )
+        .to(".immortal-content-overlay", { opacity: 0, duration: 1, ease: "power2.in" }, 3.5);
 
     }, mainContainerRef);
 
@@ -276,7 +280,6 @@ const About = () => {
       {/* --- Section 0: SOLAR SYSTEM & DELETE (Hero) --- */}
       <section className="solar-section">
         <SolarSystem />
-
         <div className="delete-overlay">
           <div className="delete-content">
             <h1 className="delete-title">DELETE</h1>
@@ -285,13 +288,12 @@ const About = () => {
             </p>
           </div>
         </div>
-
         <div className="scroll-hint">
           <span>Scroll to Purge</span>
         </div>
       </section>
 
-      {/* --- Section 1: TELEGRAMS (Updated) --- */}
+      {/* --- Section 1: TELEGRAMS (RESPONSIVE) --- */}
       <section className="telegram-section">
         <div className="telegram-header">
           <h2 className="telegram-title">The Best Man's Toast</h2>
@@ -307,7 +309,9 @@ const About = () => {
               className="telegram-card"
               style={{
                 zIndex: i,
-                transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)` // Hafif dağınık görünüm
+                // Mobilde JS ile style ezileceği için buradaki inline style'lar
+                // sadece initial render için geçerli olacak, GSAP bunları ezecek.
+                transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)`
               }}
             >
               <div className="telegram-card-top">
@@ -324,7 +328,6 @@ const About = () => {
           ))}
         </div>
 
-        {/* Not needed for pinned animation usually, but kept structure */}
         <div className="telegram-overlay"></div>
       </section>
 
@@ -396,7 +399,7 @@ const About = () => {
       <section className="immortal-section">
         <div className="immortal-media-wrapper">
           <img
-            src="/images/waterfall.jpg" // Tırnak yok, süslü parantez var
+            src="/images/waterfall.jpg"
             alt="Reichenbach Falls"
             className="immortal-bg-img"
           />
@@ -406,7 +409,7 @@ const About = () => {
         <div className="immortal-content-overlay">
           <div className="immortal-text-wrapper">
             <div className="immortal-header-group">
-              <span className="immortal-date">4 May 1891</span>
+              <span className="immortal-date">4 May</span>
               <h2 className="immortal-title">IMPOSSIBLE TO DESTRUCT</h2>
               <p className="immortal-subtitle">The Falls, Switzerland</p>
             </div>
