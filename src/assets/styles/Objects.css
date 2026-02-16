@@ -51,6 +51,7 @@
 .uniform-section-wrapper {
   overflow: hidden;
   padding: 0;
+  /* Full screen için padding 0 */
   background-color: #020202;
   flex-direction: column;
 }
@@ -62,7 +63,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Görseli kesmeden sığdırmak için */
+  /* Görseli kesmeden sığdır */
   object-position: center top;
   z-index: 1;
 }
@@ -76,11 +77,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  /* Metni aşağı al */
+  /* Metni aşağıya al */
   padding: 2rem;
   padding-bottom: 8rem;
-  /* Footer/Scroll payı */
+  /* Scroll için alt boşluk */
   pointer-events: none;
+  /* Arkadaki görsele müdahale etmesin */
 }
 
 .uniform-content-text {
@@ -92,10 +94,11 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
   pointer-events: auto;
+  /* Metin seçilebilir olsun */
 }
 
 /* =========================================
-   2. VIOLIN SECTION STYLES (YENİ)
+   2. VIOLIN SECTION STYLES (YENİLENMİŞ)
    ========================================= */
 .violin-section-wrapper {
   overflow: hidden;
@@ -111,10 +114,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Sahneyi doldurması için cover */
+  /* Tüm ekranı kaplasın */
   object-position: center;
   z-index: 1;
-  /* GSAP başlangıç değerini handle edecek */
+  /* GSAP başlangıç değerini (clip-path, filter) yönetecek */
 }
 
 .violin-overlay-content {
@@ -126,7 +129,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Ortala */
+  /* Ortada kalsın */
   padding: 2rem;
   pointer-events: none;
 }
@@ -135,11 +138,11 @@
   text-align: center;
   max-width: 40rem;
   background: rgba(10, 10, 10, 0.85);
-  /* Biraz daha koyu zemin */
+  /* Daha koyu zemin */
   padding: 2.5rem;
   border-radius: 2px;
   border-left: 4px solid var(--cyan-500);
-  /* Sol çizgi detayı */
+  /* Sol tarafına cyan çizgi */
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
   pointer-events: auto;
 }
@@ -147,13 +150,6 @@
 /* =========================================
    DİĞER BÖLÜM STYLES
    ========================================= */
-
-/* Float Icons (Uniform için) */
-.float-icon {
-  /* ... önceki kodlar aynı ... */
-  display: none;
-  /* Şimdilik gizledik çünkü yeni yapıda metin odaklı yaptık */
-}
 
 .text-box {
   text-align: center;
@@ -428,7 +424,7 @@
     max-width: 40%;
   }
 
-  /* Violin Tablet Fix */
+  /* Violin Tablet Fix (Sağa Yaslı Metin) */
   .violin-content-text {
     position: absolute;
     bottom: 20%;

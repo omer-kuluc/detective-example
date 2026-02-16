@@ -2,7 +2,7 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { BookOpen, User, Eye, Wind } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +13,7 @@ const Objects = () => {
     const ctx = gsap.context(() => {
 
       // ==================================================
-      // 1. UNIFORM SECTION (Polygon Reveal)
+      // 1. UNIFORM SECTION (POLYGON REVEAL)
       // ==================================================
       const uniformTl = gsap.timeline({
         scrollTrigger: {
@@ -25,6 +25,7 @@ const Objects = () => {
         }
       });
 
+      // Görsel Başlangıç: Ortadan çizgi -> Bitiş: Tam Ekran
       uniformTl.fromTo(".uniform-main-image",
         {
           clipPath: "polygon(0% 45%, 100% 45%, 100% 55%, 0% 55%)",
@@ -40,51 +41,52 @@ const Objects = () => {
         }
       );
 
-      uniformTl.from(".float-icon.hat", { y: -200, x: -100, opacity: 0, rotation: -45, duration: 1.5 }, 0.8);
-      uniformTl.from(".float-icon.pipe", { y: 200, x: 100, opacity: 0, rotation: 45, duration: 1.5 }, 1.0);
-      uniformTl.from(".float-icon.coat", { x: 300, opacity: 0, scale: 0.5, duration: 1.5 }, 1.2);
-
+      // Metin Animasyonu
       uniformTl.from(".uniform-content-text", {
-        y: 80, opacity: 0, duration: 1, ease: "power3.out"
-      }, 1.5);
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      }, 1.2);
 
       // ==================================================
-      // 2. VIOLIN SECTION (Spotlight Reveal) - YENİLENDİ
+      // 2. VIOLIN SECTION (CIRCLE REVEAL - SPOTLIGHT)
       // ==================================================
       const violinTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#section-violin",
-          start: "top top", // Pinlendiği için en tepeden başlar
-          end: "+=150%",
+          start: "top top",
+          end: "+=150%", // Animasyon süresi
           scrub: 1,
-          pin: true,
+          pin: true,     // Bölümü sabitle
         }
       });
 
-      // Clip-Path: Daire şeklinde açılma (Spot ışığı efekti)
+      // Görsel Başlangıç: Bulanık, Siyah Beyaz ve Merkezde Küçük Daire
+      // Bitiş: Net, Renkli ve Tam Ekran
       violinTl.fromTo(".violin-main-image",
         {
-          clipPath: "circle(10% at 50% 50%)", // Başlangıç: Küçük bir daire
+          clipPath: "circle(0% at 50% 50%)", // Hiç yoktan başla
           scale: 1.3,
-          filter: "sepia(100%) brightness(0.4) blur(4px)" // Eski fotoğraf havası
+          filter: "grayscale(100%) blur(10px) brightness(0.4)"
         },
         {
-          clipPath: "circle(100% at 50% 50%)", // Bitiş: Tam ekran
+          clipPath: "circle(100% at 50% 50%)", // Tam ekran açıl
           scale: 1,
-          filter: "sepia(20%) brightness(0.8) blur(0px)",
+          filter: "grayscale(0%) blur(0px) brightness(1)",
           duration: 2,
           ease: "power2.inOut"
         }
       );
 
-      // Metin Animasyonu
+      // Metin Animasyonu (Uniform'un aksine biraz daha geç gelsin)
       violinTl.from(".violin-content-text", {
         y: 100,
         opacity: 0,
         scale: 0.9,
         duration: 1,
         ease: "back.out(1.2)"
-      }, 1.2);
+      }, 1.5);
 
       // ==================================================
       // 3. PHONE (The Woman)
@@ -133,10 +135,6 @@ const Objects = () => {
         <img src="/images/the-detective-image.jpg" alt="The Detective" className="uniform-main-image" />
 
         <div className="uniform-overlay-content">
-          <div className="floating-icons-container">
-            {/* İkonlar buraya eklenebilir veya sadece metin kalabilir */}
-          </div>
-
           <div className="uniform-content-text">
             <span className="section-subtitle">01 // The Silhouette</span>
             <h2 className="object-title">The Armor</h2>
@@ -149,12 +147,10 @@ const Objects = () => {
         </div>
       </section>
 
-      {/* --- SECTION 2: THE VIRTUOSO (Violin) - YENİLENDİ --- */}
+      {/* --- SECTION 2: THE VIRTUOSO (Violin) --- */}
       <section id="section-violin" className="object-section violin-section-wrapper">
-        {/* Görsel Katmanı */}
         <img src="/images/the-violin.jpg" alt="The Violin" className="violin-main-image" />
 
-        {/* İçerik Katmanı */}
         <div className="violin-overlay-content">
           <div className="violin-content-text">
             <span className="section-subtitle">02 // The Virtuoso</span>
