@@ -1,3 +1,4 @@
+// about.jsx
 import React, { useLayoutEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -51,14 +52,6 @@ const TELEGRAM_TEXTS = [
   "Best wishes for the future - SH",
   "Two's company, three's a crowd - SH",
   "A man's wedding is a man's funeral - SH",
-  "The Baker Street era ends - SH",
-  "Good luck with the clinic - SH",
-  "Hope you enjoy the honeymoon - SH",
-  "I shall be at 221B if you need - SH",
-  "A happy event, I suppose - SH",
-  "Remember the Bruce-Partington plans - SH",
-  "Marriage is the end of reason - SH",
-  "Watson, come at once! - SH",
 ];
 
 const About = () => {
@@ -203,6 +196,66 @@ const About = () => {
         }
       });
 
+      // =========================================
+      // 4. IMMORTAL SECTION ANIMATIONS
+      // =========================================
+      const immortalTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".immortal-section",
+          start: "top top",
+          end: "+=300%",
+          scrub: 1,
+          pin: true,
+        }
+      });
+
+      // Clip-path animasyonu ile görseli ortaya çıkarma (Circle reveal)
+      immortalTl
+        .fromTo(".immortal-media-wrapper",
+          {
+            clipPath: "circle(0% at 50% 50%)",
+            scale: 1.2
+          },
+          {
+            clipPath: "circle(75% at 50% 50%)",
+            scale: 0.8,
+            duration: 2,
+            ease: "power2.inOut"
+          },
+          0
+        )
+        // Görsel hafif parlasın
+        .to(".immortal-bg-img", {
+          filter: "brightness(0.6) grayscale(0.3)",
+          duration: 1
+        }, 0.5);
+
+      // Metin animasyonları
+      immortalTl
+        .fromTo(".immortal-title",
+          { opacity: 0, y: 100, rotationX: -90 },
+          { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" },
+          1.5
+        )
+        .fromTo(".immortal-subtitle",
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" },
+          1.8
+        )
+        .fromTo(".immortal-quote",
+          { opacity: 0, y: 80, scale: 0.9 },
+          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" },
+          2
+        );
+
+      // Final fade out
+      immortalTl
+        .to(".immortal-content-overlay", {
+          opacity: 0,
+          duration: 1,
+          ease: "power2.in"
+        }, 3.5);
+
     }, mainContainerRef);
 
     return () => ctx.revert();
@@ -275,7 +328,6 @@ const About = () => {
               <div className="face-half face-right"></div>
             </div>
             <div className="janus-content">
-              {/* Burası güncellenen stil ile etkilenecek */}
               <h3 className="janus-title">JANUS</h3>
               <div className="janus-icons">
                 <History className="icon-cyan" size={32} />
@@ -321,15 +373,44 @@ const About = () => {
 
           <div className="quote-wrapper">
             <p className="quote-text">
-              "He is the observer who sits between worlds. He contains all contradictions within a single heartbeat. In him, the criminal and the saint exist in a state of cold calculation. He is the two faces of the same coin, tossed into the air of 221B Baker Street."
+              Janus is known as the god of doors, transitions, beginnings, and endings in Roman mythology.
+              He is the Janus of London. He is east-west,past-future, beginning-end, good-evil (if necessary).
+              He contains all contradictions at the same time within a single heartbeat.
+              <br />
+              He is on the side of the angels, but he is not one of them.
+
             </p>
           </div>
         </div>
       </section>
 
-      <div className="immortal-section">
-        <img src="src/assets/images/waterfall.jpg" alt="" />
-      </div>
+      {/* --- Section 3: IMMORTAL (Reichenbach Falls) --- */}
+      <section className="immortal-section">
+        <div className="immortal-media-wrapper">
+          <img
+            src="src/assets/images/waterfall.jpg"
+            alt="Reichenbach Falls"
+            className="immortal-bg-img"
+          />
+          <div className="immortal-vignette"></div>
+        </div>
+
+        <div className="immortal-content-overlay">
+          <div className="immortal-text-wrapper">
+            <div className="immortal-header-group">
+              <span className="immortal-date">4 May 1891</span>
+              <h2 className="immortal-title">IMPOSSIBLE TO DESTRUCT</h2>
+              <p className="immortal-subtitle">The Falls, Switzerland</p>
+            </div>
+
+            <blockquote className="immortal-quote">
+              He defines himself indestructable. Beyond his ego, this fact is proven a lot of times, based on
+              his doctor friend's blog or books that contains cases he solved.
+              The whole world believed that this fall his end, but reality was different.
+            </blockquote>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

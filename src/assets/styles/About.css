@@ -53,7 +53,7 @@
 }
 
 .delete-title {
-  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 5rem;
   font-weight: 900;
   letter-spacing: -0.05em;
@@ -64,7 +64,7 @@
 }
 
 .delete-quote {
-  font-family: 'Playfair Display', serif;
+  font-family: "Lato", sans-serif;
   font-size: 1.125rem;
   line-height: 1.75;
   color: #cbd5e1;
@@ -224,7 +224,7 @@
 }
 
 .telegram-title {
-  font-family: 'Playfair Display', serif;
+  font-family: "Lato", sans-serif;
   font-size: 2.25rem;
   color: #94a3b8;
   margin-bottom: 2rem;
@@ -281,7 +281,7 @@
 }
 
 .telegram-text {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Lato", sans-serif;
   color: #1e293b;
   font-size: 0.875rem;
   font-weight: 700;
@@ -374,24 +374,16 @@
   gap: 1rem;
 }
 
-/* --- JANUS TITLE SPLIT EFFECT --- */
 .janus-title {
   font-size: 3rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.05em;
   line-height: 1;
-
-  /* Gradient ile metni tam ortadan ikiye bölüyoruz */
-  /* Sol taraf Beyaz (#ffffff), Sağ taraf Slate (#64748b - Slate 500) */
   background: linear-gradient(to right, #ffffff 50%, #64748b 50%);
-
-  /* Metin içini transparan yapıp arka planı (gradienti) gösteriyoruz */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-
-  /* Gradient'in düzgün işlemesi için */
   display: inline-block;
 }
 
@@ -477,21 +469,108 @@
   font-style: italic;
 }
 
+/* =========================================
+   SECTION 3: IMMORTAL (REICHENBACH FALLS)
+   ========================================= */
 
-/*waterfall-section*/
 .immortal-section {
+  position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: #030303;
 }
 
-.immortal-section img {
-  width: 25%;
+.immortal-media-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* GSAP ile animasyon yapılacak */
+  will-change: clip-path, transform;
+}
+
+.immortal-bg-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  opacity: 0.9;
+  filter: brightness(0.8) grayscale(0.2);
+}
+
+.immortal-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(3, 3, 3, 0.8) 100%);
+}
+
+.immortal-content-overlay {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.immortal-text-wrapper {
+  max-width: 50rem;
+  text-align: center;
+}
+
+.immortal-header-group {
+  margin-bottom: 2rem;
+}
+
+.immortal-date {
+  display: inline-block;
+  font-family: "Lato", sans-serif;
+  font-size: 0.75rem;
+  color: #dc2626;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
   opacity: 0.8;
+}
+
+.immortal-title {
+  font-family: "Lato", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+}
+
+.immortal-subtitle {
+  font-family: "Lato", sans-serif;
+  font-size: 0.875rem;
+  color: #94a3b8;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.immortal-quote {
+  font-family: "Lato", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #e2e8f0;
+  font-style: italic;
+  font-weight: 300;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 /* =========================================
@@ -556,6 +635,15 @@
   .janus-title {
     font-size: 3.75rem;
   }
+
+  /* Immortal Updates */
+  .immortal-title {
+    font-size: 2.5rem;
+  }
+
+  .immortal-quote {
+    font-size: 1.25rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -569,5 +657,15 @@
 
   .grid-item {
     gap: 1.5rem;
+  }
+
+  /* Immortal Large Screen */
+  .immortal-title {
+    font-size: 3rem;
+  }
+
+  .immortal-quote {
+    font-size: 1.35rem;
+    line-height: 2;
   }
 }
