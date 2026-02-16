@@ -396,7 +396,7 @@ const About = () => {
       <section className="immortal-section">
         <div className="immortal-media-wrapper">
           <img
-            src="src/assets/images/waterfall.jpg"
+            src="/images/waterfall.jpg" // Tırnak yok, süslü parantez var
             alt="Reichenbach Falls"
             className="immortal-bg-img"
           />
