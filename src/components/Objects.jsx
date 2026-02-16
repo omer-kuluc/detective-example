@@ -1,5 +1,5 @@
 // objects.jsx
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { BookOpen } from 'lucide-react';
@@ -8,8 +8,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Objects = () => {
   const containerRef = useRef(null);
+  // Sayfanın (resimlerin) yüklenip yüklenmediğini kontrol eden state
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
+  // 1. Resimlerin yüklenmesini bekle
   useLayoutEffect(() => {
+    // Eğer tarayıcıda zaten her şey önbellekteyse veya hızlı yüklendiyse:
+    if (document.readyState === "complete") {
+      setIsPageLoaded(true);
+    } else {
+      // Değilse, yüklenmesini bekle
+      const handleLoad = () => setIsPageLoaded(true);
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
+  }, []);
+
+  // 2. Sayfa yüklendikten sonra GSAP animasyonlarını başlat
+  useLayoutEffect(() => {
+    if (!isPageLoaded) return; // Yüklenmediyse henüz animasyon yapma
+
     const ctx = gsap.context(() => {
 
       // ==================================================
@@ -25,23 +43,23 @@ const Objects = () => {
         }
       });
 
-      // Görsel Başlangıç: Ortadan çizgi -> Bitiş: Tam Ekran
+      // Görsel: Polygon efekt
       uniformTl.fromTo(".uniform-main-image",
         {
           clipPath: "polygon(0% 45%, 100% 45%, 100% 55%, 0% 55%)",
           scale: 1.2,
-          filter: "grayscale(100%) brightness(0.5)"
+          filter: "grayscale(100%) brightness(0.5)",
+          opacity: 1 // Yüklendiği için artık görünür yapabiliriz
         },
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          scale: 1,
+          scale: 0.8, // Tam ekran 1 olmalı
           filter: "grayscale(30%) brightness(0.9)",
           duration: 2,
           ease: "power2.inOut"
         }
       );
 
-      // Metin Animasyonu
       uniformTl.from(".uniform-content-text", {
         y: 80,
         opacity: 0,
@@ -50,36 +68,33 @@ const Objects = () => {
       }, 1.2);
 
       // ==================================================
-      // 2. VIOLIN SECTION (CIRCLE REVEAL - SPOTLIGHT)
+      // 2. VIOLIN SECTION
       // ==================================================
       const violinTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#section-violin",
           start: "top top",
-          end: "+=150%", // Animasyon süresi
+          end: "+=150%",
           scrub: 1,
-          pin: true,     // Bölümü sabitle
+          pin: true,
         }
       });
 
-      // Görsel Başlangıç: Bulanık, Siyah Beyaz ve Merkezde Küçük Daire
-      // Bitiş: Net, Renkli ve Tam Ekran
       violinTl.fromTo(".violin-main-image",
         {
-          clipPath: "circle(0% at 50% 50%)", // Hiç yoktan başla
+          clipPath: "circle(0% at 50% 50%)",
           scale: 1.3,
           filter: "grayscale(100%) blur(10px) brightness(0.4)"
         },
         {
-          clipPath: "circle(100% at 50% 50%)", // Tam ekran açıl
-          scale: 0.75,
+          clipPath: "circle(100% at 50% 50%)",
+          scale: 0.75, // Tam ekran kaplaması için 1
           filter: "grayscale(0%) blur(0px) brightness(1)",
           duration: 2,
           ease: "power2.inOut"
         }
       );
 
-      // Metin Animasyonu (Uniform'un aksine biraz daha geç gelsin)
       violinTl.from(".violin-content-text", {
         y: -50,
         opacity: 0,
@@ -89,12 +104,11 @@ const Objects = () => {
       }, 1.5);
 
       // ==================================================
-      // 3. PHONE (The Woman)
+      // 3. PHONE
       // ==================================================
       const chatTl = gsap.timeline({
         scrollTrigger: { trigger: "#section-phone", start: "top 55%" }
       });
-
       const messages = gsap.utils.toArray(".chat-bubble");
       messages.forEach((msg, i) => {
         chatTl.fromTo(msg,
@@ -105,7 +119,7 @@ const Objects = () => {
       });
 
       // ==================================================
-      // 4. BOOK (Watson)
+      // 4. BOOK
       // ==================================================
       gsap.fromTo(".book-cover",
         { rotationY: 0 },
@@ -125,15 +139,20 @@ const Objects = () => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isPageLoaded]); // isPageLoaded true olunca çalışır
 
   return (
-    <div ref={containerRef} className="objects-container">
+    <div ref={containerRef} className="objects-container" style={{ opacity: isPageLoaded ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+      {/* 
+         NOT: style={{ opacity: ... }} ekledim.
+         Sayfa yüklenene kadar beyaz/boş ekran görünmesi yerine
+         komple container gizlenir, yüklenince yumuşakça gelir.
+         Bu sayede resim "pat" diye belirmez.
+      */}
 
-      {/* --- SECTION 1: THE SILHOUETTE (Uniform) --- */}
+      {/* --- SECTION 1: UNIFORM --- */}
       <section id="section-uniform" className="object-section uniform-section-wrapper">
         <img src="/images/the-detective-image.jpg" alt="The Detective" className="uniform-main-image" />
-
         <div className="uniform-overlay-content">
           <div className="uniform-content-text">
             <span className="section-subtitle">01 // The Silhouette</span>
@@ -147,10 +166,9 @@ const Objects = () => {
         </div>
       </section>
 
-      {/* --- SECTION 2: THE VIRTUOSO (Violin) --- */}
+      {/* --- SECTION 2: VIOLIN --- */}
       <section id="section-violin" className="object-section violin-section-wrapper">
         <img src="/images/the-violin.jpg" alt="The Violin" className="violin-main-image" />
-
         <div className="violin-overlay-content">
           <div className="violin-content-text">
             <span className="section-subtitle">02 // The Virtuoso</span>
@@ -166,7 +184,7 @@ const Objects = () => {
         </div>
       </section>
 
-      {/* --- SECTION 3: THE WOMAN (Phone) --- */}
+      {/* --- SECTION 3: PHONE --- */}
       <section id="section-phone" className="object-section">
         <div className="content-wrapper reverse-on-mobile">
           <div className="text-box">
@@ -200,7 +218,7 @@ const Objects = () => {
         </div>
       </section>
 
-      {/* --- SECTION 4: THE CHRONICLER (Book) --- */}
+      {/* --- SECTION 4: BOOK --- */}
       <section id="section-book" className="object-section bg-alt">
         <div className="content-wrapper">
           <div className="visual-box perspective-container">
