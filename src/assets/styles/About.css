@@ -34,7 +34,6 @@
   z-index: 10;
 }
 
-/* --- DELETE TEXT STYLES --- */
 .delete-overlay {
   position: absolute;
   inset: 0;
@@ -72,7 +71,6 @@
   font-weight: 300;
 }
 
-/* Stars */
 .stars-layer {
   position: absolute;
   inset: 0;
@@ -88,7 +86,6 @@
   opacity: 0.2;
 }
 
-/* Main System Wrapper */
 .solar-system-wrapper {
   position: relative;
   width: 300px;
@@ -96,7 +93,6 @@
   z-index: 20;
 }
 
-/* Sun */
 .sun {
   position: absolute;
   top: 50%;
@@ -116,7 +112,6 @@
   border-radius: 9999px;
 }
 
-/* Orbit Path */
 .orbit-path {
   position: absolute;
   top: 50%;
@@ -128,7 +123,6 @@
   border-radius: 9999px;
 }
 
-/* Earth & Moon Container */
 .earth-orbit-container {
   position: absolute;
   inset: 0;
@@ -141,7 +135,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* Earth */
 .earth {
   width: 2rem;
   height: 2rem;
@@ -160,7 +153,6 @@
   opacity: 0.8;
 }
 
-/* Moon */
 .moon-orbit-wrapper {
   position: absolute;
   inset: -15px;
@@ -203,65 +195,98 @@
 }
 
 /* =========================================
-   SECTION 1: TELEGRAMS
+   SECTION 1: TELEGRAMS (REDESIGNED)
    ========================================= */
 
 .telegram-section {
   position: relative;
-  background-color: #0f172a;
-  padding: 10rem 1.5rem 15rem 1.5rem;
+  background-color: #0a0f18;
+  /* Koyu arka plan */
+  padding: 0;
+  /* Padding kaldırıldı, pin yapısı */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  /* Diyede ortala */
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .telegram-header {
   text-align: center;
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
   position: relative;
   z-index: 20;
+  padding: 0 1.5rem;
 }
 
 .telegram-title {
-  font-family: "Lato", sans-serif;
-  font-size: 2.25rem;
-  color: #94a3b8;
-  margin-bottom: 2rem;
-  font-style: italic;
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  color: #e2e8f0;
+  margin-bottom: 1rem;
+  font-weight: 400;
 }
 
 .telegram-subtitle {
-  color: #64748b;
+  color: #94a3b8;
   max-width: 36rem;
   margin: 0 auto;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
+  font-style: italic;
 }
 
 .telegram-cards-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  /* Container yüksekliği */
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  padding-top: 2rem;
+  gap: 2rem;
+  padding: 1rem;
+  perspective: 1000px;
 }
 
-.telegram-cards-container>div+div {
-  margin-top: -50px;
-}
-
+/* Beyaz-Krem Kart Tasarımı */
 .telegram-card {
   width: 16rem;
   padding: 1.5rem;
-  background-color: #fdf5e6;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border-radius: 0.125rem;
-  border-left: 8px solid rgba(6, 182, 212, 0.2);
-  mix-blend-mode: screen;
-  will-change: transform, opacity, filter;
+  background-color: #fdfbf7;
+  /* Krem beyaz */
+  background-image: linear-gradient(#f2f0e9 1px, transparent 1px);
+  background-size: 100% 1.5rem;
+
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  border-radius: 2px;
   position: relative;
+
+  /* Mix blend mode kaldırıldı, gerçek kağıt görünümü */
+  will-change: transform, clip-path, opacity;
   opacity: 0;
+  /* Başlangıçta görünmez */
+
+  /* Kağıt dokusu için ek detay */
+  overflow: hidden;
+}
+
+.telegram-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #dc2626;
+  /* Kırmızı kenar */
+  opacity: 0.8;
 }
 
 .telegram-card-top {
@@ -275,35 +300,38 @@
 
 .telegram-meta {
   font-size: 10px;
-  color: #64748b;
+  color: #475569;
   font-weight: 700;
   text-transform: uppercase;
+  font-family: "Courier New", monospace;
 }
 
 .telegram-text {
   font-family: "Lato", sans-serif;
   color: #1e293b;
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  font-style: italic;
 }
 
 .telegram-footer {
   margin-top: 1rem;
   padding-top: 0.5rem;
   border-top: 1px solid #e2e8f0;
-  font-size: 8px;
-  color: #94a3b8;
-  font-style: italic;
+  font-size: 10px;
+  color: #64748b;
+  text-align: right;
+  font-family: "Courier New", monospace;
 }
 
 .telegram-overlay {
+  /* Pin scroll ile gerek kalmayabilir ama yapı korundu */
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to bottom, #0f172a 0%, transparent 20%, transparent 80%, #0f172a 100%);
-  z-index: 10;
+  background: radial-gradient(circle at center, transparent 40%, #0a0f18 100%);
+  z-index: 5;
 }
 
 /* =========================================
@@ -490,7 +518,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  /* GSAP ile animasyon yapılacak */
   will-change: clip-path, transform;
 }
 
@@ -578,8 +605,6 @@
    ========================================= */
 
 @media (min-width: 768px) {
-
-  /* Solar System */
   .solar-system-wrapper {
     width: 600px;
     height: 600px;
@@ -604,7 +629,6 @@
     height: 0.75rem;
   }
 
-  /* Delete Text */
   .delete-title {
     font-size: 8rem;
   }
@@ -613,7 +637,6 @@
     font-size: 1.5rem;
   }
 
-  /* Telegram Updates */
   .telegram-title {
     font-size: 3.75rem;
   }
@@ -622,7 +645,11 @@
     width: 20rem;
   }
 
-  /* Janus Updates */
+  /* Kartlar yan yana gelebilir */
+  .telegram-cards-container {
+    gap: 2.5rem;
+  }
+
   .janus-head {
     width: 20rem;
     height: 20rem;
@@ -636,7 +663,6 @@
     font-size: 3.75rem;
   }
 
-  /* Immortal Updates */
   .immortal-title {
     font-size: 2.5rem;
   }
@@ -659,7 +685,6 @@
     gap: 1.5rem;
   }
 
-  /* Immortal Large Screen */
   .immortal-title {
     font-size: 3rem;
   }

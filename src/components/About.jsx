@@ -18,7 +18,6 @@ const SolarSystem = () => {
 
   return (
     <div className="solar-system-container">
-      {/* Stars background */}
       <div className="stars-layer">
         {stars.map((style, i) => (
           <div key={i} className="star" style={style} />
@@ -45,13 +44,14 @@ const SolarSystem = () => {
   );
 };
 
-// --- DATA ---
+// --- DATA (Best Man Speech Quotes) ---
 const TELEGRAM_TEXTS = [
-  "Heartiest congratulations - SH",
-  "Deepest sympathy - SH",
-  "Best wishes for the future - SH",
-  "Two's company, three's a crowd - SH",
-  "A man's wedding is a man's funeral - SH",
+  "The point of a best man speech - SH",
+  "John Watson is the man who keeps me grounded - SH",
+  "I am not a man of sentiment - SH",
+  "To the very best of times, John - SH",
+  "I have never been a friend until now - SH",
+  "Short and sweet... unlike my usual self - SH",
 ];
 
 const About = () => {
@@ -65,7 +65,6 @@ const About = () => {
       // 1. SOLAR SYSTEM & DELETE TEXT ANIMATIONS
       // =========================================
 
-      // A) Ay'ın sürekli dönüşü
       gsap.to(".moon-orbit-wrapper", {
         rotation: 360,
         duration: 5,
@@ -73,7 +72,6 @@ const About = () => {
         ease: "linear"
       });
 
-      // B) Scroll Timeline
       const solarTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".solar-section",
@@ -84,7 +82,6 @@ const About = () => {
         }
       });
 
-      // ADIM 1: Güneş Sistemi küçülüp kayboluyor (Giriş)
       solarTl
         .to(".solar-system-wrapper", {
           scale: 0,
@@ -98,7 +95,6 @@ const About = () => {
           duration: 1
         }, 0);
 
-      // ADIM 2: DELETE yazısı beliriyor (Gelişme)
       solarTl
         .fromTo(".delete-content",
           { opacity: 0, scale: 0.8, y: 50 },
@@ -111,7 +107,6 @@ const About = () => {
           duration: 0.8
         }, 0.5);
 
-      // ADIM 3: DELETE yazısı da kayboluyor (Sonuç/Çıkış)
       solarTl.to(".delete-content", {
         opacity: 0,
         y: -50,
@@ -122,42 +117,60 @@ const About = () => {
 
 
       // =========================================
-      // 2. TELEGRAM ANIMATIONS
+      // 2. TELEGRAM ANIMATIONS (CREATIVE CLIP-PATH)
       // =========================================
+
+      // Pin the section
+      const telegramTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".telegram-section",
+          start: "top top",
+          end: "+=400%",
+          scrub: 1,
+          pin: true,
+        }
+      });
+
+      // Header animasyonu
+      telegramTl
+        .from(".telegram-header", {
+          opacity: 0,
+          y: -100,
+          duration: 1,
+          ease: "power2.out"
+        }, 0);
+
+      // Kartlar: Clip-path ile "slit" açılma efekti
+      // Başlangıç: inset(0 50% 0 50%) -> Ortadan çizgi gibi başlar
+      // Bitiş: inset(0 0% 0 0%) -> Tam görünür
       const cards = gsap.utils.toArray('.telegram-card');
-      const totalCards = cards.length;
 
       cards.forEach((card, index) => {
-        const intensity = (index + 1) / totalCards;
-        const finalOpacity = 0.5 + (intensity * 0.5);
-        const finalBrightness = 1 + (intensity * 0.5);
-        const blurRadius = 5 + (intensity * 20);
-        const glowOpacity = 0.3 + (intensity * 0.4);
-
-        gsap.fromTo(card,
-          {
-            y: 150,
-            opacity: 0,
-            rotation: index % 2 === 0 ? -5 : 5,
-            scale: 0.8,
-            filter: "brightness(0.5) drop-shadow(0 0 0px rgba(253, 245, 230, 0))"
-          },
-          {
-            y: -150,
-            opacity: finalOpacity,
-            scale: 1,
-            rotation: index % 2 === 0 ? -2 : 2,
-            filter: `brightness(${finalBrightness}) drop-shadow(0 0 ${blurRadius}px rgba(253, 245, 230, ${glowOpacity}))`,
-            duration: 1.5,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              end: 'top 40%',
-              scrub: 1,
-            }
-          }
-        );
+        telegramTl
+          .fromTo(card,
+            {
+              clipPath: "inset(0 50% 0 50%)", // Tamamen kapalı (dikey çizgi)
+              opacity: 0,
+              scale: 0.8,
+              filter: "brightness(0.8) blur(5px)"
+            },
+            {
+              clipPath: "inset(0 0% 0 0%)", // Tamamen açık
+              opacity: 1,
+              scale: 1,
+              filter: "brightness(1) blur(0px)",
+              duration: 1,
+              ease: "power4.inOut"
+            },
+            1 + (index * 0.4) // Stagger efekti
+          )
+          .to(card, {
+            // Hafif yukarı kayıp silinme (sonra)
+            y: -30,
+            opacity: 0.3,
+            duration: 0.5,
+            ease: "power1.in"
+          }, 4 + (index * 0.1));
       });
 
       // =========================================
@@ -209,7 +222,6 @@ const About = () => {
         }
       });
 
-      // Clip-path animasyonu ile görseli ortaya çıkarma (Circle reveal)
       immortalTl
         .fromTo(".immortal-media-wrapper",
           {
@@ -224,13 +236,11 @@ const About = () => {
           },
           0
         )
-        // Görsel hafif parlasın
         .to(".immortal-bg-img", {
           filter: "brightness(0.6) grayscale(0.3)",
           duration: 1
         }, 0.5);
 
-      // Metin animasyonları
       immortalTl
         .fromTo(".immortal-title",
           { opacity: 0, y: 100, rotationX: -90 },
@@ -248,7 +258,6 @@ const About = () => {
           2
         );
 
-      // Final fade out
       immortalTl
         .to(".immortal-content-overlay", {
           opacity: 0,
@@ -268,7 +277,6 @@ const About = () => {
       <section className="solar-section">
         <SolarSystem />
 
-        {/* DELETE TEXT OVERLAY */}
         <div className="delete-overlay">
           <div className="delete-content">
             <h1 className="delete-title">DELETE</h1>
@@ -283,12 +291,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* --- Section 1: TELEGRAMS --- */}
+      {/* --- Section 1: TELEGRAMS (Updated) --- */}
       <section className="telegram-section">
         <div className="telegram-header">
-          <h2 className="telegram-title">Telegrams for the Doctor</h2>
+          <h2 className="telegram-title">The Best Man's Toast</h2>
           <p className="telegram-subtitle">
-            A flurry of cream-colored messages, falling like snow on a summer's day.
+            Fragments from a speech delivered at a wedding, etched in cream and memory.
           </p>
         </div>
 
@@ -298,24 +306,25 @@ const About = () => {
               key={i}
               className="telegram-card"
               style={{
-                marginLeft: `${Math.sin(i) * 50}px`,
-                zIndex: i
+                zIndex: i,
+                transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)` // Hafif dağınık görünüm
               }}
             >
               <div className="telegram-card-top">
-                <span className="telegram-meta">Post Office Telegraph</span>
-                <span className="telegram-meta">1891</span>
+                <span className="telegram-meta">Wedding Breakfast</span>
+                <span className="telegram-meta">Reception</span>
               </div>
               <p className="telegram-text">
-                {text}
+                "{text.split(' - ')[0]}"
               </p>
               <div className="telegram-footer">
-                Delivered by hand at St. Jude's
+                Spoken by Mr. Sherlock Holmes
               </div>
             </div>
           ))}
         </div>
 
+        {/* Not needed for pinned animation usually, but kept structure */}
         <div className="telegram-overlay"></div>
       </section>
 
@@ -378,7 +387,6 @@ const About = () => {
               He contains all contradictions at the same time within a single heartbeat.
               <br />
               He is on the side of the angels, but he is not one of them.
-
             </p>
           </div>
         </div>
