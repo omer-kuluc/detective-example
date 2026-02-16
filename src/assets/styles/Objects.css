@@ -1,9 +1,394 @@
+/* objects.css */
+:root {
+  --cyan-500: #06b6d4;
+  --cyan-400: #22d3ee;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+}
+
+/* --- MOBIL KODLARI --- */
 .objects-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #030303;
+  font-family: "Lato", sans-serif;
+  position: relative;
+}
+
+.objects-wrapper {
   display: flex;
+  width: fit-content;
+  height: 100%;
+  will-change: transform;
+}
+
+.object-panel {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* Ortak Metin Stilleri */
+.label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan-400);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.panel-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--slate-200);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+.panel-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--slate-400);
+  font-style: italic;
+  max-width: 300px;
+}
+
+/* --- PANEL 1: IDENTITY --- */
+.panel-dark {
+  background-color: #0a0a0a;
+}
+
+.visual-area {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.silhouette-group {
+  position: relative;
+  width: 100px;
+  height: 120px;
+}
+
+.hat-shape {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 30px;
+  background: var(--slate-700);
+  border-radius: 50% 50% 0 0;
+  clip-path: polygon(10% 100%, 90% 100%, 100% 0, 0 0);
+}
+
+.pipe-shape {
+  position: absolute;
+  bottom: 30px;
+  left: 100%;
+  width: 40px;
+  height: 15px;
+  background: var(--slate-600);
+  border-radius: 0 0 10px 0;
+}
+
+.coat-shape {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 70px;
+  background: var(--slate-800);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+}
+
+/* --- PANEL 2: VIOLIN --- */
+.panel-accent {
+  background-color: #050505;
+}
+
+.violin-visual {
+  position: relative;
+}
+
+.violin-icon {
+  color: var(--cyan-500);
+  opacity: 0.9;
+}
+
+.sound-waves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.sound-waves span {
+  position: absolute;
+  border: 1px solid var(--cyan-400);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* --- PANEL 3: PHONE --- */
+.panel-darker {
+  background-color: #020202;
+}
+
+.panel-content.column-layout {
+  height: 80%;
+  justify-content: space-between;
+}
+
+.phone-device {
+  width: 260px;
+  height: 480px;
+  background: #000;
+  border: 3px solid #333;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  padding: 1rem;
+  background: #1a1a1a;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--slate-200);
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cyan-500);
+  border-radius: 50%;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: hidden;
+  /* Animasyon için hidden */
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  opacity: 0;
+  /* Başlangıçta görünmez */
+  transform: translateY(20px);
+}
+
+.chat-bubble.left {
+  align-self: flex-start;
+  background: #333;
+  color: #fff;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-bubble.right {
+  align-self: flex-end;
+  background: var(--cyan-500);
+  color: #000;
+  border-bottom-right-radius: 2px;
+}
+
+/* --- PANEL 4: BOOK --- */
+.panel-cyan {
+  background-color: #030303;
+}
+
+.book-cover {
+  width: 150px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.book-front {
+  width: 100%;
+  height: 100%;
+  background: var(--slate-800);
+  border: 1px solid var(--slate-600);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  font-size: 2rem;
-  background-color: #fff;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+}
 
+.book-front h3 {
+  font-size: 1.2rem;
+  color: var(--slate-200);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.book-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--cyan-500);
+  margin: 1rem 0;
+}
+
+.book-author {
+  font-size: 0.8rem;
+  color: var(--slate-400);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.book-author span {
+  color: var(--cyan-400);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.center-text {
+  margin-top: 1rem;
+}
+
+/* TABLET KODLARI */
+@media (width >=768px) {
+  .panel-content {
+    flex-direction: row;
+    max-width: 80%;
+    text-align: left;
+    justify-content: space-between;
+  }
+
+  .panel-content.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .visual-area {
+    width: 250px;
+    height: 250px;
+  }
+
+  .panel-title {
+    font-size: 3.5rem;
+  }
+
+  .panel-desc {
+    font-size: 1.1rem;
+    max-width: 400px;
+  }
+
+  /* Silhouette resize */
+  .silhouette-group {
+    width: 150px;
+    height: 180px;
+  }
+
+  .hat-shape {
+    width: 90px;
+    height: 45px;
+  }
+
+  .pipe-shape {
+    width: 60px;
+    height: 20px;
+  }
+
+  .coat-shape {
+    width: 120px;
+    height: 100px;
+  }
+
+  .phone-device {
+    width: 300px;
+    height: 550px;
+  }
+
+  .chat-bubble {
+    font-size: 13px;
+  }
+
+  .book-cover {
+    width: 200px;
+    height: 280px;
+  }
+}
+
+/* DESKTOP KODLARI */
+@media (width >=1280px) {
+  .panel-title {
+    font-size: 4.5rem;
+  }
+
+  .panel-desc {
+    font-size: 1.25rem;
+    max-width: 500px;
+  }
+
+  .visual-area {
+    width: 350px;
+    height: 350px;
+  }
+
+  .phone-device {
+    width: 320px;
+    height: 600px;
+  }
+
+  .book-cover {
+    width: 250px;
+    height: 350px;
+  }
+
+  .book-front h3 {
+    font-size: 1.5rem;
+  }
 }
