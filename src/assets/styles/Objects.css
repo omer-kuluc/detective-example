@@ -18,6 +18,7 @@
   color: var(--slate-200);
   font-family: "Lato", sans-serif;
   overflow-x: hidden;
+  padding-top: 150px;
 }
 
 /* --- GENEL SECTION AYARLARI --- */
@@ -85,7 +86,8 @@
   /* Arkadaki görsele müdahale etmesin */
 }
 
-.uniform-content-text {
+.uniform-content-text,
+.violin-content-text {
   text-align: center;
   max-width: 40rem;
   background: rgba(0, 0, 0, 0.7);
@@ -123,29 +125,17 @@
 .violin-overlay-content {
   position: relative;
   z-index: 5;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   /* Ortada kalsın */
-  padding: 2rem;
+  padding: 1rem;
   pointer-events: none;
 }
 
-.violin-content-text {
-  text-align: center;
-  max-width: 40rem;
-  background: rgba(10, 10, 10, 0.85);
-  /* Daha koyu zemin */
-  padding: 2.5rem;
-  border-radius: 2px;
-  border-left: 4px solid var(--cyan-500);
-  /* Sol tarafına cyan çizgi */
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
-  pointer-events: auto;
-}
 
 /* =========================================
    DİĞER BÖLÜM STYLES
@@ -168,7 +158,7 @@
 }
 
 .object-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
   margin-bottom: 1rem;
   line-height: 1.1;
@@ -385,6 +375,11 @@
    ========================================= */
 
 @media (width >=768px) {
+
+  .objects-container {
+    padding-top: 200px;
+  }
+
   .content-wrapper {
     flex-direction: row;
     align-items: center;
@@ -412,7 +407,7 @@
   }
 
   .object-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
 
   /* Uniform Tablet Fix */
@@ -427,12 +422,10 @@
   /* Violin Tablet Fix (Sağa Yaslı Metin) */
   .violin-content-text {
     position: absolute;
-    bottom: 20%;
-    right: 10%;
+    left: 70%;
     text-align: left;
-    max-width: 40%;
+    max-width: 60%;
     border-left: none;
-    border-right: 4px solid var(--cyan-500);
     /* Çizgiyi sağa al */
   }
 
@@ -458,7 +451,7 @@
   }
 
   .object-title {
-    font-size: 5rem;
+    font-size: 3.5rem;
   }
 
   .visual-box {

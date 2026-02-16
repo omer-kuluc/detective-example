@@ -72,7 +72,7 @@ const Objects = () => {
         },
         {
           clipPath: "circle(100% at 50% 50%)", // Tam ekran açıl
-          scale: 1,
+          scale: 0.75,
           filter: "grayscale(0%) blur(0px) brightness(1)",
           duration: 2,
           ease: "power2.inOut"
@@ -81,11 +81,11 @@ const Objects = () => {
 
       // Metin Animasyonu (Uniform'un aksine biraz daha geç gelsin)
       violinTl.from(".violin-content-text", {
-        y: 100,
+        y: -50,
         opacity: 0,
-        scale: 0.9,
+        scale: 0.5,
         duration: 1,
-        ease: "back.out(1.2)"
+        ease: "power3.out"
       }, 1.5);
 
       // ==================================================
