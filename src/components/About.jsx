@@ -23,9 +23,7 @@ const SherlockMind = () => {
       <div className="clues-layer">
         {floatingClues.map((clue, i) => {
           // Rastgelelik hesaplamaları
-          const moveDuration = Math.random() * 150 + 10; // 20s - 35s arası süzülme
           const flashDuration = Math.random() * 8 + 5;  // 3s - 8s arası yanıp sönme döngüsü
-          const delay = Math.random() * 5;              // Başlangıç gecikmesi
 
           return (
             <span
@@ -37,7 +35,7 @@ const SherlockMind = () => {
                 // İki animasyonu CSS variable olarak veya direct style olarak birleştiriyoruz
                 // clueFloat: Hareketi sağlar
                 // clueFlash: Parlamayı sağlar
-                animation: `clueFloat ${moveDuration}s linear infinite, clueFlash ${flashDuration}s ease-in-out infinite ${delay}s`
+                animation: `clueFloat linear infinite, clueFlash ${flashDuration}s ease-in-out infinite -2.5s`
               }}
             >
               {clue}

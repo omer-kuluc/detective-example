@@ -28,40 +28,40 @@
   position: relative;
   width: 100%;
   height: 100%;
-  /* Noir arka plan */
   background: radial-gradient(circle at center, #1e293b 0%, #020617 80%);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* Stacking Context oluşturuyoruz ki z-indexler dışarı sızmasın */
+  isolation: isolate;
   z-index: 10;
   padding-top: 100px;
 }
 
-/* 1. Uçuşan Kanıtlar & Parlama Efekti */
+/* 1. Uçuşan Kanıtlar (Z-INDEX: 1 - EN ARKADA) */
 .clues-layer {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  /* Mouse etkileşimini kapat, yazı seçimi bozulmasın */
   z-index: 1;
+  /* En alt katman */
 }
 
 .floating-clue {
   position: absolute;
   color: rgba(255, 255, 255, 0.05);
-  /* Çok silik başlangıç */
   font-family: 'Courier New', monospace;
   font-weight: 900;
   text-transform: uppercase;
   user-select: none;
   white-space: nowrap;
-  /* Animasyon JSX içinde inline style olarak veriliyor (clueFloat + clueFlash) */
   filter: blur(1px);
-  /* Default bulanık */
   font-size: 0.9rem;
 }
 
-/* Yüzme Animasyonu */
 @keyframes clueFloat {
   0% {
     transform: translateY(0) rotate(0deg);
@@ -76,11 +76,8 @@
   }
 }
 
-/* Parlama (Flash) Animasyonu - Dikkat Çekme */
-/* Parlama (Flash) Animasyonu - YAVAŞLATILMIŞ & YUMUŞATILMIŞ */
 @keyframes clueFlash {
 
-  /* Sürenin %0 ile %70'i arasında sönük kalsın (Bekleme süresi artar) */
   0%,
   70% {
     color: rgba(255, 255, 255, 0.05);
@@ -90,7 +87,6 @@
     transform: scale(1);
   }
 
-  /* %85'te en parlak noktaya ulaşsın (Daha yavaş parlar) */
   85% {
     color: #ffffff;
     text-shadow: 0 0 15px rgba(34, 211, 238, 0.8), 0 0 30px rgba(34, 211, 238, 0.4);
@@ -99,7 +95,6 @@
     transform: scale(1.1);
   }
 
-  /* %100'de tekrar sönük hale dönsün */
   100% {
     color: rgba(255, 255, 255, 0.05);
     text-shadow: none;
@@ -109,7 +104,7 @@
   }
 }
 
-/* 2. Tarama Çizgisi */
+/* 2. Tarama Çizgisi (Z-INDEX: 5) */
 .scan-line {
   position: absolute;
   top: 0;
@@ -118,8 +113,10 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
   animation: scanDown 4s linear infinite;
-  z-index: 2;
+  z-index: 5;
+  /* Clue'ların üstünde, içeriğin altında */
   opacity: 0.3;
+  pointer-events: none;
 }
 
 @keyframes scanDown {
@@ -132,13 +129,18 @@
   }
 }
 
-/* 3. İçerik Tasarımı */
+/* 3. Ana İçerik (Z-INDEX: 20 - EN ÖNDE) */
 .mind-content {
   position: relative;
-  z-index: 10;
+  z-index: 20;
+  /* Kesinlikle en üstte */
   padding: 1rem;
   text-align: center;
   color: #e2e8f0;
+
+  /* KRİTİK NOKTA: Arkadan geçen yazıları maskelemek için hafif bir merkez gölgesi */
+  background: radial-gradient(closest-side, rgba(3, 3, 3, 0.7) 30%, transparent 100%);
+  border-radius: 50%;
 }
 
 .icon-row {
@@ -168,6 +170,7 @@
   color: #cbd5e1;
   margin-bottom: 1.5rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  max-width: 900px;
 }
 
 .mind-paragraph strong {
@@ -198,7 +201,8 @@
   inset: 0;
   background: radial-gradient(circle at center, transparent 50%, #000000 100%);
   pointer-events: none;
-  z-index: 5;
+  z-index: 30;
+  /* En üstte durup kenarları karartır */
 }
 
 .scroll-hint {
@@ -211,7 +215,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   animation: pulse 2s infinite;
-  z-index: 30;
+  z-index: 40;
 }
 
 @keyframes pulse {
@@ -616,6 +620,7 @@
    ========================================= */
 
 @media (min-width: 768px) {
+
   .mind-hero-title {
     font-size: 4rem;
   }
