@@ -262,7 +262,7 @@ const Home = () => {
               HIGH-FUNCTIONING <br /> SOCIOPATH
             </h2>
             <div className="research-badge">
-              <p>Do your research</p>
+              <p>Please, don't confuse</p>
             </div>
           </div>
         </div>
