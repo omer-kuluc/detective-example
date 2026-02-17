@@ -75,7 +75,6 @@ const Home = () => {
         stagger: 0.1,
         ease: "power4.out"
       })
-        // Yeni Tanıtım Yazısı Animasyonu
         .from(".hero-description-text", {
           opacity: 0,
           y: 50,
@@ -128,7 +127,6 @@ const Home = () => {
       });
 
       sociopathTl
-        // Yeni: Giriş metni yukarıdan yavaşça belirsin
         .from(".sociopath-intro-text", {
           y: -50,
           opacity: 0,
@@ -154,6 +152,42 @@ const Home = () => {
         yoyo: true,
         stagger: { amount: 5, from: "random" }
       });
+
+      // 4. Outro Footer Animation (YENİ)
+      const outroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".outro-footer",
+          start: "top 85%", // Ekranın altına yaklaştığında başla
+        }
+      });
+
+      outroTl
+        .from(".outro-footer p:first-child", {
+          y: 50,
+          opacity: 0,
+          filter: "blur(10px)", // Sisli giriş
+          duration: 1.5,
+          ease: "power2.out"
+        })
+        .from(".footer-line", {
+          height: 0, // Çizgiyi uzat
+          opacity: 0,
+          duration: 1.75,
+          ease: "power2.inOut"
+        }, "-=1.0") // İlk yazı bitmeden çizgi başlasın
+        .from(".outro-footer p:last-child", {
+          opacity: 0,
+          filter: "blur(10px)",
+          color: "#94a3b8", // Başlangıçta daha soluk
+          duration: 2.25,
+          ease: "power2.out"
+        }, "-=0.8")
+        .to(".outro-footer p", {
+          color: "#22d3ee", // Vurgu rengine dön
+          textShadow: "0 0 10px rgba(34, 211, 238, 0.5)",
+          duration: 1.5
+        }, "-=1");
+
     }, containerRef);
 
     return () => ctx.revert();
@@ -191,7 +225,6 @@ const Home = () => {
             ))}
           </h1>
 
-          {/* Yeni Tanıtım Bölümü */}
           <div className="hero-description">
             <p className='hero-description-text'>Where you only see, he observes.</p>
           </div>
@@ -275,10 +308,11 @@ const Home = () => {
             <div className="title-glow"></div>
           </div>
           <p className="outro-tagline">You know where he is</p>
+
           <div className="outro-footer">
             <p>If you want to solve the problem,</p>
             <div className="footer-line"></div>
-            <p>The chair is waiting for you</p>
+            <p className="last-msg">The chair is waiting for you</p>
           </div>
         </div>
       </section>
