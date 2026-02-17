@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const SherlockMind = () => {
   // Arka planda uçuşan "Dedektiflik/Zihin" kelimeleri
   const floatingClues = useMemo(() => [
-    "RACHE", "REDBEARD",
+    "RACHE", "REDBEARD", "TEAPOT",
     "4 SIGNS", "HOUND", "LIAR",
     "PAIROT", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
     "CARL POWERS", "MISS ME?", "32-24-34"
@@ -23,7 +23,7 @@ const SherlockMind = () => {
       <div className="clues-layer">
         {floatingClues.map((clue, i) => {
           // Rastgelelik hesaplamaları
-          const moveDuration = Math.random() * 15 + 20; // 20s - 35s arası süzülme
+          const moveDuration = Math.random() * 150 + 10; // 20s - 35s arası süzülme
           const flashDuration = Math.random() * 8 + 5;  // 3s - 8s arası yanıp sönme döngüsü
           const delay = Math.random() * 5;              // Başlangıç gecikmesi
 
@@ -32,9 +32,8 @@ const SherlockMind = () => {
               key={i}
               className="floating-clue"
               style={{
-                top: `${Math.random() * 90}%`,
-                left: `${Math.random() * 90}%`,
-                fontSize: `${Math.random() * 1.5 + 1}rem`,
+                top: `${Math.random() * 70}%`,
+                left: `${Math.random() * 70}%`,
                 // İki animasyonu CSS variable olarak veya direct style olarak birleştiriyoruz
                 // clueFloat: Hareketi sağlar
                 // clueFlash: Parlamayı sağlar
@@ -56,13 +55,12 @@ const SherlockMind = () => {
           <Fingerprint className="mind-icon" size={40} />
           <Activity className="mind-icon" size={40} />
         </div>
-
-        <h2 className="mind-subtitle">
-          <span className="decode-text">EMOTION</span> IS A CHEMICAL DEFECT
-        </h2>
-
         <div className="mind-divider"></div>
 
+        <h1 className="mind-hero-title">
+          THE WORLD'S ONLY<br />
+          <span className="highlight-title">CONSULTING DETECTIVE</span>
+        </h1>
         <p className="mind-paragraph">
           To him, the world is not a playground, but a vast puzzle waiting to be deconstructed.
           He rejects the dull routine of existence, craving only the mental exaltation of the <strong>bizarre</strong>.
@@ -73,14 +71,6 @@ const SherlockMind = () => {
           He stands alone on the precipice of logic. Neither police nor private eye.
         </p>
 
-        <h1 className="mind-hero-title">
-          THE WORLD'S ONLY<br />
-          <span className="highlight-title">CONSULTING DETECTIVE</span>
-        </h1>
-
-        <div className="signature-block">
-          <span className="sign-line"> - S.H.</span>
-        </div>
       </div>
 
       {/* Vignette (Karanlık Köşeler) */}
@@ -136,7 +126,6 @@ const About = () => {
       // B) İçerik Animasyonları
       mindTl
         .from(".mind-icon", { scale: 0, rotation: 360, opacity: 0, stagger: 0.2 }, 0.5)
-        .from(".mind-subtitle", { x: -50, opacity: 0, letterSpacing: "10px", duration: 1 }, 0.7)
         .from(".mind-divider", { scaleX: 0, duration: 1 }, 0.8)
         .from(".mind-paragraph", { y: 30, opacity: 0, stagger: 0.3, duration: 1 }, 1)
         .from(".mind-hero-title", {
@@ -146,7 +135,6 @@ const About = () => {
           duration: 1.5,
           ease: "back.out(1.7)"
         }, 1.2)
-        .from(".sign-line", { strokeDashoffset: 100, opacity: 0, duration: 1 }, 2);
 
       // Not: floating-clue animasyonu artık CSS üzerinden (clueFloat + clueFlash) yönetiliyor.
       // GSAP ile sadece parallax etkisi verebiliriz ama CSS animasyonu daha performanslı parlamalar için yeterli.
