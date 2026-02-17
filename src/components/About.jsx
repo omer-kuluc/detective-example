@@ -11,31 +11,40 @@ gsap.registerPlugin(ScrollTrigger);
 const SherlockMind = () => {
   // Arka planda uçuşan "Dedektiflik/Zihin" kelimeleri
   const floatingClues = useMemo(() => [
-    "RACHE", "MORIARTY", "THE WOMAN", "REDBEARD",
-    "PINK", "4 SIGNS", "HOUND", "LIAR",
+    "RACHE", "REDBEARD",
+    "4 SIGNS", "HOUND", "LIAR",
     "PAIROT", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
-    "CARL POWERS", "LAZARUS",
+    "CARL POWERS", "MISS ME?", "32-24-34"
   ], []);
 
   return (
     <div className="sherlock-mind-container">
       {/* 1. Arka Plan: Uçuşan Kanıtlar */}
       <div className="clues-layer">
-        {floatingClues.map((clue, i) => (
-          <span
-            key={i}
-            className="floating-clue"
-            style={{
-              top: `${Math.random() * 90}%`,
-              left: `${Math.random() * 90}%`,
-              fontSize: `${Math.random() * 2 + 1}rem`,
-              animationDuration: `${Math.random() * 10 + 10}s`,
-              animationDelay: `-${Math.random() * 5}s`
-            }}
-          >
-            {clue}
-          </span>
-        ))}
+        {floatingClues.map((clue, i) => {
+          // Rastgelelik hesaplamaları
+          const moveDuration = Math.random() * 15 + 20; // 20s - 35s arası süzülme
+          const flashDuration = Math.random() * 8 + 5;  // 3s - 8s arası yanıp sönme döngüsü
+          const delay = Math.random() * 5;              // Başlangıç gecikmesi
+
+          return (
+            <span
+              key={i}
+              className="floating-clue"
+              style={{
+                top: `${Math.random() * 90}%`,
+                left: `${Math.random() * 90}%`,
+                fontSize: `${Math.random() * 1.5 + 1}rem`,
+                // İki animasyonu CSS variable olarak veya direct style olarak birleştiriyoruz
+                // clueFloat: Hareketi sağlar
+                // clueFlash: Parlamayı sağlar
+                animation: `clueFloat ${moveDuration}s linear infinite, clueFlash ${flashDuration}s ease-in-out infinite ${delay}s`
+              }}
+            >
+              {clue}
+            </span>
+          );
+        })}
       </div>
 
       {/* 2. Görsel Efekt: Tarama Çizgisi */}
@@ -100,7 +109,7 @@ const About = () => {
       const mm = gsap.matchMedia();
 
       // =========================================
-      // 1. SHERLOCK MIND ANIMATIONS (HERO - REPLACED SOLAR)
+      // 1. SHERLOCK MIND ANIMATIONS (HERO)
       // =========================================
 
       const mindTl = gsap.timeline({
@@ -113,7 +122,7 @@ const About = () => {
         }
       });
 
-      // A) Giriş: Sinematik Perde Açılışı (Clip Path)
+      // A) Giriş: Sinematik Perde Açılışı
       gsap.fromTo(".sherlock-mind-container",
         { clipPath: "circle(5% at 50% 50%)", filter: "grayscale(100%) blur(5px)" },
         {
@@ -139,26 +148,13 @@ const About = () => {
         }, 1.2)
         .from(".sign-line", { strokeDashoffset: 100, opacity: 0, duration: 1 }, 2);
 
-      // C) Arka Plan Clue Hareketi (Parallax)
-      gsap.to(".floating-clue", {
-        y: (i) => (i % 2 === 0 ? -100 : 100),
-        rotation: (i) => Math.random() * 90 - 45,
-        opacity: 0.1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".mind-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 2
-        }
-      });
-
+      // Not: floating-clue animasyonu artık CSS üzerinden (clueFloat + clueFlash) yönetiliyor.
+      // GSAP ile sadece parallax etkisi verebiliriz ama CSS animasyonu daha performanslı parlamalar için yeterli.
 
       // =========================================
-      // 2. TELEGRAM ANIMATIONS (RESPONSIVE)
+      // 2. TELEGRAM ANIMATIONS
       // =========================================
 
-      // A) DESKTOP (Min-width: 1024px)
       mm.add("(min-width: 1024px)", () => {
         setIsMobile(false);
         gsap.set(".telegram-section", { clearProps: "height,overflow" });
@@ -175,9 +171,7 @@ const About = () => {
           }
         });
 
-        telegramTl.from(".telegram-header", {
-          opacity: 0, y: -100, duration: 1, ease: "power2.out",
-        }, 0);
+        telegramTl.from(".telegram-header", { opacity: 0, y: -100, duration: 1, ease: "power2.out" }, 0);
 
         const cards = gsap.utils.toArray('.telegram-card');
         cards.forEach((card, index) => {
@@ -189,7 +183,6 @@ const About = () => {
         });
       });
 
-      // B) MOBILE & TABLET (Max-width: 1023px)
       mm.add("(max-width: 1023px)", () => {
         setIsMobile(true);
         gsap.set(".telegram-section", { height: "auto", minHeight: "auto", overflow: "visible", position: "relative" });
@@ -207,12 +200,10 @@ const About = () => {
         });
       });
 
-
       // =========================================
-      // 3. JANUS & IMMORTAL (GLOBAL)
+      // 3. JANUS & IMMORTAL
       // =========================================
 
-      // JANUS
       if (janusRef.current) {
         gsap.fromTo(janusRef.current,
           { rotationY: -15 },
@@ -230,7 +221,6 @@ const About = () => {
         scrollTrigger: { trigger: ".janus-section", start: "top 60%" }
       });
 
-      // IMMORTAL
       const immortalTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".immortal-section",
@@ -259,16 +249,13 @@ const About = () => {
 
   return (
     <div ref={mainContainerRef} className="about-container">
-
-      {/* --- Section 0: THE SHERLOCK MIND (Replaced Solar System) --- */}
+      {/* --- Section 0: THE SHERLOCK MIND --- */}
       <section className="mind-section">
         <SherlockMind />
-        <div className="scroll-hint">
-          <span>Analyze</span>
-        </div>
+        <div className="scroll-hint"><span>Analyze</span></div>
       </section>
 
-      {/* --- Section 1: TELEGRAMS (RESPONSIVE) --- */}
+      {/* --- Section 1: TELEGRAMS --- */}
       <section className="telegram-section">
         <div className="telegram-header">
           <h2 className="telegram-title">The Best Man's Toast</h2>
@@ -276,31 +263,18 @@ const About = () => {
             Fragments from a speech delivered at a wedding, etched in cream and memory.
           </p>
         </div>
-
         <div className="telegram-cards-container">
           {TELEGRAM_TEXTS.map((text, i) => (
-            <div
-              key={i}
-              className="telegram-card"
-              style={{
-                zIndex: i,
-                transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)`
-              }}
-            >
+            <div key={i} className="telegram-card" style={{ zIndex: i, transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)` }}>
               <div className="telegram-card-top">
                 <span className="telegram-meta">Wedding Breakfast</span>
                 <span className="telegram-meta">Reception</span>
               </div>
-              <p className="telegram-text">
-                "{text.split(' - ')[0]}"
-              </p>
-              <div className="telegram-footer">
-                Spoken by Mr. Sherlock Holmes
-              </div>
+              <p className="telegram-text">"{text.split(' - ')[0]}"</p>
+              <div className="telegram-footer">Spoken by Mr. Sherlock Holmes</div>
             </div>
           ))}
         </div>
-
         <div className="telegram-overlay"></div>
       </section>
 
@@ -320,42 +294,24 @@ const About = () => {
               </div>
             </div>
           </div>
-
           <div className="janus-grid">
             <div className="grid-item">
-              <div className="contradiction-pair">
-                <span className="contradiction-text text-cyan">EAST</span>
-                <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">WEST</span>
-              </div>
+              <div className="contradiction-pair"><span className="contradiction-text text-cyan">EAST</span><div className="connect-line"></div><span className="contradiction-text text-slate">WEST</span></div>
               <p className="item-label">Universal Mind</p>
             </div>
             <div className="grid-item">
-              <div className="contradiction-pair">
-                <span className="contradiction-text text-cyan">PAST</span>
-                <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">FUTURE</span>
-              </div>
+              <div className="contradiction-pair"><span className="contradiction-text text-cyan">PAST</span><div className="connect-line"></div><span className="contradiction-text text-slate">FUTURE</span></div>
               <p className="item-label">Timeless Observation</p>
             </div>
             <div className="grid-item">
-              <div className="contradiction-pair">
-                <span className="contradiction-text text-cyan">BEGIN</span>
-                <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">END</span>
-              </div>
+              <div className="contradiction-pair"><span className="contradiction-text text-cyan">BEGIN</span><div className="connect-line"></div><span className="contradiction-text text-slate">END</span></div>
               <p className="item-label">Absolute Logic</p>
             </div>
             <div className="grid-item">
-              <div className="contradiction-pair">
-                <span className="contradiction-text text-cyan">GOOD</span>
-                <div className="connect-line"></div>
-                <span className="contradiction-text text-slate">EVIL</span>
-              </div>
+              <div className="contradiction-pair"><span className="contradiction-text text-cyan">GOOD</span><div className="connect-line"></div><span className="contradiction-text text-slate">EVIL</span></div>
               <p className="item-label">Necessary Balance</p>
             </div>
           </div>
-
           <div className="quote-wrapper">
             <p className="quote-text">
               Janus is known as the god of doors, transitions, beginnings, and endings in Roman mythology.
@@ -368,17 +324,12 @@ const About = () => {
         </div>
       </section>
 
-      {/* --- Section 3: IMMORTAL (Reichenbach Falls) --- */}
+      {/* --- Section 3: IMMORTAL --- */}
       <section className="immortal-section">
         <div className="immortal-media-wrapper">
-          <img
-            src="/images/waterfall.jpg"
-            alt="Reichenbach Falls"
-            className="immortal-bg-img"
-          />
+          <img src="/images/waterfall.jpg" alt="Reichenbach Falls" className="immortal-bg-img" />
           <div className="immortal-vignette"></div>
         </div>
-
         <div className="immortal-content-overlay">
           <div className="immortal-text-wrapper">
             <div className="immortal-header-group">
@@ -386,7 +337,6 @@ const About = () => {
               <h2 className="immortal-title">IMPOSSIBLE TO DESTRUCT</h2>
               <p className="immortal-subtitle">The Falls, Switzerland</p>
             </div>
-
             <blockquote className="immortal-quote">
               He defines himself indestructable. Beyond his ego, this fact is proven a lot of times, based on
               his doctor friend's blog or books that contains cases he solved.

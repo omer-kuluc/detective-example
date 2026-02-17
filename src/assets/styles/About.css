@@ -1,7 +1,7 @@
 /* about.css */
 
 /* =========================================
-   GLOBAL / BASE SETTINGS
+   GLOBAL
    ========================================= */
 .about-container {
   width: 100%;
@@ -11,7 +11,7 @@
 }
 
 /* =========================================
-   SECTION 0: THE SHERLOCK MIND (HERO)
+   SECTION 0: THE SHERLOCK MIND
    ========================================= */
 .mind-section {
   position: relative;
@@ -28,7 +28,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  /* Noir arka plan: Koyu gri/siyah geçişli */
+  /* Noir arka plan */
   background: radial-gradient(circle at center, #1e293b 0%, #020617 80%);
   display: flex;
   justify-content: center;
@@ -36,7 +36,7 @@
   z-index: 10;
 }
 
-/* 1. Uçuşan Kanıtlar */
+/* 1. Uçuşan Kanıtlar & Parlama Efekti */
 .clues-layer {
   position: absolute;
   inset: 0;
@@ -47,16 +47,19 @@
 
 .floating-clue {
   position: absolute;
-  color: rgba(255, 255, 255, 0.03);
-  /* Çok silik */
+  color: rgba(255, 255, 255, 0.05);
+  /* Çok silik başlangıç */
   font-family: 'Courier New', monospace;
   font-weight: 900;
   text-transform: uppercase;
   user-select: none;
   white-space: nowrap;
-  animation: clueFloat linear infinite;
+  /* Animasyon JSX içinde inline style olarak veriliyor (clueFloat + clueFlash) */
+  filter: blur(1px);
+  /* Default bulanık */
 }
 
+/* Yüzme Animasyonu */
 @keyframes clueFloat {
   0% {
     transform: translateY(0) rotate(0deg);
@@ -68,6 +71,39 @@
 
   100% {
     transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Parlama (Flash) Animasyonu - Dikkat Çekme */
+/* Parlama (Flash) Animasyonu - YAVAŞLATILMIŞ & YUMUŞATILMIŞ */
+@keyframes clueFlash {
+
+  /* Sürenin %0 ile %70'i arasında sönük kalsın (Bekleme süresi artar) */
+  0%,
+  70% {
+    color: rgba(255, 255, 255, 0.05);
+    text-shadow: none;
+    opacity: 0.1;
+    filter: blur(1px);
+    transform: scale(1);
+  }
+
+  /* %85'te en parlak noktaya ulaşsın (Daha yavaş parlar) */
+  85% {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(34, 211, 238, 0.8), 0 0 30px rgba(34, 211, 238, 0.4);
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1.1);
+  }
+
+  /* %100'de tekrar sönük hale dönsün */
+  100% {
+    color: rgba(255, 255, 255, 0.05);
+    text-shadow: none;
+    opacity: 0.1;
+    filter: blur(1px);
+    transform: scale(1);
   }
 }
 
@@ -113,7 +149,6 @@
 
 .mind-icon {
   color: #0ea5e9;
-  /* Sky blue */
   filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
 }
 
@@ -128,7 +163,6 @@
 
 .decode-text {
   color: #ef4444;
-  /* Kırmızı vurgu */
   font-weight: 700;
   text-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
 }
@@ -162,7 +196,6 @@
   font-weight: 900;
   margin-top: 3rem;
   color: #475569;
-  /* Pasif renk */
 }
 
 .highlight-title {
@@ -177,7 +210,6 @@
 .signature-block {
   margin-top: 2rem;
   font-family: 'Sacramento', cursive;
-  /* El yazısı havası */
   font-size: 2rem;
   color: #64748b;
   opacity: 0.8;
@@ -500,7 +532,7 @@
 }
 
 /* =========================================
-   SECTION 3: IMMORTAL (REICHENBACH FALLS)
+   SECTION 3: IMMORTAL
    ========================================= */
 .immortal-section {
   position: relative;
@@ -602,12 +634,10 @@
 }
 
 /* =========================================
-   MEDIA QUERIES (TABLET & DESKTOP)
+   MEDIA QUERIES
    ========================================= */
 
 @media (min-width: 768px) {
-
-  /* Mind Section Changes */
   .mind-hero-title {
     font-size: 4rem;
   }
@@ -620,7 +650,6 @@
     font-size: 1.25rem;
   }
 
-  /* Telegram Changes */
   .telegram-title {
     font-size: 3.75rem;
   }
@@ -633,7 +662,6 @@
     gap: 2.5rem;
   }
 
-  /* Janus Changes */
   .janus-head {
     width: 20rem;
     height: 20rem;
@@ -647,7 +675,6 @@
     font-size: 3.75rem;
   }
 
-  /* Immortal Changes */
   .immortal-title {
     font-size: 2.5rem;
   }
