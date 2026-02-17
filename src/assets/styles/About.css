@@ -7,166 +7,188 @@
   width: 100%;
   background-color: #030303;
   overflow-x: hidden;
+  font-family: 'Lato', sans-serif;
 }
 
 /* =========================================
-   SECTION 0: SOLAR SYSTEM & DELETE
+   SECTION 0: THE SHERLOCK MIND (HERO)
    ========================================= */
-.solar-section {
+.mind-section {
   position: relative;
   width: 100%;
   height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
-  background-color: #0f172a;
+  background-color: #050505;
 }
 
-.solar-system-container {
+.sherlock-mind-container {
+  position: relative;
   width: 100%;
   height: 100%;
+  /* Noir arka plan: Koyu gri/siyah geçişli */
+  background: radial-gradient(circle at center, #1e293b 0%, #020617 80%);
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0.2);
+  align-items: center;
   z-index: 10;
 }
 
-.delete-overlay {
+/* 1. Uçuşan Kanıtlar */
+.clues-layer {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.delete-content {
-  text-align: center;
-  max-width: 40rem;
-  padding: 0 1.5rem;
-  opacity: 0;
-}
-
-.delete-title {
-  font-family: "Lato", sans-serif;
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  margin-bottom: 1.5rem;
-  color: #ffffff;
-  transition: color 0.3s;
-}
-
-.delete-quote {
-  font-family: "Lato", sans-serif;
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: #cbd5e1;
-  font-style: italic;
-  font-weight: 300;
-}
-
-.stars-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  z-index: 1;
 }
 
-.star {
+.floating-clue {
   position: absolute;
-  border-radius: 9999px;
-  background-color: white;
-  opacity: 0.2;
+  color: rgba(255, 255, 255, 0.03);
+  /* Çok silik */
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  user-select: none;
+  white-space: nowrap;
+  animation: clueFloat linear infinite;
 }
 
-.solar-system-wrapper {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  z-index: 20;
+@keyframes clueFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
 
-.sun {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 5rem;
-  height: 5rem;
-  background-color: #eab308;
-  border-radius: 9999px;
-  box-shadow: 0 0 60px rgba(234, 179, 8, 0.4);
-}
-
-.sun-inner {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to top right, #ea580c, #fde047);
-  border-radius: 9999px;
-}
-
-.orbit-path {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 9999px;
-}
-
-.earth-orbit-container {
-  position: absolute;
-  inset: 0;
-}
-
-.earth-position-wrapper {
+/* 2. Tarama Çizgisi */
+.scan-line {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.earth {
-  width: 2rem;
-  height: 2rem;
-  background-color: #2563eb;
-  border-radius: 9999px;
-  position: relative;
-  box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
-}
-
-.earth-inner {
+  left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom right, #60a5fa, #047857);
-  border-radius: 9999px;
-  overflow: hidden;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
+  animation: scanDown 4s linear infinite;
+  z-index: 2;
+  opacity: 0.3;
+}
+
+@keyframes scanDown {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/* 3. İçerik Tasarımı */
+.mind-content {
+  position: relative;
+  z-index: 10;
+  max-width: 50rem;
+  padding: 2rem;
+  text-align: center;
+  color: #e2e8f0;
+}
+
+.icon-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.mind-icon {
+  color: #0ea5e9;
+  /* Sky blue */
+  filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
+}
+
+.mind-subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.decode-text {
+  color: #ef4444;
+  /* Kırmızı vurgu */
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(239, 68, 68, 0.5);
+}
+
+.mind-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #334155, transparent);
+  margin: 2rem 0;
+}
+
+.mind-paragraph {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  font-weight: 300;
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.mind-paragraph strong {
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.mind-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 900;
+  margin-top: 3rem;
+  color: #475569;
+  /* Pasif renk */
+}
+
+.highlight-title {
+  display: block;
+  color: #f1f5f9;
+  font-size: 3.5rem;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  letter-spacing: -1px;
+}
+
+.signature-block {
+  margin-top: 2rem;
+  font-family: 'Sacramento', cursive;
+  /* El yazısı havası */
+  font-size: 2rem;
+  color: #64748b;
   opacity: 0.8;
 }
 
-.moon-orbit-wrapper {
+.mind-vignette {
   position: absolute;
-  inset: -15px;
-}
-
-.moon {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: #d6d3d1;
-  border-radius: 9999px;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 50%, #000000 100%);
+  pointer-events: none;
+  z-index: 5;
 }
 
 .scroll-hint {
@@ -195,20 +217,16 @@
 }
 
 /* =========================================
-   SECTION 1: TELEGRAMS (REDESIGNED)
+   SECTION 1: TELEGRAMS
    ========================================= */
-
 .telegram-section {
   position: relative;
   background-color: #0a0f18;
-  /* Koyu arka plan */
   padding: 0;
-  /* Padding kaldırıldı, pin yapısı */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Diyede ortala */
   min-height: 100vh;
   overflow: hidden;
 }
@@ -241,7 +259,6 @@
   position: relative;
   width: 100%;
   height: 60vh;
-  /* Container yüksekliği */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -251,29 +268,17 @@
   perspective: 1000px;
 }
 
-/* Beyaz-Krem Kart Tasarımı */
 .telegram-card {
   width: 16rem;
   padding: 1.5rem;
   background-color: #fdfbf7;
-  /* Krem beyaz */
   background-image: linear-gradient(#f2f0e9 1px, transparent 1px);
   background-size: 100% 1.5rem;
-
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.3),
-    0 2px 4px -1px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.05);
-
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(0, 0, 0, 0.05);
   border-radius: 2px;
   position: relative;
-
-  /* Mix blend mode kaldırıldı, gerçek kağıt görünümü */
   will-change: transform, clip-path, opacity;
   opacity: 0;
-  /* Başlangıçta görünmez */
-
-  /* Kağıt dokusu için ek detay */
   overflow: hidden;
 }
 
@@ -285,7 +290,6 @@
   width: 4px;
   height: 100%;
   background: #dc2626;
-  /* Kırmızı kenar */
   opacity: 0.8;
 }
 
@@ -326,7 +330,6 @@
 }
 
 .telegram-overlay {
-  /* Pin scroll ile gerek kalmayabilir ama yapı korundu */
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -337,7 +340,6 @@
 /* =========================================
    SECTION 2: JANUS
    ========================================= */
-
 .janus-section {
   position: relative;
   min-height: 100vh;
@@ -500,7 +502,6 @@
 /* =========================================
    SECTION 3: IMMORTAL (REICHENBACH FALLS)
    ========================================= */
-
 .immortal-section {
   position: relative;
   width: 100%;
@@ -605,38 +606,21 @@
    ========================================= */
 
 @media (min-width: 768px) {
-  .solar-system-wrapper {
-    width: 600px;
-    height: 600px;
+
+  /* Mind Section Changes */
+  .mind-hero-title {
+    font-size: 4rem;
   }
 
-  .sun {
-    width: 8rem;
-    height: 8rem;
+  .highlight-title {
+    font-size: 5rem;
   }
 
-  .earth {
-    width: 3rem;
-    height: 3rem;
+  .mind-paragraph {
+    font-size: 1.25rem;
   }
 
-  .moon-orbit-wrapper {
-    inset: -25px;
-  }
-
-  .moon {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-
-  .delete-title {
-    font-size: 8rem;
-  }
-
-  .delete-quote {
-    font-size: 1.5rem;
-  }
-
+  /* Telegram Changes */
   .telegram-title {
     font-size: 3.75rem;
   }
@@ -645,11 +629,11 @@
     width: 20rem;
   }
 
-  /* Kartlar yan yana gelebilir */
   .telegram-cards-container {
     gap: 2.5rem;
   }
 
+  /* Janus Changes */
   .janus-head {
     width: 20rem;
     height: 20rem;
@@ -663,6 +647,7 @@
     font-size: 3.75rem;
   }
 
+  /* Immortal Changes */
   .immortal-title {
     font-size: 2.5rem;
   }

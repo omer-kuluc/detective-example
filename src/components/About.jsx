@@ -2,44 +2,80 @@
 import React, { useLayoutEffect, useRef, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { History, Compass } from 'lucide-react';
+import { History, Compass, Fingerprint, Activity } from 'lucide-react';
 
 // GSAP plugin kaydı
 gsap.registerPlugin(ScrollTrigger);
 
-// --- SOLAR SYSTEM COMPONENT ---
-const SolarSystem = () => {
-  const stars = useMemo(() => [...Array(50)].map((_, i) => ({
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    width: `${Math.random() * 2 + 1}px`,
-    height: `${Math.random() * 2 + 1}px`,
-  })), []);
+// --- NEW COMPONENT: THE SHERLOCK MIND ---
+const SherlockMind = () => {
+  // Arka planda uçuşan "Dedektiflik/Zihin" kelimeleri
+  const floatingClues = useMemo(() => [
+    "RACHE", "MORIARTY", "THE WOMAN", "REDBEARD",
+    "PINK", "4 SIGNS", "HOUND", "LIAR",
+    "PAIROT", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
+    "CARL POWERS", "LAZARUS",
+  ], []);
 
   return (
-    <div className="solar-system-container">
-      <div className="stars-layer">
-        {stars.map((style, i) => (
-          <div key={i} className="star" style={style} />
+    <div className="sherlock-mind-container">
+      {/* 1. Arka Plan: Uçuşan Kanıtlar */}
+      <div className="clues-layer">
+        {floatingClues.map((clue, i) => (
+          <span
+            key={i}
+            className="floating-clue"
+            style={{
+              top: `${Math.random() * 90}%`,
+              left: `${Math.random() * 90}%`,
+              fontSize: `${Math.random() * 2 + 1}rem`,
+              animationDuration: `${Math.random() * 10 + 10}s`,
+              animationDelay: `-${Math.random() * 5}s`
+            }}
+          >
+            {clue}
+          </span>
         ))}
       </div>
 
-      <div className="solar-system-wrapper">
-        <div className="sun">
-          <div className="sun-inner"></div>
+      {/* 2. Görsel Efekt: Tarama Çizgisi */}
+      <div className="scan-line"></div>
+
+      {/* 3. Ana İçerik */}
+      <div className="mind-content">
+        <div className="icon-row">
+          <Fingerprint className="mind-icon" size={40} />
+          <Activity className="mind-icon" size={40} />
         </div>
-        <div className="orbit-path"></div>
-        <div className="earth-orbit-container">
-          <div className="earth-position-wrapper">
-            <div className="earth">
-              <div className="earth-inner"></div>
-              <div className="moon-orbit-wrapper">
-                <div className="moon"></div>
-              </div>
-            </div>
-          </div>
+
+        <h2 className="mind-subtitle">
+          <span className="decode-text">EMOTION</span> IS A CHEMICAL DEFECT
+        </h2>
+
+        <div className="mind-divider"></div>
+
+        <p className="mind-paragraph">
+          To him, the world is not a playground, but a vast puzzle waiting to be deconstructed.
+          He rejects the dull routine of existence, craving only the mental exaltation of the <strong>bizarre</strong>.
+          Friendship is a variable he rarely calculates; sentiment is merely grit in a sensitive instrument.
+        </p>
+
+        <p className="mind-paragraph">
+          He stands alone on the precipice of logic. Neither police nor private eye.
+        </p>
+
+        <h1 className="mind-hero-title">
+          THE WORLD'S ONLY<br />
+          <span className="highlight-title">CONSULTING DETECTIVE</span>
+        </h1>
+
+        <div className="signature-block">
+          <span className="sign-line"> - S.H.</span>
         </div>
       </div>
+
+      {/* Vignette (Karanlık Köşeler) */}
+      <div className="mind-vignette"></div>
     </div>
   );
 };
@@ -64,54 +100,67 @@ const About = () => {
       const mm = gsap.matchMedia();
 
       // =========================================
-      // 1. SOLAR SYSTEM & DELETE (GLOBAL)
+      // 1. SHERLOCK MIND ANIMATIONS (HERO - REPLACED SOLAR)
       // =========================================
 
-      gsap.to(".moon-orbit-wrapper", {
-        rotation: 360,
-        duration: 5,
-        repeat: -1,
-        ease: "linear"
-      });
-
-      const solarTl = gsap.timeline({
+      const mindTl = gsap.timeline({
         scrollTrigger: {
-          trigger: ".solar-section",
+          trigger: ".mind-section",
           start: "top top",
-          end: "+=250%",
-          scrub: 1,
+          end: "+=150%",
           pin: true,
+          scrub: 1,
         }
       });
 
-      solarTl
-        .to(".solar-system-wrapper", { scale: 0, opacity: 0, ease: "power2.inOut", duration: 1 }, 0)
-        .to(".earth-orbit-container", { rotation: 360, ease: "none", duration: 1 }, 0)
-        .fromTo(".delete-content",
-          { opacity: 0, scale: 0.8, y: 50 },
-          { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power2.out" },
-          0.3
-        )
-        .to(".delete-title", {
-          color: "#dc2626",
-          textShadow: "0 0 30px rgba(220, 38, 38, 0.6)",
-          duration: 0.8
-        }, 0.5)
-        .to(".delete-content", {
-          opacity: 0, y: -50, scale: 1.1, duration: 1, ease: "power2.in"
-        }, "+=0.5");
+      // A) Giriş: Sinematik Perde Açılışı (Clip Path)
+      gsap.fromTo(".sherlock-mind-container",
+        { clipPath: "circle(5% at 50% 50%)", filter: "grayscale(100%) blur(5px)" },
+        {
+          clipPath: "circle(150% at 50% 50%)",
+          filter: "grayscale(0%) blur(0px)",
+          duration: 2,
+          ease: "power2.inOut"
+        }
+      );
+
+      // B) İçerik Animasyonları
+      mindTl
+        .from(".mind-icon", { scale: 0, rotation: 360, opacity: 0, stagger: 0.2 }, 0.5)
+        .from(".mind-subtitle", { x: -50, opacity: 0, letterSpacing: "10px", duration: 1 }, 0.7)
+        .from(".mind-divider", { scaleX: 0, duration: 1 }, 0.8)
+        .from(".mind-paragraph", { y: 30, opacity: 0, stagger: 0.3, duration: 1 }, 1)
+        .from(".mind-hero-title", {
+          scale: 0.9,
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 1.5,
+          ease: "back.out(1.7)"
+        }, 1.2)
+        .from(".sign-line", { strokeDashoffset: 100, opacity: 0, duration: 1 }, 2);
+
+      // C) Arka Plan Clue Hareketi (Parallax)
+      gsap.to(".floating-clue", {
+        y: (i) => (i % 2 === 0 ? -100 : 100),
+        rotation: (i) => Math.random() * 90 - 45,
+        opacity: 0.1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".mind-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 2
+        }
+      });
 
 
       // =========================================
       // 2. TELEGRAM ANIMATIONS (RESPONSIVE)
       // =========================================
 
-      // A) DESKTOP (Min-width: 1024px) -> Pinleme ve Sahne Animasyonu
-      // Tabletleri de kapsaması için break point'i yükselttik
+      // A) DESKTOP (Min-width: 1024px)
       mm.add("(min-width: 1024px)", () => {
         setIsMobile(false);
-
-        // Masaüstü ayarlarını geri yükle (Mobil ayarlardan dönüşlerde temizlik)
         gsap.set(".telegram-section", { clearProps: "height,overflow" });
         gsap.set(".telegram-cards-container", { clearProps: "height,overflow,position" });
         gsap.set(".telegram-card", { clearProps: "position,top,left,width,transform,opacity" });
@@ -133,83 +182,28 @@ const About = () => {
         const cards = gsap.utils.toArray('.telegram-card');
         cards.forEach((card, index) => {
           telegramTl.fromTo(card,
-            {
-              clipPath: "inset(0 50% 0 50%)",
-              opacity: 0,
-              scale: 0.8,
-              filter: "brightness(0.8) blur(5px)"
-            },
-            {
-              clipPath: "inset(0 0% 0 0%)",
-              opacity: 1,
-              scale: 1,
-              filter: "brightness(1) blur(0px)",
-              duration: 1,
-              ease: "power4.inOut"
-            },
+            { clipPath: "inset(0 50% 0 50%)", opacity: 0, scale: 0.8, filter: "brightness(0.8) blur(5px)" },
+            { clipPath: "inset(0 0% 0 0%)", opacity: 1, scale: 1, filter: "brightness(1) blur(0px)", duration: 1, ease: "power4.inOut" },
             1 + (index * 0.4)
-          )
-            .to(card, {
-              y: -30, opacity: 0.3, duration: 0.5, ease: "power1.in"
-            }, 4 + (index * 0.1));
+          ).to(card, { y: -30, opacity: 0.3, duration: 0.5, ease: "power1.in" }, 4 + (index * 0.1));
         });
       });
 
-      // B) MOBILE & TABLET (Max-width: 1023px) -> DOĞAL SCROLL AKIŞI
+      // B) MOBILE & TABLET (Max-width: 1023px)
       mm.add("(max-width: 1023px)", () => {
         setIsMobile(true);
+        gsap.set(".telegram-section", { height: "auto", minHeight: "auto", overflow: "visible", position: "relative" });
+        gsap.set(".telegram-cards-container", { height: "auto", overflow: "visible", position: "relative", display: "block" });
+        gsap.set(".telegram-card", { position: "relative", top: "auto", left: "auto", width: "100%", opacity: 0, transform: "none", marginBottom: "20px" });
 
-        // --- KRİTİK ÇÖZÜM ---
-        // CSS'de sabitlenmiş yükseklikleri ve taşmaları temizleyip
-        // kartların alt alta akmasına izin veriyoruz.
-        gsap.set(".telegram-section", {
-          height: "auto",
-          minHeight: "auto",
-          overflow: "visible",
-          position: "relative"
-        });
-
-        gsap.set(".telegram-cards-container", {
-          height: "auto",
-          overflow: "visible",
-          position: "relative",
-          display: "block" // Flex veya grid ise block yapıp alta almaya zorlayabiliriz
-        });
-
-        gsap.set(".telegram-card", {
-          position: "relative",
-          top: "auto",
-          left: "auto",
-          width: "100%",
-          opacity: 0, // Animasyonla gelsinler
-          transform: "none",
-          marginBottom: "20px" // Kartlar arası boşluk
-        });
-
-        // Header Animasyonu
         gsap.from(".telegram-header", {
-          scrollTrigger: {
-            trigger: ".telegram-section",
-            start: "top 80%",
-          },
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          ease: "power2.out"
+          scrollTrigger: { trigger: ".telegram-section", start: "top 80%" },
+          opacity: 0, y: 50, duration: 1, ease: "power2.out"
         });
 
-        // Kartlar için Batch Animasyon
         ScrollTrigger.batch(".telegram-card", {
-          start: "top 90%", // Ekranın %90'ı girince başlasın
-          onEnter: batch => gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out",
-            overwrite: true
-          }),
+          start: "top 90%",
+          onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.6, ease: "power2.out", overwrite: true }),
         });
       });
 
@@ -228,9 +222,7 @@ const About = () => {
 
       const contradictions = gsap.utils.toArray('.contradiction-text');
       contradictions.forEach(c => {
-        gsap.to(c, {
-          opacity: 0.2, duration: 0.1, repeat: -1, yoyo: true, repeatDelay: Math.random() * 5,
-        });
+        gsap.to(c, { opacity: 0.2, duration: 0.1, repeat: -1, yoyo: true, repeatDelay: Math.random() * 5 });
       });
 
       gsap.from(".connect-line", {
@@ -255,18 +247,9 @@ const About = () => {
           { clipPath: "circle(75% at 50% 50%)", scale: 0.8, duration: 2, ease: "power2.inOut" }, 0
         )
         .to(".immortal-bg-img", { filter: "brightness(0.6) grayscale(0.3)", duration: 1 }, 0.5)
-        .fromTo(".immortal-title",
-          { opacity: 0, y: 100, rotationX: -90 },
-          { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" }, 1.5
-        )
-        .fromTo(".immortal-subtitle",
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" }, 1.8
-        )
-        .fromTo(".immortal-quote",
-          { opacity: 0, y: 80, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" }, 2
-        )
+        .fromTo(".immortal-title", { opacity: 0, y: 100, rotationX: -90 }, { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" }, 1.5)
+        .fromTo(".immortal-subtitle", { opacity: 0, y: 50 }, { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" }, 1.8)
+        .fromTo(".immortal-quote", { opacity: 0, y: 80, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" }, 2)
         .to(".immortal-content-overlay", { opacity: 0, duration: 1, ease: "power2.in" }, 3.5);
 
     }, mainContainerRef);
@@ -277,19 +260,11 @@ const About = () => {
   return (
     <div ref={mainContainerRef} className="about-container">
 
-      {/* --- Section 0: SOLAR SYSTEM & DELETE (Hero) --- */}
-      <section className="solar-section">
-        <SolarSystem />
-        <div className="delete-overlay">
-          <div className="delete-content">
-            <h1 className="delete-title">DELETE</h1>
-            <p className="delete-quote">
-              "He does not know that the Earth revolves around the Sun, and even if he did, his mind deletes it. For that same mind to be able to deduce that a painting in an art gallery is a fake after examining a corpse by a lake for ten minutes, it must purge itself of such unnecessary information."
-            </p>
-          </div>
-        </div>
+      {/* --- Section 0: THE SHERLOCK MIND (Replaced Solar System) --- */}
+      <section className="mind-section">
+        <SherlockMind />
         <div className="scroll-hint">
-          <span>Scroll to Purge</span>
+          <span>Analyze</span>
         </div>
       </section>
 
@@ -309,8 +284,6 @@ const About = () => {
               className="telegram-card"
               style={{
                 zIndex: i,
-                // Mobilde JS ile style ezileceği için buradaki inline style'lar
-                // sadece initial render için geçerli olacak, GSAP bunları ezecek.
                 transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)`
               }}
             >
