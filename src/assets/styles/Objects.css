@@ -181,14 +181,6 @@
   font-weight: 300;
 }
 
-.highlight-text {
-  color: var(--cyan-400);
-  font-style: italic;
-  font-weight: 600;
-  border-left: 2px solid var(--cyan-500);
-  padding-left: 1rem;
-  display: inline-block;
-}
 
 /* Phone & Book Styles */
 .content-wrapper .visual-box {
@@ -269,6 +261,13 @@
   background-color: #262626;
   color: #fff;
   border-bottom-left-radius: 4px;
+}
+
+.chat-bubble.right-message {
+  align-self: flex-end;
+  background-color: var(--cyan-500);
+  color: #fff;
+  border-bottom-right-radius: 4px;
 }
 
 .chat-bubble.special {
@@ -422,10 +421,11 @@
   /* Violin Tablet Fix (Sağa Yaslı Metin) */
   .violin-content-text {
     position: absolute;
-    left: 70%;
+    left: 50%;
     text-align: left;
-    max-width: 60%;
+    text-align: left;
     border-left: none;
+    width: 375px;
     /* Çizgiyi sağa al */
   }
 

@@ -159,8 +159,8 @@ const Objects = () => {
             <h2 className="object-title">The Armor</h2>
             <div className="divider-cyan"></div>
             <p className="object-desc">
-              The iconic Belstaff jacket, the upturned collar. It is a costume of armor.
-              He wears his solitude like a coat, shielding himself from the banality of ordinary life.
+              The deerstalker, the pipe—or the nicotine patch—and the coat. This trio has become a signature on the streets of London,
+              and you already know exactly who it belongs to.
             </p>
           </div>
         </div>
@@ -172,13 +172,11 @@ const Objects = () => {
         <div className="violin-overlay-content">
           <div className="violin-content-text">
             <span className="section-subtitle">02 // The Virtuoso</span>
-            <h2 className="object-title">The Instrument</h2>
+            <h2 className="object-title">The Violin</h2>
             <div className="divider-cyan"></div>
             <p className="object-desc">
-              He does not play for applause. He plays to untangle the knots in his mind palace.
-              When the logic limits, the music begins. It is not just sound; it is chaos processed into pure deductive reason.
-              <br /><br />
-              <span className="highlight-text">"It clears the static."</span>
+              He does not play for applause. When the logic limits,
+              the music begins. It is not just sound; it is chaos processed into pure deductive reason.
             </p>
           </div>
         </div>
@@ -188,14 +186,12 @@ const Objects = () => {
       <section id="section-phone" className="object-section">
         <div className="content-wrapper reverse-on-mobile">
           <div className="text-box">
-            <span className="section-subtitle">03 // The Woman</span>
+            <span className="section-subtitle">03 // The Phone</span>
             <h2 className="object-title">The Connection</h2>
             <div className="divider-cyan"></div>
             <p className="object-desc">
-              Irene Adler. The only mind that ever beat him. A dangerous game of chess played via SMS.
-              Sentimental? No. It was a duel of intellects, vibrating in his pocket.
-              <br /><br />
-              <span className="highlight-text">"Brainy is the new sexy."</span>
+              Many crimes occurred, many cases were closed, but he never found evidence worth keeping as a memento.
+              However, there are always exceptions and there always will be.
             </p>
           </div>
           <div className="visual-box">
@@ -208,8 +204,8 @@ const Objects = () => {
                   <div className="chat-bubble incoming">Let's have dinner.</div>
                   <div className="chat-bubble incoming">Let's have dinner.</div>
                   <div className="time-separator"><span>December 25</span></div>
-                  <div className="chat-bubble incoming special">Merry Christmas.</div>
-                  <div className="time-separator"><span>Karachi</span></div>
+                  <div className="chat-bubble right-message special">Merry Christmas.</div>
+                  <div className="time-separator"><span> January 1</span></div>
                   <div className="chat-bubble incoming final">Goodbye Mr. H.</div>
                 </div>
               </div>
@@ -227,7 +223,7 @@ const Objects = () => {
                 <div className="book-spine"></div>
                 <div className="book-front">
                   <BookOpen size={40} className="book-icon" />
-                  <h3 className="book-title-text">A STUDY IN<br />PINK</h3>
+                  <h3 className="book-title-text">THE DETECTIVE</h3>
                   <div className="book-author-line">
                     <span>AUTHOR:</span>
                     <span className="handwritten">The Detective's Doctor Friend</span>
@@ -239,20 +235,23 @@ const Objects = () => {
             </div>
           </div>
           <div className="text-box">
-            <span className="section-subtitle">04 // The Chronicler</span>
-            <h2 className="object-title">The Legend</h2>
+            <span className="section-subtitle">04 // The Blog</span>
+            <h2 className="object-title">The Book</h2>
             <div className="divider-cyan"></div>
             <p className="object-desc">
-              Without the blogger, there is no legend. Only cold cases in a police file.
-              John Watson documents the genius, romanticizing the sociopath into a hero for the public eye.
-              He humanizes the machine.
-              <br /><br />
-              <span className="highlight-text">"I'm not his friend. I'm his blogger."</span>
-            </p>
+              Without the blogger, there is no legend;
+              only cold cases in a police file.
+              The Doctor documents the genius through his own eyes.
+              Perhaps one day, your story will become a part of this
+              book or the blog. Who knows?  </p>
           </div>
         </div>
       </section>
+      <footer className="main-footer">
 
+        <div className="footer-copyright">Sir Arthur Conan Doyle & Sherlock TV Tribute
+          <p>| For Educational Purposes Only</p></div>
+      </footer>
     </div>
   );
 };
