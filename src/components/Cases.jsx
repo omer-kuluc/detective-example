@@ -403,101 +403,14 @@ function Cases() {
 
       {/* Footer */}
       <footer className="main-footer">
-        <div className="footer-gradient"></div>
-        <div className="main-footer-content">
-          <div className="footer-col col-deduction">
-            <div className="deduction-header">
-              <div className="shield-icon"><ShieldCheck className="icon" /></div>
-              <div className="deduction-text">
-                <h4>Deduction Complete</h4>
-                <p>ARCHIVE_LOCK_SUCCESSFUL</p>
-              </div>
-            </div>
-            <p className="quote-small">"I am not a psychopath, Anderson. I'm a high-functioning sociopath. Do your research."</p>
-            <div className="auth-line"><span>Authenticated by Mycroft Holmes</span></div>
-          </div>
 
-          <div className="footer-col col-metadata">
-            <div className="metadata-list">
-              <h5>Active Case Files Metadata</h5>
-              <div className="meta-rows">
-                <div className="meta-row"><span className="label">Subject</span><span className="value">S. Holmes / J. Watson</span></div>
-                <div className="meta-row"><span className="label">Clearance</span><span className="value">LEVEL_0_MAX</span></div>
-                <div className="meta-row"><span className="label">Last Sync</span><span className="value">{new Date().toLocaleDateString()}</span></div>
-                <div className="meta-row"><span className="label">Status</span><span className="value">GAME_AFOOT</span></div>
-              </div>
-            </div>
-            <div className="obs-log group">
-              <EyeIcon className="icon" />
-              <div className="obs-text">
-                <span className="title">OBSERVATION_LOG</span>
-                <span className="subtitle">You see, but you do not observe.</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="footer-col col-address">
-            <div className="address-card">
-              <div className="card-bg-icon"><Fingerprint /></div>
-              <div className="card-content">
-                <div className="card-header"><LockIcon className="lock-small" /><span>Encrypted Archive</span></div>
-                <h6>221B BAKER STREET</h6>
-                <p className="city">London, United Kingdom</p>
-                <div className="separator"></div>
-                <div className="signature">S. Holmes</div>
-              </div>
-            </div>
-            <div className="status-dots"><div className="dot"></div><div className="dot"></div></div>
-          </div>
-        </div>
         <div className="footer-copyright">Sherlock TV Tribute | For Educational Purposes Only</div>
       </footer>
 
 
 
       {/* Mind Palace Modal */}
-      {selectedCase && (
-        <div className="modal-backdrop">
-          <div className="modal-container">
-            <div className="modal-header">
-              <div className="header-title"><BrainCircuit className="icon pulse" /><h3>Mind Palace Analysis</h3></div>
-              <button onClick={() => setSelectedCase(null)} className="close-btn"><X className="icon" /></button>
-            </div>
-            <div className="modal-body">
-              <h4 className="case-title">{selectedCase.title}</h4>
-              <p className="case-desc">"{selectedCase.description}"</p>
-              {isLoadingDeduction ? (
-                <div className="loading-state"><Loader2 className="spinner" /><p>Running deduction algorithms...</p></div>
-              ) : deduction ? (
-                <div className="deduction-result">
-                  <div className="analysis-text-block">
-                    <div className="label-row"><Terminal className="icon" /><span>The Analysis</span></div>
-                    <p className="analysis-text">{deduction.analysis}</p>
-                  </div>
-                  <div className="stats-grid">
-                    <div className="stat-box">
-                      <p className="stat-label">Likelihood of Guilt</p>
-                      <div className="stat-value-container">
-                        <span className="percentage">{deduction.likelihood}%</span>
-                        <div className="progress-bar"><div className="progress-fill" style={{ width: `${deduction.likelihood}%` }} /></div>
-                      </div>
-                    </div>
-                    <div className="stat-box">
-                      <p className="stat-label">Verdict</p>
-                      <p className="verdict-text"><ShieldAlert className="icon" />{deduction.verdict}</p>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="error-state"><p>Error connecting to Mind Palace. Try again later.</p></div>
-              )}
-            </div>
-            <div className="modal-footer">
-              <button onClick={() => setSelectedCase(null)} className="close-link">Close Connection</button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
