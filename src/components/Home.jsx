@@ -1,3 +1,4 @@
+import Lenis from '@studio-freight/lenis';
 import React, { useLayoutEffect, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -101,12 +102,25 @@ const Home = () => {
       });
 
       // 2. Art of Deduction
+      // --- YENİ EKLENECEK KISIM (Yumuşak Giriş) ---
+      gsap.from(".deduction-content", {
+        scrollTrigger: {
+          trigger: ".deduction-section",
+          start: "top 80%", // Ekranın altına girdiği an başla
+          end: "top top",   // Tam pinleneceği an bitir
+          scrub: 1.5,       // Yumuşak takip
+        },
+        y: 100,             // Hafif aşağıdan gelsin
+        scale: 0.95,        // Hafif küçükten büyüsün (derinlik hissi)
+        opacity: 0,         // Fludan gelsin
+        ease: "power2.out"
+      });
       const deductionTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".deduction-section",
           start: "top top",
           end: "+=200%",
-          scrub: 1,
+          scrub: 0.5,
           pin: true,
           anticipatePin: 1
         }
@@ -293,7 +307,7 @@ const Home = () => {
       <section className="sociopath-section">
         <div className="sociopath-container">
           <div className="sociopath-intro-text">
-            For who wonders, <br />although he may seem devoid of emotions, don't be
+            For those who wonder, <br />although he may seem devoid of emotions, don't be
             afraid.
           </div>
           <div className="sociopath-main">
