@@ -97,8 +97,15 @@
   margin-block: 1rem;
 }
 
+.hero-text span {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 .hero-text .spacer {
   width: 1.1rem;
+
 }
 
 .hero-description {
@@ -113,6 +120,9 @@
   font-style: italic;
   line-height: 1.6;
   letter-spacing: 0.05em;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .hero-divider-wrapper {
@@ -146,6 +156,10 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--slate-500);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
 }
 
 /* Deduction Section */
@@ -191,9 +205,26 @@
   font-weight: 700;
 }
 
+.deduction-letter {
+  display: inline-block;
+  /* Transformların çalışması için şart */
+
+  /* Titremeyi önleyen kritik kodlar: */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  /* Arka yüzü gizle, performansı artırır */
+  will-change: transform, opacity;
+  /* Tarayıcı optimizasyonu */
+  transform: translateZ(0);
+  /* 3D hızlandırmayı CSS ile de zorla */
+}
+
 .deduction-title-grid .spacer {
   width: 0.8rem;
 }
+
+
 
 .deduction-underline {
   height: 4px;
@@ -314,6 +345,9 @@
   font-weight: 900;
   text-align: center;
   line-height: 1;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .research-badge {

@@ -73,14 +73,20 @@ const Home = () => {
         opacity: 0,
         duration: 1.5,
         stagger: 0.1,
-        ease: "power4.out"
+        ease: "power4.out",
+        z: 0.1,            // GPU katmanını aktif et
+        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+        force3D: true
       })
         .from(".hero-description-text", {
           opacity: 0,
           y: 50,
           duration: 1.5,
           stagger: 0.4,
-          ease: "power2.out"
+          ease: "power2.out",
+          z: 0.1,            // GPU katmanını aktif et
+          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          force3D: true
         }, "-=1.75");
 
       gsap.to(".scroll-hint p", {
@@ -89,6 +95,9 @@ const Home = () => {
         ease: "power1.inOut",
         yoyo: true,
         repeat: -1,
+        z: 0.1,            // GPU katmanını aktif et
+        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+        force3D: true      // Donanım hızlandırmayı zorla
       });
 
       // 2. Art of Deduction
@@ -110,6 +119,9 @@ const Home = () => {
           x: () => (Math.random() - 0.5) * 1000,
           y: () => (Math.random() - 0.5) * 1000,
           rotation: () => (Math.random() - 0.5) * 360,
+          z: 0.1,            // Derinlik katarak GPU'yu devreye sokar
+          rotationZ: 0.01,   // Sub-pixel rendering hatasını çözer
+          force3D: true,     // Donanım hızlandırma
           stagger: 0.05,
         })
         .to(".deduction-bg-text", { opacity: 0.1, scale: 1.2, duration: 1 }, "<")
@@ -141,7 +153,10 @@ const Home = () => {
           opacity: 0,
           duration: 1,
           color: "#22d3ee",
-          textShadow: "0 0 20px #22d3ee"
+          textShadow: "0 0 20px #22d3ee",
+          z: 0.1,            // GPU katmanını aktif et
+          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          force3D: true
         });
 
       gsap.to(".floating-detail", {
@@ -269,7 +284,7 @@ const Home = () => {
             </div>
             <div className="icon-box">
               <Search className="icon" />
-              <p>To Clue</p>
+              <p>To Detect</p>
             </div>
           </div>
         </div>
