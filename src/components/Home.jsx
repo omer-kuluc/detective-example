@@ -1,4 +1,3 @@
-import Lenis from '@studio-freight/lenis';
 import React, { useLayoutEffect, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -65,18 +64,15 @@ const Home = () => {
     const ctx = gsap.context(() => {
       gsap.set(containerRef.current, { opacity: 0 });
       gsap.to(containerRef.current, { opacity: 1, duration: 1.2, ease: "power2.out" });
-
-      // 1. Hero Reveal
       const heroTl = gsap.timeline();
-
       heroTl.from(".hero-text span", {
         y: 100,
         opacity: 0,
         duration: 1.5,
         stagger: 0.1,
         ease: "power4.out",
-        z: 0.1,            // GPU katmanını aktif et
-        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+        z: 0.1,
+        rotationZ: 0.01,
         force3D: true
       })
         .from(".hero-description-text", {
@@ -85,8 +81,8 @@ const Home = () => {
           duration: 1.5,
           stagger: 0.4,
           ease: "power2.out",
-          z: 0.1,            // GPU katmanını aktif et
-          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          z: 0.1,
+          rotationZ: 0.01,
           force3D: true
         }, "-=1.75");
 
@@ -96,23 +92,21 @@ const Home = () => {
         ease: "power1.inOut",
         yoyo: true,
         repeat: -1,
-        z: 0.1,            // GPU katmanını aktif et
-        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
-        force3D: true      // Donanım hızlandırmayı zorla
+        z: 0.1,
+        rotationZ: 0.01,
+        force3D: true
       });
 
-      // 2. Art of Deduction
-      // --- YENİ EKLENECEK KISIM (Yumuşak Giriş) ---
       gsap.from(".deduction-content", {
         scrollTrigger: {
           trigger: ".deduction-section",
-          start: "top 80%", // Ekranın altına girdiği an başla
-          end: "top top",   // Tam pinleneceği an bitir
-          scrub: 1.5,       // Yumuşak takip
+          start: "top 80%",
+          end: "top top",
+          scrub: 1.5,
         },
-        y: 100,             // Hafif aşağıdan gelsin
-        scale: 0.95,        // Hafif küçükten büyüsün (derinlik hissi)
-        opacity: 0,         // Fludan gelsin
+        y: 100,
+        scale: 0.95,
+        opacity: 0,
         ease: "power2.out"
       });
       const deductionTl = gsap.timeline({
@@ -133,15 +127,14 @@ const Home = () => {
           x: () => (Math.random() - 0.5) * 1000,
           y: () => (Math.random() - 0.5) * 1000,
           rotation: () => (Math.random() - 0.5) * 360,
-          z: 0.1,            // Derinlik katarak GPU'yu devreye sokar
-          rotationZ: 0.01,   // Sub-pixel rendering hatasını çözer
-          force3D: true,     // Donanım hızlandırma
+          z: 0.1,
+          rotationZ: 0.01,
+          force3D: true,
           stagger: 0.05,
         })
         .to(".deduction-bg-text", { opacity: 0.1, scale: 1.2, duration: 1 }, "<")
         .from(".deduction-underline", { width: 0, duration: 0.5, ease: "power2.inOut" });
 
-      // 3. Sociopath Section
       const sociopathTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".sociopath-section",
@@ -168,8 +161,8 @@ const Home = () => {
           duration: 1,
           color: "#22d3ee",
           textShadow: "0 0 20px #22d3ee",
-          z: 0.1,            // GPU katmanını aktif et
-          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          z: 0.1,
+          rotationZ: 0.01,
           force3D: true
         });
 
@@ -182,11 +175,10 @@ const Home = () => {
         stagger: { amount: 5, from: "random" }
       });
 
-      // 4. Outro Footer Animation (YENİ)
       const outroTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".outro-footer",
-          start: "top 85%", // Ekranın altına yaklaştığında başla
+          start: "top 85%",
         }
       });
 
@@ -194,25 +186,25 @@ const Home = () => {
         .from(".outro-footer p:first-child", {
           y: 50,
           opacity: 0,
-          filter: "blur(10px)", // Sisli giriş
+          filter: "blur(10px)",
           duration: 1.5,
           ease: "power2.out"
         })
         .from(".footer-line", {
-          height: 0, // Çizgiyi uzat
+          height: 0,
           opacity: 0,
           duration: 1.75,
           ease: "power2.inOut"
-        }, "-=1.0") // İlk yazı bitmeden çizgi başlasın
+        }, "-=1.0")
         .from(".outro-footer p:last-child", {
           opacity: 0,
           filter: "blur(10px)",
-          color: "#94a3b8", // Başlangıçta daha soluk
+          color: "#94a3b8",
           duration: 2.25,
           ease: "power2.out"
         }, "-=0.8")
         .to(".outro-footer p", {
-          color: "#22d3ee", // Vurgu rengine dön
+          color: "#22d3ee",
           textShadow: "0 0 10px rgba(34, 211, 238, 0.5)",
           duration: 1.5
         }, "-=1");
@@ -225,7 +217,6 @@ const Home = () => {
   return (
     <div ref={containerRef} className="home-container" style={{ backgroundColor: 'black' }}>
       <BouncingCharacters />
-
       <div className="glow-layer">
         <div className="glow-top" />
         <div className="glow-bottom" />
@@ -350,9 +341,7 @@ const Home = () => {
         <div className="scroll-progress-bar"></div>
       </div>
       <div className="scanline-effect"></div>
-      {/* Footer */}
       <footer className="main-footer">
-
         <div className="footer-copyright">Sir Arthur Conan Doyle & Sherlock TV Tribute
           <p>| For Educational Purposes Only</p></div>
       </footer>
