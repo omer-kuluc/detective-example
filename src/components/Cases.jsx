@@ -148,9 +148,9 @@ function Cases() {
           <div className="hero-decoration">
             <div className="fingerprint-icon"><Fingerprint className="icon" /></div>
           </div>
-          <p className='cases-hero-text'>Special cases shows that </p>
+          <p className='cases-hero-text'>Unique files</p>
           <h1 className="cases-hero-title">THE CASES</h1>
-          <p className='cases-hero-text'>what he is capable of </p>
+          <p className='cases-hero-text'> from a shared journey </p>
           <div className="hero-decoration">
             <div className="fingerprint-icon"><Fingerprint className="icon" /></div>
           </div>
@@ -286,8 +286,8 @@ function Cases() {
                 <span className="status-badge danger">DANGER</span>
               </div>
               <h2 className="case-title">The<span className='case-title-span eyes-title' > Devil Eyes</span></h2>
-              <p className="case-description">Blue, dull eyes with a repulsive mind. Blackmail is his lifestyle.
-                How can you stop a man that even the people in the palace cannot control </p>
+              <p className="case-description">Blue, dull eyes with a repulsive <span className='blue-eye-text'>mind</span>. Blackmail is his way of life.
+                How can you stop a man whom even the <span className='blue-eye-text'>Palace</span> can not control?</p>
             </div>
           </div>
         </section>

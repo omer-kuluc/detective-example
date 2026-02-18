@@ -563,11 +563,13 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
+
 }
 
 .immortal-text-wrapper {
   max-width: 50rem;
   text-align: center;
+  padding: 1rem;
 }
 
 .immortal-header-group {
@@ -614,7 +616,7 @@
 
 .immortal-quote {
   font-family: "Lato", sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: #e2e8f0;
   font-style: italic;

@@ -226,12 +226,16 @@
   text-shadow: 0 0 10px rgba(102, 103, 64, 0.5);
 }
 
-.eyes-title {
+.eyes-title,
+.blue-eye-text {
   color: #0d5772;
   text-shadow: 0 0 10px rgba(22, 78, 99, 0.5);
 }
 
-
+.blue-eye-text {
+  font-weight: 700;
+  font-style: italic;
+}
 
 
 /* Status Badges */

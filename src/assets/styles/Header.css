@@ -62,7 +62,6 @@
   text-decoration: none;
   font-size: 1.2rem;
   transition: color 0.3s ease;
-  border-bottom: 1px solid #111;
 }
 
 .nav-links a:last-child {
@@ -223,11 +222,6 @@
 
   .nav-links {
     gap: 3rem;
-  }
-
-  .nav-links a:hover {
-    color: #fff;
-    background-color: transparent;
   }
 
   .credits-trigger {

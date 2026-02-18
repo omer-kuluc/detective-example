@@ -360,10 +360,10 @@ const About = () => {
               <p className="immortal-subtitle">The Falls, Switzerland</p>
             </div>
             <blockquote className="immortal-quote">
-              He defines himself indestructable. Beyond his ego, this fact is proven a lot of times, based on
-              his doctor friend's blog or books that contains cases he solved.
-              The whole world believed that this fall his end, but reality was different.
-            </blockquote>
+              He defines himself as indestructible. Beyond his ego, this fact has been proven many times,
+              based on his doctor friend's blog or the books containing
+              the cases he solved. The whole world believed that this fall was his end, but the
+              reality was different.    </blockquote>
           </div>
         </div>
       </section>
