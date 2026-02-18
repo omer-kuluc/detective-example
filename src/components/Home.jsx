@@ -350,6 +350,12 @@ const Home = () => {
         <div className="scroll-progress-bar"></div>
       </div>
       <div className="scanline-effect"></div>
+      {/* Footer */}
+      <footer className="main-footer">
+
+        <div className="footer-copyright">Sir Arthur Conan Doyle & Sherlock TV Tribute
+          <p>| For Educational Purposes Only</p></div>
+      </footer>
     </div>
   );
 };

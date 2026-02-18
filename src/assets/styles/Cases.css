@@ -92,6 +92,9 @@
   line-height: 1.1;
   margin-bottom: 2rem;
   letter-spacing: -0.05em;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .gradient-text {
@@ -125,6 +128,9 @@
 .cases-hero-text {
   font-size: 1.125rem;
   font-style: italic;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 
 }
 
@@ -166,6 +172,9 @@
   position: relative;
   perspective: 1000px;
   min-height: 300px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Case Info Container */
@@ -177,6 +186,9 @@
   gap: 2rem;
   width: 100%;
   max-width: 500px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .status-row {
@@ -200,6 +212,24 @@
   line-height: 1.625;
 }
 
+.case-title-span {
+  font-style: italic;
+}
+
+.pink-title {
+  color: var(--pink-600);
+  text-shadow: 0 0 10px rgba(219, 39, 119, 0.5);
+}
+
+.mayfly-title {
+  color: #666740;
+  text-shadow: 0 0 10px rgba(102, 103, 64, 0.5);
+}
+
+.eyes-title {
+  color: #0d5772;
+  text-shadow: 0 0 10px rgba(22, 78, 99, 0.5);
+}
 
 
 
@@ -1067,7 +1097,7 @@
 /* DESKTOP MEDIA QUERY (min-width: 1280px)   */
 /* ========================================= */
 
-@media (width >=1180px) {
+@media (width >=1280px) {
   .main-header {
     padding-top: 8rem;
     padding-bottom: 5rem;

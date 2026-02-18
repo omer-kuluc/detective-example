@@ -42,7 +42,11 @@ function Cases() {
     const ctx = gsap.context(() => {
       // 1. Intro Animations (Ana Başlık)
       gsap.from(".cases-hero-title", {
-        y: 60, opacity: 0, duration: 1.5, ease: "power4.out", stagger: 0.2
+        y: 60, opacity: 0, duration: 1.5, ease: "power4.out", stagger: 0.2,
+        z: 0.1,            // GPU katmanını aktif et
+        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+        force3D: true
+
       });
 
       // 2. Dekorasyon Çizgileri
@@ -59,7 +63,10 @@ function Cases() {
         duration: 1.5, // Yavaşça belirsin (Smooth)
         stagger: 0.3, // İki paragraf arasında bekleme süresi
         ease: "power2.out", // Yumuşak duruş
-        delay: 1 // Diğer elementlerden sonra başla
+        delay: 1, // Diğer elementlerden sonra başla
+        z: 0.1,            // GPU katmanını aktif et
+        rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+        force3D: true
       });
 
       // Generic Section Animations
@@ -75,6 +82,10 @@ function Cases() {
             start: caseId === 'case-1' ? "top bottom+=300" : "top bottom",
             end: "bottom top",
             scrub: 1,
+            z: 0.1,            // GPU katmanını aktif et
+            rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+            force3D: true
+
           },
           y: 100, scale: 0.8, opacity: 0,
         });
@@ -85,6 +96,10 @@ function Cases() {
             trigger: section,
             start: "top 80%",
             toggleActions: "play none none reverse",
+            z: 0.1,            // GPU katmanını aktif et
+            rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+            force3D: true
+
           },
           x: -100, opacity: 0, duration: 1, ease: "back.out(1.2)"
         });
@@ -115,13 +130,6 @@ function Cases() {
           }
         }
       });
-
-      // Footer Animation
-      gsap.from(".main-footer-content", {
-        scrollTrigger: { trigger: ".main-footer", start: "top bottom" },
-        opacity: 0, y: 40, duration: 1.2, ease: "power4.out"
-      });
-
     }, containerRef);
     return () => ctx.revert();
   }, []);
@@ -171,7 +179,7 @@ function Cases() {
               <div className="status-row">
                 <span className="status-badge solved">SOLVED</span>
               </div>
-              <h2 className="case-title">The Pink Suitcase</h2>
+              <h2 className="case-title">The <span className='case-title-span pink-title'>Pink Suitcase</span> </h2>
               <p className="case-description">A pink suitcase where it didn't belong. A trail of impossible suicides. This is where it all started.</p>
             </div>
 
@@ -201,7 +209,7 @@ function Cases() {
               <div className="status-row">
                 <span className="status-badge solved">SOLVED</span>
               </div>
-              <h2 className="case-title">The Mayfly</h2>
+              <h2 className="case-title">The <span className='case-title-span mayfly-title'>Mayfly</span></h2>
               <p className="case-description">One wedding toast. One life to save. As The Detective balances the pressure of being the Best Man, the key to an
                 impossible case lies hidden within the photographs.
               </p>
@@ -275,9 +283,9 @@ function Cases() {
           <div className="case-info-container">
             <div className="case-info-content">
               <div className="status-row">
-                <span className="status-badge classified">CLASSIFIED</span>
+                <span className="status-badge danger">DANGER</span>
               </div>
-              <h2 className="case-title">The Devil Eyes</h2>
+              <h2 className="case-title">The<span className='case-title-span eyes-title' > Devil Eyes</span></h2>
               <p className="case-description">Blue, dull eyes with a repulsive mind. Blackmail is his lifestyle.
                 How can you stop a man that even the people in the palace cannot control </p>
             </div>
@@ -352,7 +360,7 @@ function Cases() {
               <div className="status-row">
                 <span className="status-badge private">PRIVATE</span>
               </div>
-              <h2 className="case-title">'THE' <span className='title-woman'> WOMAN</span></h2>
+              <h2 className="case-title">'THE' <span className='title-woman'> Woman</span></h2>
               <p className="case-description">Elevated pulses and dilated pupils. You can find yourself on the losing side because of a certain chemical defect.
                 And it’s called: SENTIMENT </p>
             </div>
@@ -404,7 +412,8 @@ function Cases() {
       {/* Footer */}
       <footer className="main-footer">
 
-        <div className="footer-copyright">Sherlock TV Tribute | For Educational Purposes Only</div>
+        <div className="footer-copyright">Sir Arthur Conan Doyle & Sherlock TV Tribute
+          <p>| For Educational Purposes Only</p></div>
       </footer>
 
 
