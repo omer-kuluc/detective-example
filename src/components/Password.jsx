@@ -11,16 +11,13 @@ const Password = ({ onUnlock }) => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      // 1. ADIM: Başlangıç
       gsap.set(containerRef.current, { visibility: "hidden", opacity: 0 });
       gsap.set(phoneRef.current, { opacity: 0, y: 30 });
       gsap.set(['.passcode-slot', '.label-text', '.credits-text'], { opacity: 0 });
       gsap.set(inputRef.current, { scale: 1, x: 0 });
 
-      // 2. ADIM: Sahne
       gsap.set(containerRef.current, { visibility: "visible", opacity: 1 });
 
-      // 3. ADIM: Giriş 
       const introTl = gsap.timeline();
       introTl.to(phoneRef.current, { opacity: 1, y: 0, duration: 1.2, ease: "power4.out" })
         .to('.label-text', { opacity: 1, duration: 0.8, stagger: 0.2 }, "-=0.8")
@@ -54,7 +51,6 @@ const Password = ({ onUnlock }) => {
 
       const tl = gsap.timeline({ delay: 1 });
 
-      // --- 1. HAK: 1895 (Hata) ---
       tl.to({}, { duration: 0.5 })
         .call(() => updateSlot(0, '1')).to({}, { duration: 0.2 })
         .call(() => updateSlot(1, '8')).to({}, { duration: 0.2 })
@@ -71,7 +67,6 @@ const Password = ({ onUnlock }) => {
         .to(guessMsgRef.current, { opacity: 0, duration: 0.3 })
         .call(() => { clearSlots(); setPassColor('#ffffff'); });
 
-      // --- 2. HAK: 221B (Hata) ---
       tl.to({}, { duration: 0.5 })
         .call(() => updateSlot(0, '2')).to({}, { duration: 0.2 })
         .call(() => updateSlot(1, '2')).to({}, { duration: 0.2 })
@@ -88,7 +83,6 @@ const Password = ({ onUnlock }) => {
         .to(guessMsgRef.current, { opacity: 0, duration: 0.3 })
         .call(() => { clearSlots(); setPassColor('#ffffff'); });
 
-      // --- 3. HAK: 1058 (Hata) ---
       tl.to({}, { duration: 0.5 })
         .call(() => updateSlot(0, '1')).to({}, { duration: 0.2 })
         .call(() => updateSlot(1, '0')).to({}, { duration: 0.2 })
@@ -105,7 +99,6 @@ const Password = ({ onUnlock }) => {
         .to(guessMsgRef.current, { opacity: 0, duration: 0.3 })
         .call(() => { clearSlots(); setPassColor('#ffffff'); });
 
-      // --- 4. HAK: (Başarılı) ---
       tl.to({}, { duration: 0.5 })
         .call(() => updateSlot(0, '*')).to({}, { duration: 0.2 })
         .call(() => updateSlot(1, '*')).to({}, { duration: 0.2 })
@@ -119,7 +112,6 @@ const Password = ({ onUnlock }) => {
         .to(guessMsgRef.current, { opacity: 1, color: '#22c55e', duration: 0.3 })
         .to(inputRef.current, { scale: 1.1, duration: 0.4 })
         .to({}, { duration: 1 })
-        // Home'a geçmeden önce ekranı karartıyoruz
         .to(containerRef.current, { opacity: 0, duration: 0.8, ease: "power2.inOut" })
         .call(() => {
           if (onUnlock) onUnlock();
