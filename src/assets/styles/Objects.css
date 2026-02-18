@@ -1,5 +1,3 @@
-/* objects.css */
-
 :root {
   --cyan-500: #06b6d4;
   --cyan-400: #22d3ee;
@@ -21,7 +19,6 @@
   padding-top: 150px;
 }
 
-/* --- GENEL SECTION AYARLARI --- */
 .object-section {
   padding: 5rem 1.5rem;
   min-height: 100vh;
@@ -46,13 +43,9 @@
   z-index: 10;
 }
 
-/* =========================================
-   1. UNIFORM SECTION STYLES
-   ========================================= */
 .uniform-section-wrapper {
   overflow: hidden;
   padding: 0;
-  /* Full screen için padding 0 */
   background-color: #020202;
   flex-direction: column;
 }
@@ -64,7 +57,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Görseli kesmeden sığdır */
   object-position: center top;
   z-index: 1;
   will-change: transform, opacity;
@@ -81,12 +73,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  /* Metni aşağıya al */
   padding: 2rem;
   padding-bottom: 8rem;
-  /* Scroll için alt boşluk */
   pointer-events: none;
-  /* Arkadaki görsele müdahale etmesin */
 }
 
 .uniform-content-text,
@@ -102,12 +91,8 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   transform: translateZ(0);
-  /* Metin seçilebilir olsun */
 }
 
-/* =========================================
-   2. VIOLIN SECTION STYLES (YENİLENMİŞ)
-   ========================================= */
 .violin-section-wrapper {
   overflow: hidden;
   padding: 0;
@@ -122,10 +107,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Tüm ekranı kaplasın */
   object-position: center;
   z-index: 1;
-  /* GSAP başlangıç değerini (clip-path, filter) yönetecek */
 }
 
 .violin-overlay-content {
@@ -137,15 +120,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* Ortada kalsın */
   padding: 1rem;
   pointer-events: none;
 }
-
-
-/* =========================================
-   DİĞER BÖLÜM STYLES
-   ========================================= */
 
 .text-box {
   text-align: center;
@@ -190,8 +167,6 @@
   transform: translateZ(0);
 }
 
-
-/* Phone & Book Styles */
 .content-wrapper .visual-box {
   order: 1;
 }
@@ -329,16 +304,10 @@
   display: flex;
   transform-style: preserve-3d;
   z-index: 2;
-  /* 1. KARANLIK ATMOSFER: Çok koyu lacivert/gri (Gece mavisi) */
   background: linear-gradient(to bottom, #111111, #1a1a1a);
-
-  /* 2. TEMA RENGİ: Sitendeki turkuaz (cyan) rengi vurgu olarak kullanalım */
   border: 2px solid #0891b2;
-  /* Cyan border */
-  /* 3. LOŞ IŞIK: Üstten gelen bir ışık efekti */
   box-shadow:
     0 0 15px rgba(8, 145, 178, 0.2),
-    /* Cyan glow */
     inset 0 0 30px rgba(0, 0, 0, 0.9);
 }
 
@@ -391,10 +360,6 @@
   background: repeating-linear-gradient(90deg, #fff, #fff 2px, #eee 3px, #eee 4px);
 }
 
-/* =========================================
-   MEDIA QUERIES (TABLET & DESKTOP)
-   ========================================= */
-
 @media (width >=768px) {
 
   .objects-container {
@@ -431,7 +396,6 @@
     font-size: 3rem;
   }
 
-  /* Uniform Tablet Fix */
   .uniform-content-text {
     position: absolute;
     bottom: 20%;
@@ -440,14 +404,12 @@
     max-width: 40%;
   }
 
-  /* Violin Tablet Fix (Sağa Yaslı Metin) */
   .violin-content-text {
     position: absolute;
     left: 50%;
     text-align: left;
     text-align: left;
     border-left: none;
-    /* Çizgiyi sağa al */
   }
 
   .phone-frame {
