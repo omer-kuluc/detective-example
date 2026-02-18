@@ -49,7 +49,11 @@ const Objects = () => {
           clipPath: "polygon(0% 45%, 100% 45%, 100% 55%, 0% 55%)",
           scale: 1.2,
           filter: "grayscale(100%) brightness(0.5)",
-          opacity: 1 // Yüklendiği için artık görünür yapabiliriz
+          opacity: 1, // Yüklendiği için artık görünür yapabiliriz,
+          z: 0.1,
+          rotationZ: 0.01,
+          force3D: true
+
         },
         {
           clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -64,7 +68,11 @@ const Objects = () => {
         y: 80,
         opacity: 0,
         duration: 1,
-        ease: "power3.out"
+        ease: "power3.out",
+        z: 0.1,
+        rotationZ: 0.01,
+        force3D: true
+
       }, 1.2);
 
       // ==================================================
@@ -84,7 +92,10 @@ const Objects = () => {
         {
           clipPath: "circle(0% at 50% 50%)",
           scale: 1.3,
-          filter: "grayscale(100%) blur(10px) brightness(0.4)"
+          filter: "grayscale(100%) blur(10px) brightness(0.4)",
+          z: 0.1,
+          rotationZ: 0.01,
+          force3D: true
         },
         {
           clipPath: "circle(100% at 50% 50%)",
@@ -100,7 +111,10 @@ const Objects = () => {
         opacity: 0,
         scale: 0.5,
         duration: 1,
-        ease: "power3.out"
+        ease: "power3.out",
+        z: 0.1,
+        rotationZ: 0.01,
+        force3D: true
       }, 1.5);
 
       // ==================================================
@@ -171,8 +185,8 @@ const Objects = () => {
         <img src="/images/the-violin.jpg" alt="The Violin" className="violin-main-image" />
         <div className="violin-overlay-content">
           <div className="violin-content-text">
-            <span className="section-subtitle">02 // The Virtuoso</span>
-            <h2 className="object-title">The Violin</h2>
+            <span className="section-subtitle">02 // The Violin</span>
+            <h2 className="object-title">The Virtuoso</h2>
             <div className="divider-cyan"></div>
             <p className="object-desc">
               He does not play for applause. When the logic limits,

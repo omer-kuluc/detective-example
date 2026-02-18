@@ -67,6 +67,9 @@
   /* Görseli kesmeden sığdır */
   object-position: center top;
   z-index: 1;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .uniform-overlay-content {
@@ -96,6 +99,9 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
   pointer-events: auto;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
   /* Metin seçilebilir olsun */
 }
 
@@ -125,8 +131,8 @@
 .violin-overlay-content {
   position: relative;
   z-index: 5;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,6 +185,9 @@
   color: var(--slate-400);
   line-height: 1.7;
   font-weight: 300;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 
@@ -246,6 +255,8 @@
   flex-direction: column;
   gap: 0.8rem;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .chat-bubble {
@@ -318,6 +329,17 @@
   display: flex;
   transform-style: preserve-3d;
   z-index: 2;
+  /* 1. KARANLIK ATMOSFER: Çok koyu lacivert/gri (Gece mavisi) */
+  background: linear-gradient(to bottom, #111111, #1a1a1a);
+
+  /* 2. TEMA RENGİ: Sitendeki turkuaz (cyan) rengi vurgu olarak kullanalım */
+  border: 2px solid #0891b2;
+  /* Cyan border */
+  /* 3. LOŞ IŞIK: Üstten gelen bir ışık efekti */
+  box-shadow:
+    0 0 15px rgba(8, 145, 178, 0.2),
+    /* Cyan glow */
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
 }
 
 .book-front {
@@ -338,7 +360,7 @@
   font-family: "Lato", sans-serif;
   font-size: 1.5rem;
   font-weight: 900;
-  color: #e2e8f0;
+  color: #22d3ee;
   margin: 1.5rem 0;
   letter-spacing: 0.1em;
 }
@@ -425,7 +447,6 @@
     text-align: left;
     text-align: left;
     border-left: none;
-    width: 375px;
     /* Çizgiyi sağa al */
   }
 

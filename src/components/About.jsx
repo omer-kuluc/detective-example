@@ -13,7 +13,7 @@ const SherlockMind = () => {
   const floatingClues = useMemo(() => [
     "RACHE", "REDBEARD", "TEAPOT",
     "ORANGE PIPS", "HOUND", "LIAR", "HAMISH",
-    "PAIROT", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
+    "PIRATE", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
     "CARL POWERS", "MISS ME?", "32-24-34", "FALL ON YOUR BACK"
   ], []);
 
