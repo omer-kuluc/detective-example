@@ -38,16 +38,28 @@ function Cases() {
     });
   };
 
-
-
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Intro Animations
+      // 1. Intro Animations (Ana Başlık)
       gsap.from(".cases-hero-title", {
         y: 60, opacity: 0, duration: 1.5, ease: "power4.out", stagger: 0.2
       });
+
+      // 2. Dekorasyon Çizgileri
       gsap.from(".hero-decoration", {
         scaleX: 0, duration: 2, delay: 0.5, ease: "power4.inOut"
+      });
+
+      // 3. --- SIMPLE SMOOTH TEXT ANIMATION ---
+      // "cases-hero-text" sınıfına sahip paragraflar için basit ve şık bir giriş.
+      // Parmak izi/çizgilerden sonra (delay: 1) başlar.
+      gsap.from(".cases-hero-text", {
+        y: 30, // Hafif aşağıdan gelsin
+        opacity: 0, // Görünmez başla
+        duration: 1.5, // Yavaşça belirsin (Smooth)
+        stagger: 0.3, // İki paragraf arasında bekleme süresi
+        ease: "power2.out", // Yumuşak duruş
+        delay: 1 // Diğer elementlerden sonra başla
       });
 
       // Generic Section Animations
@@ -74,7 +86,7 @@ function Cases() {
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
-          x: 50, opacity: 0, duration: 1, ease: "back.out(1.7)"
+          x: -100, opacity: 0, duration: 1, ease: "back.out(1.2)"
         });
 
         // Specific Animation for Case 4 (Hospital/Reichenbach)
@@ -128,10 +140,13 @@ function Cases() {
           <div className="hero-decoration">
             <div className="fingerprint-icon"><Fingerprint className="icon" /></div>
           </div>
+          <p className='cases-hero-text'>Special cases shows that </p>
           <h1 className="cases-hero-title">THE CASES</h1>
+          <p className='cases-hero-text'>what he is capable of </p>
           <div className="hero-decoration">
             <div className="fingerprint-icon"><Fingerprint className="icon" /></div>
           </div>
+
         </div>
       </header>
 
@@ -140,7 +155,6 @@ function Cases() {
         {/* --- CASE 1: A STUDY IN PINK --- */}
         <section className="case-section layout-normal" data-case-id="case-1">
           <div className="case-art-container">
-            <div className="bg-number"><span>1</span></div>
             {/* Suitcase Art HTML */}
             <div className="art-wrapper group">
               <div className="suitcase-body">
@@ -156,100 +170,19 @@ function Cases() {
             <div className="info-header">
               <div className="status-row">
                 <span className="status-badge solved">SOLVED</span>
-                <span className="case-number">#001</span>
               </div>
               <h2 className="case-title">The Pink Suitcase</h2>
-              <p className="case-description">The suitcase that shouldn’t be there. A series of impossible suicides. This is where it all began.</p>
+              <p className="case-description">A pink suitcase where it didn't belong. A trail of impossible suicides. This is where it all started.</p>
             </div>
 
 
           </div>
         </section>
 
-        {/* --- CASE 2: THE GREAT GAME --- */}
-        <section className="case-section layout-reverse" data-case-id="case-2">
-          <div className="case-art-container">
-            <div className="bg-number"><span>2</span></div>
-            {/* Bomb Art HTML */}
-            <div className="art-wrapper bomb-wrapper group">
-              <div className="bomb-sticks">
-                {[1, 2, 3, 4, 5].map(i => (
-                  <div key={i} className="dynamite">
-                    <div className="dynamite-highlight"></div>
-                    <div className="dynamite-band"></div>
-                  </div>
-                ))}
-                <div className="bomb-brace top"></div>
-                <div className="bomb-brace bottom"></div>
-              </div>
-              <div className="bomb-timer-container">
-                <div className="bomb-timer">
-                  00:0{Math.floor(Math.random() * 9)}:2{Math.floor(Math.random() * 9)}
-                </div>
-              </div>
-              <div className="art-glow red"></div>
-            </div>
-          </div>
-          <div className="case-info-container">
-            <div className="info-header">
-              <div className="status-row">
-                <span className="status-badge danger">DANGER</span>
-                <span className="case-number">#002</span>
-              </div>
-              <h2 className="case-title">The Game</h2>
-              <p className="case-description">It starts with a murder happened 20 years ago. People with a bomb vest ticking. A consulting criminal reveals himself through an elaborate puzzle.</p>
-            </div>
-          </div>
-        </section>
-
-        {/* --- CASE 3: A SCANDAL IN BELGRAVIA --- */}
-        <section className="case-section layout-normal" >
-          <div className="case-art-container">
-            <div className="bg-number"><span>3</span></div>
-            {/* Phone Art HTML */}
-            <div className="art-wrapper perspective-container group">
-              <div className="cases-phone-body">
-                <p className='cases-phone-body-text'>SHER</p>
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="custom-lock-icon"
-                >
-                  {/* Kilit Sapı (Hareket edecek kısım) */}
-                  <path className="lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4" />
-                  {/* Kilit Gövdesi (Sabit kalacak) */}
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                </svg>
-              </div>
-              <div className="art-glow cyan"></div>
-            </div>
-          </div>
-          <div className="case-info-container">
-            <div className="info-header">
-              <div className="status-row">
-                <span className="status-badge private">PRIVATE</span>
-                <span className="case-number">#003</span>
-              </div>
-              <h2 className="case-title">'THE' <span className='title-woman'> WOMAN</span></h2>
-              <p className="case-description">Elevated pulses and dilated pupils. You can find yourself on the losing side
-                because of certain chemical defect. <br />And It's called : SENTIMENT
-              </p>
-            </div>
-
-
-          </div>
-        </section>
 
         {/* --- CASE 5: THE SIGN OF THREE (Sign of Three - Wedding) --- */}
         <section className="case-section layout-reverse" data-case-id="case-5">
           <div className="case-art-container">
-            <div className="bg-number"><span>4</span></div>
             {/* Wedding Camera Art HTML */}
             <div className="art-wrapper group">
               <div className="camera-body">
@@ -267,24 +200,19 @@ function Cases() {
             <div className="info-header">
               <div className="status-row">
                 <span className="status-badge solved">SOLVED</span>
-                <span className="case-number">#005</span>
               </div>
-              <h2 className="case-title">The May Fly</h2>
-              <p className="case-description">A wedding toast and a life to save. When The Detective navigates the complexities of a Best Man’s duty, he can solve a case
-                by looking photographs
+              <h2 className="case-title">The Mayfly</h2>
+              <p className="case-description">One wedding toast. One life to save. As The Detective balances the pressure of being the Best Man, the key to an
+                impossible case lies hidden within the photographs.
               </p>
             </div>
           </div>
         </section>
 
-        {/* --- CASE 6: HIS LAST VOW (Mind Palace) --- */}
         {/* --- CASE 6: HIS LAST VOW (Magnussen - Clean Oval Style) --- */}
         <section className="case-section layout-normal" data-case-id="case-6">
           <div className="case-art-container">
-            <div className="bg-number"><span>5</span></div>
-
             <div className="art-wrapper mind-palace-art group">
-
               {/* Altın Telli Gözlük Yapısı */}
               <div className="glasses-structure">
                 <div className="bridge-gold"></div>
@@ -348,20 +276,98 @@ function Cases() {
             <div className="case-info-content">
               <div className="status-row">
                 <span className="status-badge classified">CLASSIFIED</span>
-                <span className="case-number">#006</span>
               </div>
               <h2 className="case-title">The Devil Eyes</h2>
-              <p className="case-description">Blue, dull eyes with a repulsive <span className='mind-palace-text'>mind. </span>
-                Blackmail is his lifestyle. How could you stop this man even the people in the <span className='mind-palace-text'>palace</span> can't intervene ?
-              </p>
+              <p className="case-description">Blue, dull eyes with a repulsive mind. Blackmail is his lifestyle.
+                How can you stop a man that even the people in the palace cannot control </p>
             </div>
           </div>
         </section>
 
+        {/* --- CASE 2: THE GREAT GAME --- */}
+        <section className="case-section layout-reverse" data-case-id="case-2">
+          <div className="case-art-container">
+            {/* Bomb Art HTML */}
+            <div className="art-wrapper bomb-wrapper group">
+              <div className="bomb-sticks">
+                {[1, 2, 3, 4, 5].map(i => (
+                  <div key={i} className="dynamite">
+                    <div className="dynamite-highlight"></div>
+                    <div className="dynamite-band"></div>
+                  </div>
+                ))}
+                <div className="bomb-brace top"></div>
+                <div className="bomb-brace bottom"></div>
+              </div>
+              <div className="bomb-timer-container">
+                <div className="bomb-timer">
+                  00:0{Math.floor(Math.random() * 9)}:2{Math.floor(Math.random() * 9)}
+                </div>
+              </div>
+              <div className="art-glow red"></div>
+            </div>
+          </div>
+          <div className="case-info-container">
+            <div className="info-header">
+              <div className="status-row">
+                <span className="status-badge danger">DANGER</span>
+              </div>
+              <h2 className="case-title">The Game</h2>
+              <p className="case-description">A twenty-year-old cold case resurfaces. Victims trapped in ticking bomb vests. And a consulting criminal
+                who reveals his identity through a deadly, elaborate puzzle.</p>
+            </div>
+          </div>
+        </section>
+
+
+        {/* --- CASE 3: A SCANDAL IN BELGRAVIA --- */}
+        <section className="case-section layout-normal" >
+          <div className="case-art-container">
+            {/* Phone Art HTML */}
+            <div className="art-wrapper perspective-container group">
+              <div className="cases-phone-body">
+                <p className='cases-phone-body-text'>SHER</p>
+                <svg
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="custom-lock-icon"
+                >
+                  {/* Kilit Sapı (Hareket edecek kısım) */}
+                  <path className="lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  {/* Kilit Gövdesi (Sabit kalacak) */}
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                </svg>
+              </div>
+              <div className="art-glow cyan"></div>
+            </div>
+          </div>
+          <div className="case-info-container">
+            <div className="info-header">
+              <div className="status-row">
+                <span className="status-badge private">PRIVATE</span>
+              </div>
+              <h2 className="case-title">'THE' <span className='title-woman'> WOMAN</span></h2>
+              <p className="case-description">Elevated pulses and dilated pupils. You can find yourself on the losing side because of a certain chemical defect.
+                And it’s called: SENTIMENT </p>
+            </div>
+
+
+          </div>
+        </section>
+
+
+
+
+
         {/* --- CASE 4: THE REICHENBACH FALL (Hospital) --- */}
         <section className="case-section layout-reverse" data-case-id="case-4">
           <div className="case-art-container">
-            <div className="bg-number"><span>6</span></div>
             {/* Hospital Art HTML */}
             <div className="hospital-root group">
               <div className="hospital-building-container">
@@ -382,12 +388,12 @@ function Cases() {
             <div className="info-header">
               <div className="status-row">
                 <span className="status-badge fatal">FATAL</span>
-                <span className="case-number">#004</span>
               </div>
               <h2 className="case-title">The Fall</h2>
-              <p className="case-description"> Edge of the waterfall or rooftop.
-                How can you <span className='fall-text staying-text'>stayin' </span><span className='fall-text alive-text'>alive</span> when you come face to face with an enemy
-                burning with a deathwish ?
+              <p className="case-description"> The edge of a waterfall, or a rooftop in London. How can you keep
+                <span className='fall-text staying-text'> stayin' </span><span className='fall-text alive-text'> alive </span>
+                when you stand face to face with an enemy
+                burning with a death wish ?
               </p>
             </div>
           </div>
