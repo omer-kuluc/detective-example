@@ -8,10 +8,12 @@
   padding: 1rem;
 }
 
+/* Navigasyon linklerinin doğru konumlanması için relative ekledik */
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 /* Credits Butonu */
@@ -37,27 +39,39 @@
 /* Navigasyon Linkleri */
 .nav-links {
   display: none;
+  /* JS ile açılana kadar gizli */
   flex-direction: column;
   position: absolute;
   top: 100%;
+  /* Header'ın hemen altına */
   left: 0;
   width: 100%;
   background-color: #000;
-  padding: 2rem 0;
+  padding: 0;
   text-align: center;
-  gap: 1.5rem;
   border-bottom: 1px solid #222;
-}
-
-.nav-links.mobile-show {
-  display: flex;
+  overflow: hidden;
+  /* Height animasyonu için kritik */
+  z-index: 998;
 }
 
 .nav-links a {
+  display: block;
+  padding: 1.5rem 0;
   color: #ccc;
   text-decoration: none;
   font-size: 1.2rem;
   transition: color 0.3s ease;
+  border-bottom: 1px solid #111;
+}
+
+.nav-links a:last-child {
+  border-bottom: none;
+}
+
+.nav-links a:hover {
+  color: #06b6d4;
+  background-color: #0a0a0a;
 }
 
 /* Dialog - Modal Stilleri */
@@ -68,7 +82,6 @@
   backdrop-filter: blur(8px);
   z-index: 1000;
   display: none;
-  /* JS ile kontrol ediliyor */
   opacity: 0;
   align-items: center;
   justify-content: center;
@@ -147,6 +160,8 @@
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 1001;
+  padding: 0.5rem;
 }
 
 .bar {
@@ -169,28 +184,39 @@
 }
 
 
-@media(width>=768px) {
+@media(width >=768px) {
 
-  /* --- TABLET KODLARI --- */
+  /* --- TABLET ve ÜSTÜ --- */
   .burger-menu {
     display: none;
   }
 
   .nav-links {
-    display: flex;
+    display: flex !important;
+    /* GSAP clearProps çalışmazsa diye !important */
     flex-direction: row;
     position: static;
     width: auto;
+    height: auto !important;
+    opacity: 1 !important;
     padding: 0;
     gap: 1.5rem;
     border: none;
+    overflow: visible;
+    background-color: transparent;
+  }
+
+  .nav-links a {
+    border-bottom: none;
+    padding: 0;
+    font-size: 1rem;
   }
 }
 
 
-@media(width>=1280px) {
+@media(width >=1280px) {
 
-  /* --- DESKTOP KODLARI --- */
+  /* --- DESKTOP --- */
   .header-container {
     padding: 1.5rem 5rem;
   }
@@ -201,6 +227,7 @@
 
   .nav-links a:hover {
     color: #fff;
+    background-color: transparent;
   }
 
   .credits-trigger {

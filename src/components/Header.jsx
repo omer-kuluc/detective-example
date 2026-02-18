@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 
@@ -8,21 +8,83 @@ export default function Header() {
 
   const modalRef = useRef(null)
   const overlayRef = useRef(null)
+  const navRef = useRef(null)
+
+  // İlk render'da animasyonun çalışmasını engellemek için ref
+  const isFirstRender = useRef(true)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
 
-  // Dialog Animasyonu
+  // --- MOBİL MENÜ ANİMASYONU ---
+  useLayoutEffect(() => {
+    // Component unmount olduğunda temizlik yapması için context
+    let ctx = gsap.context(() => { }, navRef)
+
+    // Sadece mobil görünümde çalışsın
+    if (window.innerWidth < 768) {
+      if (isFirstRender.current) {
+        isFirstRender.current = false
+        // Başlangıçta kapalıysa display: none olduğundan emin ol (CSS hallediyor ama garanti olsun)
+        if (!isMenuOpen) gsap.set(navRef.current, { display: 'none' })
+        return
+      }
+
+      if (isMenuOpen) {
+        // AÇILIŞ:
+        // Önce display: flex yap ki görünür olsun, sonra animasyona başla
+        gsap.fromTo(navRef.current,
+          { display: 'flex', height: 0, opacity: 0 },
+          { height: 'auto', opacity: 1, duration: 0.5, ease: "power3.out", overwrite: 'auto' }
+        )
+      } else {
+        // KAPANIŞ:
+        // Revert sorunu yaşamamak için animasyonu doğrudan burada yönetiyoruz.
+        // overwrite: 'auto' ile önceki animasyon (açılış) yarım kaldıysa onu ezer.
+        gsap.to(navRef.current, {
+          height: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power3.in",
+          overwrite: 'auto',
+          onComplete: () => {
+            // Animasyon bitince gizle
+            gsap.set(navRef.current, { display: 'none' })
+          }
+        })
+      }
+    } else {
+      // Masaüstü ise stilleri temizle
+      gsap.set(navRef.current, { clearProps: "all" })
+    }
+
+    // Effect her çalıştığında değil, sadece component tamamen yok olduğunda revert et
+    return () => ctx.revert()
+  }, [isMenuOpen]) // isMenuOpen değiştiğinde çalışır
+
+  // Resize Listener: Masaüstüne geçilirse menüyü düzelt
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        // GSAP stillerini temizle, CSS kontrolü devralsın
+        gsap.set(navRef.current, { clearProps: "all" })
+        if (isMenuOpen) setIsMenuOpen(false)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [isMenuOpen])
+
+  // Dialog Animasyonu (Credits)
   useEffect(() => {
     if (isCreditsOpen) {
-      // Açılış
-      gsap.to(overlayRef.current, { display: 'flex', opacity: 1, duration: 0.4 })
+      gsap.set(overlayRef.current, { display: 'flex' }) // Önce görünür yap
+      gsap.to(overlayRef.current, { opacity: 1, duration: 0.4 })
       gsap.fromTo(modalRef.current,
         { y: -50, opacity: 0, scale: 0.9 },
         { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out" }
       )
     } else {
-      // Kapanış
       gsap.to(modalRef.current, { y: 20, opacity: 0, scale: 0.95, duration: 0.4, ease: "power3.in" })
       gsap.to(overlayRef.current, {
         opacity: 0, duration: 0.4, onComplete: () => {
@@ -36,20 +98,17 @@ export default function Header() {
     <>
       <header className="header-container">
         <div className="header-content">
-          {/* Logo yerine Credits Butonu */}
           <button className="credits-trigger" onClick={() => setIsCreditsOpen(true)}>
             CREDITS
           </button>
 
-          {/* Mobil Menü Butonu */}
           <button className="burger-menu" onClick={toggleMenu} aria-label="Menu">
             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
             <div className={`bar ${isMenuOpen ? 'open' : ''}`}></div>
           </button>
 
-          {/* Navigasyon Linkleri */}
-          <nav className={`nav-links ${isMenuOpen ? 'mobile-show' : ''}`}>
+          <nav className="nav-links" ref={navRef}>
             <Link to="/" onClick={closeMenu}>Home</Link>
             <Link to="/cases" onClick={closeMenu}>Cases</Link>
             <Link to="/about" onClick={closeMenu}>About</Link>
@@ -58,7 +117,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Credits Dialog / Modal */}
+      {/* Credits Dialog */}
       <div className="credits-overlay" ref={overlayRef} onClick={() => setIsCreditsOpen(false)}>
         <div className="credits-modal" ref={modalRef} onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
@@ -74,6 +133,7 @@ export default function Header() {
               Inspired by the brilliant TV Series adaptation <strong>SHERLOCK (2010-2017)</strong>,
             </p>
             <div className="modal-divider"></div>
+            <p className="footer-note">The Game is On</p>
           </div>
         </div>
       </div>
