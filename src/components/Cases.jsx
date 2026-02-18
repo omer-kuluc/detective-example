@@ -362,7 +362,7 @@ function Cases() {
               </div>
               <h2 className="case-title">'THE' <span className='title-woman'> Woman</span></h2>
               <p className="case-description">Elevated pulses and dilated pupils. You can find yourself on the losing side because of a certain chemical defect.
-                And it’s called: SENTIMENT </p>
+                It’s called: <span className='title-woman '>SENTIMENT</span> </p>
             </div>
 
 

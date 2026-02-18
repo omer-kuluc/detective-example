@@ -12,9 +12,9 @@ const SherlockMind = () => {
   // Arka planda uçuşan "Dedektiflik/Zihin" kelimeleri
   const floatingClues = useMemo(() => [
     "RACHE", "REDBEARD", "TEAPOT",
-    "4 SIGNS", "HOUND", "LIAR",
+    "ORANGE PIPS", "HOUND", "LIAR", "HAMISH",
     "PAIROT", "I.O.U", "EAST WIND", "SAVE HIM", "5 NOVEMBER", "RICHARD BROOK",
-    "CARL POWERS", "MISS ME?", "32-24-34"
+    "CARL POWERS", "MISS ME?", "32-24-34", "FALL ON YOUR BACK"
   ], []);
 
   return (
@@ -31,7 +31,7 @@ const SherlockMind = () => {
               className="floating-clue"
               style={{
                 top: `${Math.random() * 70}%`,
-                left: `${Math.random() * 70}%`,
+                left: `${Math.random() * 65}%`,
                 // İki animasyonu CSS variable olarak veya direct style olarak birleştiriyoruz
                 // clueFloat: Hareketi sağlar
                 // clueFlash: Parlamayı sağlar
@@ -62,7 +62,7 @@ const SherlockMind = () => {
         <p className="mind-paragraph">
           To him, the world is not a playground, but a vast puzzle waiting to be deconstructed.
           He rejects the dull routine of existence, craving only the mental exaltation of the <strong>bizarre</strong>.
-          Friendship is a variable he rarely calculates; sentiment is merely grit in a sensitive instrument.
+          Friendship is a variable he rarely calculates.
         </p>
 
         <p className="mind-paragraph">
@@ -79,12 +79,14 @@ const SherlockMind = () => {
 
 // --- DATA (Best Man Speech Quotes) ---
 const TELEGRAM_TEXTS = [
-  "The point of a best man speech - SH",
-  "John Watson is the man who keeps me grounded - SH",
-  "I am not a man of sentiment - SH",
-  "To the very best of times, John - SH",
-  "I have never been a friend until now - SH",
-  "Short and sweet... unlike my usual self - SH",
+  "The Best Man Proposal",
+  "Emotions & Logic",
+  "Friendship",
+  "Funny Stories",
+  "The Bloody Guardsman",
+  "Stag Night",
+  "Solving Cases & Saving Lives",
+  "Hamish"
 ];
 
 const About = () => {
@@ -125,13 +127,25 @@ const About = () => {
       mindTl
         .from(".mind-icon", { scale: 0, rotation: 360, opacity: 0, stagger: 0.2 }, 0.5)
         .from(".mind-divider", { scaleX: 0, duration: 1 }, 0.8)
-        .from(".mind-paragraph", { y: 30, opacity: 0, stagger: 0.3, duration: 1 }, 1)
+        .from(".mind-paragraph", {
+          y: 30, opacity: 0, stagger: 0.3, duration: 1,
+
+          z: 0.1,            // GPU katmanını aktif et
+          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          force3D: true
+
+
+        }, 1)
         .from(".mind-hero-title", {
           scale: 0.9,
           opacity: 0,
           filter: "blur(10px)",
           duration: 1.5,
-          ease: "back.out(1.7)"
+          ease: "back.out(1.7)",
+          z: 0.1,            // GPU katmanını aktif et
+          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          force3D: true
+
         }, 1.2)
 
       // Not: floating-clue animasyonu artık CSS üzerinden (clueFloat + clueFlash) yönetiliyor.
@@ -157,7 +171,13 @@ const About = () => {
           }
         });
 
-        telegramTl.from(".telegram-header", { opacity: 0, y: -100, duration: 1, ease: "power2.out" }, 0);
+        telegramTl.from(".telegram-header", {
+          opacity: 0, duration: 1.5, ease: "power2.out",
+          z: 0.1,            // GPU katmanını aktif et
+          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          force3D: true
+
+        }, 0);
 
         const cards = gsap.utils.toArray('.telegram-card');
         cards.forEach((card, index) => {
@@ -223,9 +243,23 @@ const About = () => {
           { clipPath: "circle(75% at 50% 50%)", scale: 0.8, duration: 2, ease: "power2.inOut" }, 0
         )
         .to(".immortal-bg-img", { filter: "brightness(0.6) grayscale(0.3)", duration: 1 }, 0.5)
-        .fromTo(".immortal-title", { opacity: 0, y: 100, rotationX: -90 }, { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" }, 1.5)
-        .fromTo(".immortal-subtitle", { opacity: 0, y: 50 }, { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" }, 1.8)
-        .fromTo(".immortal-quote", { opacity: 0, y: 80, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" }, 2)
+        .fromTo(".immortal-title", {
+          opacity: 0, y: 100, rotationX: -90,
+          z: 0.1,
+          rotationZ: 0.01,
+          force3D: true
+
+        }, { opacity: 1, y: 0, rotationX: 0, duration: 1, ease: "power3.out" }, 1.5)
+        .fromTo(".immortal-subtitle", {
+          opacity: 0, y: 50, z: 0.1,
+          rotationZ: 0.01,
+          force3D: true
+        }, { opacity: 1, y: 25, duration: 0.8, ease: "power2.out" }, 1.8)
+        .fromTo(".immortal-quote", {
+          opacity: 0, y: 80, scale: 0.9, z: 0.1,
+          rotationZ: 0.01,
+          force3D: true
+        }, { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out" }, 2)
         .to(".immortal-content-overlay", { opacity: 0, duration: 1, ease: "power2.in" }, 3.5);
 
     }, mainContainerRef);
@@ -246,18 +280,19 @@ const About = () => {
         <div className="telegram-header">
           <h2 className="telegram-title">The Best Man's Toast</h2>
           <p className="telegram-subtitle">
-            Fragments from a speech delivered at a wedding, etched in cream and memory.
+            Even for a man who avoids friendship, rejecting his
+            doctor friend’s request to be the Best Man was impossible.
+            Here are the notes from that wedding day.
           </p>
         </div>
         <div className="telegram-cards-container">
           {TELEGRAM_TEXTS.map((text, i) => (
             <div key={i} className="telegram-card" style={{ zIndex: i, transform: `rotate(${(i % 2 === 0 ? -2 : 2) * (i * 0.5)}deg)` }}>
               <div className="telegram-card-top">
-                <span className="telegram-meta">Wedding Breakfast</span>
-                <span className="telegram-meta">Reception</span>
+                <span className="telegram-meta">Notes for speech</span>
+                <span className="telegram-meta">05/01/2014</span>
               </div>
               <p className="telegram-text">"{text.split(' - ')[0]}"</p>
-              <div className="telegram-footer">Spoken by Mr. Sherlock Holmes</div>
             </div>
           ))}
         </div>
@@ -283,27 +318,28 @@ const About = () => {
           <div className="janus-grid">
             <div className="grid-item">
               <div className="contradiction-pair"><span className="contradiction-text text-cyan">EAST</span><div className="connect-line"></div><span className="contradiction-text text-slate">WEST</span></div>
-              <p className="item-label">Universal Mind</p>
+              <p className="item-label">Direction</p>
             </div>
             <div className="grid-item">
               <div className="contradiction-pair"><span className="contradiction-text text-cyan">PAST</span><div className="connect-line"></div><span className="contradiction-text text-slate">FUTURE</span></div>
-              <p className="item-label">Timeless Observation</p>
+              <p className="item-label">Time</p>
             </div>
             <div className="grid-item">
-              <div className="contradiction-pair"><span className="contradiction-text text-cyan">BEGIN</span><div className="connect-line"></div><span className="contradiction-text text-slate">END</span></div>
-              <p className="item-label">Absolute Logic</p>
+              <div className="contradiction-pair"><span className="contradiction-text text-cyan">BEGINNING</span><div className="connect-line"></div><span className="contradiction-text text-slate">END</span></div>
+              <p className="item-label">Existence</p>
             </div>
             <div className="grid-item">
               <div className="contradiction-pair"><span className="contradiction-text text-cyan">GOOD</span><div className="connect-line"></div><span className="contradiction-text text-slate">EVIL</span></div>
-              <p className="item-label">Necessary Balance</p>
+              <p className="item-label">Choice</p>
             </div>
           </div>
           <div className="quote-wrapper">
             <p className="quote-text">
               Janus is known as the god of doors, transitions, beginnings, and endings in Roman mythology.
-              He is the Janus of London. He is east-west,past-future, beginning-end, good-evil (if necessary).
-              He contains all contradictions at the same time within a single heartbeat.
-              <br />
+              He is the Janus of London. He is east and west, past and future, beginning and end, good and evil (if necessary).
+              He holds all contradictions within a single heartbeat.
+            </p>
+            <p className='quote-text angel-text'>
               He is on the side of the angels, but he is not one of them.
             </p>
           </div>
