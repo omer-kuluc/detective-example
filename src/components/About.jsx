@@ -1,15 +1,11 @@
-// about.jsx
 import React, { useLayoutEffect, useRef, useMemo, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { History, Compass, Fingerprint, Activity } from 'lucide-react';
 
-// GSAP plugin kaydı
 gsap.registerPlugin(ScrollTrigger);
 
-// --- NEW COMPONENT: THE SHERLOCK MIND ---
 const SherlockMind = () => {
-  // Arka planda uçuşan "Dedektiflik/Zihin" kelimeleri
   const floatingClues = useMemo(() => [
     "RACHE", "REDBEARD", "TEAPOT",
     "ORANGE PIPS", "HOUND", "LIAR", "HAMISH",
@@ -19,11 +15,9 @@ const SherlockMind = () => {
 
   return (
     <div className="sherlock-mind-container">
-      {/* 1. Arka Plan: Uçuşan Kanıtlar */}
       <div className="clues-layer">
         {floatingClues.map((clue, i) => {
-          // Rastgelelik hesaplamaları
-          const flashDuration = Math.random() * 8 + 5;  // 3s - 8s arası yanıp sönme döngüsü
+          const flashDuration = Math.random() * 8 + 5;
 
           return (
             <span
@@ -32,9 +26,6 @@ const SherlockMind = () => {
               style={{
                 top: `${Math.random() * 70}%`,
                 left: `${Math.random() * 65}%`,
-                // İki animasyonu CSS variable olarak veya direct style olarak birleştiriyoruz
-                // clueFloat: Hareketi sağlar
-                // clueFlash: Parlamayı sağlar
                 animation: `clueFloat linear infinite, clueFlash ${flashDuration}s ease-in-out infinite -2.5s`
               }}
             >
@@ -44,10 +35,8 @@ const SherlockMind = () => {
         })}
       </div>
 
-      {/* 2. Görsel Efekt: Tarama Çizgisi */}
       <div className="scan-line"></div>
 
-      {/* 3. Ana İçerik */}
       <div className="mind-content">
         <div className="icon-row">
           <Fingerprint className="mind-icon" size={40} />
@@ -64,14 +53,10 @@ const SherlockMind = () => {
           He rejects the dull routine of existence, craving only the mental exaltation of the <strong>bizarre</strong>.
           Friendship is a variable he rarely calculates.
         </p>
-
         <p className="mind-paragraph">
           He stands alone on the precipice of logic. Neither police nor private eye.
         </p>
-
       </div>
-
-      {/* Vignette (Karanlık Köşeler) */}
       <div className="mind-vignette"></div>
     </div>
   );
@@ -98,10 +83,6 @@ const About = () => {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // =========================================
-      // 1. SHERLOCK MIND ANIMATIONS (HERO)
-      // =========================================
-
       const mindTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".mind-section",
@@ -112,7 +93,6 @@ const About = () => {
         }
       });
 
-      // A) Giriş: Sinematik Perde Açılışı
       gsap.fromTo(".sherlock-mind-container",
         { clipPath: "circle(5% at 50% 50%)", filter: "grayscale(100%) blur(5px)" },
         {
@@ -123,15 +103,14 @@ const About = () => {
         }
       );
 
-      // B) İçerik Animasyonları
       mindTl
         .from(".mind-icon", { scale: 0, rotation: 360, opacity: 0, stagger: 0.2 }, 0.5)
         .from(".mind-divider", { scaleX: 0, duration: 1 }, 0.8)
         .from(".mind-paragraph", {
           y: 30, opacity: 0, stagger: 0.3, duration: 1,
 
-          z: 0.1,            // GPU katmanını aktif et
-          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          z: 0.1,
+          rotationZ: 0.01,
           force3D: true
 
 
@@ -142,18 +121,12 @@ const About = () => {
           filter: "blur(10px)",
           duration: 1.5,
           ease: "back.out(1.7)",
-          z: 0.1,            // GPU katmanını aktif et
-          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          z: 0.1,
+          rotationZ: 0.01,
           force3D: true
 
         }, 1.2)
 
-      // Not: floating-clue animasyonu artık CSS üzerinden (clueFloat + clueFlash) yönetiliyor.
-      // GSAP ile sadece parallax etkisi verebiliriz ama CSS animasyonu daha performanslı parlamalar için yeterli.
-
-      // =========================================
-      // 2. TELEGRAM ANIMATIONS
-      // =========================================
 
       mm.add("(min-width: 1024px)", () => {
         setIsMobile(false);
@@ -173,8 +146,8 @@ const About = () => {
 
         telegramTl.from(".telegram-header", {
           opacity: 0, duration: 1.5, ease: "power2.out",
-          z: 0.1,            // GPU katmanını aktif et
-          rotationZ: 0.01,   // Piksel titremesini önle (sihirli dokunuş)
+          z: 0.1,
+          rotationZ: 0.01,
           force3D: true
 
         }, 0);
@@ -205,10 +178,6 @@ const About = () => {
           onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.6, ease: "power2.out", overwrite: true }),
         });
       });
-
-      // =========================================
-      // 3. JANUS & IMMORTAL
-      // =========================================
 
       if (janusRef.current) {
         gsap.fromTo(janusRef.current,
@@ -269,13 +238,11 @@ const About = () => {
 
   return (
     <div ref={mainContainerRef} className="about-container">
-      {/* --- Section 0: THE SHERLOCK MIND --- */}
       <section className="mind-section">
         <SherlockMind />
         <div className="scroll-hint"><span>Analyze</span></div>
       </section>
 
-      {/* --- Section 1: TELEGRAMS --- */}
       <section className="telegram-section">
         <div className="telegram-header">
           <h2 className="telegram-title">The Best Man's Toast</h2>
@@ -346,7 +313,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* --- Section 3: IMMORTAL --- */}
       <section className="immortal-section">
         <div className="immortal-media-wrapper">
           <img src="/images/waterfall.jpg" alt="Reichenbach Falls" className="immortal-bg-img" />
