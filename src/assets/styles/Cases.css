@@ -26,7 +26,6 @@
   overflow-x: hidden;
 }
 
-/* --- Background Decor --- */
 .background-decor {
   position: fixed;
   inset: 0;
@@ -57,11 +56,6 @@
   background-color: rgba(80, 7, 36, 0.1);
 }
 
-/* --- Typography Utilities --- */
-
-/* --- Mobile First Styles (Default) --- */
-
-/* Header */
 .main-header {
   padding-top: 5rem;
   padding-bottom: 3rem;
@@ -144,10 +138,8 @@
   margin: 0 auto;
 }
 
-/* Main Grid */
 .cases-grid {
   max-width: 80rem;
-  /* 7xl */
   margin: 0 auto;
   padding: 0 1.5rem 10rem 1.5rem;
   display: flex;
@@ -162,7 +154,6 @@
   align-items: center;
 }
 
-/* Case Art Container */
 .case-art-container {
   flex: 1;
   width: 100%;
@@ -177,7 +168,6 @@
   transform: translateZ(0);
 }
 
-/* Case Info Container */
 .case-info-container {
   flex: 1;
   display: flex;
@@ -237,8 +227,6 @@
   font-style: italic;
 }
 
-
-/* Status Badges */
 .status-badge {
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
@@ -273,7 +261,6 @@
   border-color: rgba(6, 182, 212, 0.2);
 }
 
-
 .status-badge.fatal {
   background: rgba(239, 68, 68, 0.1);
   color: #f87171;
@@ -285,8 +272,6 @@
   color: #60a5fa;
   border-color: rgba(59, 130, 246, 0.2);
 }
-
-/* --- SYMBOLIC ART STYLES (Converted) --- */
 
 .art-wrapper {
   position: relative;
@@ -323,7 +308,6 @@
   filter: blur(20px);
 }
 
-/* Case 1: Suitcase */
 .suitcase-body {
   width: 10rem;
   height: 13rem;
@@ -383,7 +367,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Case 2: Bomb */
 .bomb-wrapper {
   flex-direction: column;
   gap: 1.5rem;
@@ -464,7 +447,6 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Case 3: Phone */
 .cases-phone-body {
   width: 16rem;
   height: 30rem;
@@ -496,41 +478,29 @@
   letter-spacing: 0.2em;
   text-shadow: 0 0 50px rgba(34, 211, 238, 0.8);
   transition: all 0.4s ease;
-  /* Yumuşak geçiş için bunu ekle */
 }
 
-/* Hover durumları */
 .cases-phone-body:hover .cases-phone-body-text {
   color: #fff;
   text-shadow: 0 0 15px #22d3ee;
 }
 
-/* --- Kilit İkonu Genel Ayarları --- */
 .custom-lock-icon {
   color: #22d3ee;
-  /* Neon Mavi */
   transition: all 0.4s ease;
   overflow: visible;
-  /* Sap dışarı taşarsa kesilmesin */
 }
 
-/* Kilit Sapı (Halka) Başlangıç Ayarı */
 .lock-shackle {
   transform-origin: 17px 11px;
-  /* Dönme noktası (sağ alt uç) */
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  /* Yaylanma efekti */
 }
 
-/* --- Hover Efekti (Kilit Açılma Hareketi) --- */
 .cases-phone-body:hover .lock-shackle {
-  /* Önce 3px yukarı kalkar, sonra 45 derece sağa döner */
   transform: translateY(-3px) rotate(45deg);
   stroke: #ffffff;
-  /* Açılınca beyaza döner */
 }
 
-/* İkonun tamamı için ekstra parlama */
 .cases-phone-body:hover .custom-lock-icon {
   filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.8));
   color: #ffffff;
@@ -542,7 +512,6 @@
 }
 
 
-/* Case 4: Hospital */
 .hospital-root {
   position: relative;
   width: 100%;
@@ -558,7 +527,6 @@
   border-right: 4px solid var(--neutral-800);
   border-top: 4px solid var(--neutral-800);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-  /* overflow: visible needed for letters falling */
 }
 
 .hospital-roof {
@@ -628,7 +596,6 @@
   color: #40bee9;
 }
 
-/* Case 5: Wedding (Camera) */
 .camera-body {
   width: 13rem;
   height: 10rem;
@@ -697,9 +664,6 @@
   box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
 
-/* Case 6: Mind Palace (Eyes) */
-/* --- Case 6: Mind Palace (Glasses & Dead Eyes) --- */
-
 .mind-palace-art {
   width: 100%;
   max-width: 600px;
@@ -710,18 +674,15 @@
   perspective: 1000px;
 }
 
-/* --- Gözlük İskeleti --- */
 .glasses-structure {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  /* İki cam arası mesafe */
   padding: 2rem 0;
   position: relative;
 }
 
-/* Altın Köprü (Görseldeki ince tel) */
 .bridge-gold {
   position: absolute;
   top: 45%;
@@ -730,13 +691,11 @@
   width: 2rem;
   height: 0.8rem;
   border-top: 2px solid #d4af37;
-  /* Altın rengi */
   border-radius: 50% 50% 0 0;
   z-index: 20;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Burunluklar */
 .nose-pad {
   position: absolute;
   top: 48%;
@@ -758,7 +717,6 @@
   transform: rotate(-10deg);
 }
 
-/* Sap Bağlantı Noktaları (Lug) */
 .temple-lug {
   position: absolute;
   top: 42%;
@@ -776,22 +734,16 @@
   right: 2px;
 }
 
-/* --- Oval Lens (Görseldeki Elips Gözlük) --- */
 .lens-oval {
   position: relative;
   width: 12rem;
-  /* Genişlik */
   height: 6rem;
-  /* Yükseklik (Tam oval için) */
   border-radius: 50%;
-  /* Tam oval şekil */
-  /* Çerçevesiz (Rimless) görünüm: Border yok, sadece gölge ve parlama */
   background: rgba(0, 0, 0, 0.2);
   box-shadow:
     0 5px 15px rgba(0, 0, 0, 0.5),
     inset 0 0 10px rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  /* Camın dışına taşan her şeyi kes */
   transition: transform 0.5s ease;
 }
 
@@ -799,7 +751,6 @@
   transform: scale(1.02);
 }
 
-/* Camın kenar parlaması (Kesilmiş cam efekti) */
 .rim-highlight {
   position: absolute;
   inset: 0;
@@ -808,7 +759,6 @@
   pointer-events: none;
 }
 
-/* --- Cam Yüzeyi --- */
 .glass-surface {
   width: 100%;
   height: 100%;
@@ -819,16 +769,10 @@
   background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05), transparent 60%);
 }
 
-/* --- Göz Maskesi (Eye Aperture) --- */
-/* İrisin yuvarlak kalıp, gözün badem şeklinde görünmesini sağlayan katman */
 .eye-mask {
   width: 7rem;
-  /* Göz açıklığı genişliği */
   height: 3.5rem;
-  /* Göz açıklığı yüksekliği (Kısık bakış) */
-  /* Badem şekli oluşturma */
   border-radius: 100%;
-  /* Bu noktada clip-path kullanarak daha keskin bir badem şekli veriyoruz */
   clip-path: ellipse(100% 70% at 50% 50%);
   position: relative;
   overflow: hidden;
@@ -836,14 +780,11 @@
   align-items: center;
   justify-content: center;
   background: #000;
-  /* Göz çukuru karanlığı */
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 1);
 }
 
-/* Göz Akı (Sclera) */
 .eye-sclera {
   width: 110%;
-  /* Maskeden biraz büyük */
   height: 110%;
   background: radial-gradient(circle, #cbd5e1 30%, #475569 80%, #0f172a 100%);
   display: flex;
@@ -851,24 +792,14 @@
   justify-content: center;
 }
 
-/* --- İris (Temiz Daire) --- */
 .iris-clean {
   width: 3rem;
-  /* İris boyutu */
   height: 3rem;
-  /* Tam kare boyut */
   border-radius: 50%;
-  /* Kusursuz daire */
-
-  /* Magnussen Buz Mavisi */
   background: radial-gradient(circle,
       #90c6cc 10%,
-      /* En iç açık mavi */
       #0891b2 50%,
-      /* Orta mavi/yeşil */
-      #164e63 90%
-      /* Dış koyu halka (Limbic ring) */
-    );
+      #164e63 90%);
 
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
   display: flex;
@@ -877,10 +808,8 @@
   filter: contrast(1.1) brightness(1.1);
 }
 
-/* --- Göz Bebeği (Pupil) --- */
 .pupil-clean {
   width: 0.8rem;
-  /* Çok küçük, soğuk odaklı */
   height: 0.8rem;
   background-color: #000;
   border-radius: 50%;
@@ -889,7 +818,6 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Göz Bebeği Işıltısı (Canlılık/Islaklık) */
 .reflection-sharp {
   position: absolute;
   top: 25%;
@@ -901,7 +829,6 @@
   box-shadow: 0 0 2px #fff;
 }
 
-/* Göz Kapağı Gölgeleri (Derinlik katar) */
 .eyelid-shadow {
   position: absolute;
   left: 0;
@@ -922,7 +849,6 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
-/* --- Cam Parlaması (Glass Glare) --- */
 .glass-glare {
   position: absolute;
   top: 0;
@@ -934,7 +860,6 @@
   z-index: 60;
 }
 
-/* --- REC Arayüzü --- */
 .rec-ui-layer {
   position: absolute;
   top: 15px;
@@ -968,7 +893,6 @@
   }
 }
 
-/* Alt Yazılar */
 .hud-data-row {
   margin-top: 2rem;
   display: flex;
@@ -999,7 +923,6 @@
   text-align: center;
 }
 
-/* --- FOOTER STYLES --- */
 .main-footer {
   background-color: rgba(0, 0, 0, 0.4);
   border-top: 1px solid var(--neutral-900);
@@ -1017,15 +940,8 @@
   opacity: 0.5;
 }
 
-
-
-/* ========================================= */
-/* TABLET MEDIA QUERY (min-width: 768px)     */
-/* ========================================= */
-
 @media (width >=768px) {
 
-  /* Header adjustments */
   .cases-hero-title {
     font-size: 6rem;
     letter-spacing: -0.075em;
@@ -1039,8 +955,6 @@
     font-size: 1.25rem;
   }
 
-  /* Case Section Layouts */
-  /* Row Direction alternating handled by utility classes */
   .case-section.layout-normal {
     flex-direction: row;
   }
@@ -1054,13 +968,10 @@
     align-items: center;
   }
 
-  /* Text Sizes */
   .case-title {
     font-size: 3rem;
   }
 
-
-  /* Footer Columns */
   .main-footer-content {
     grid-template-columns: repeat(12, 1fr);
     gap: 4rem;
@@ -1080,12 +991,10 @@
     text-align: right;
   }
 
-  /* Modal Grid */
   .stats-grid {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Case 3: Phone */
   .cases-phone-body-text {
     font-size: 1.5rem;
     color: #22d3ee;
@@ -1096,10 +1005,6 @@
 
 }
 
-
-/* ========================================= */
-/* DESKTOP MEDIA QUERY (min-width: 1280px)   */
-/* ========================================= */
 
 @media (width >=1280px) {
   .main-header {
@@ -1114,12 +1019,10 @@
 
   .cases-grid {
     gap: 15rem;
-    /* Larger spacing between cases */
   }
 
   .case-section {
     gap: 8rem;
-    /* Larger gap between image and text */
   }
 
   .case-title {
