@@ -3,7 +3,6 @@ import React from 'react'
 export default function Footer() {
   return (
     <footer className="main-footer">
-      {/* Üst kısımdaki ince cyan çizgi efekti */}
       <div className="footer-glow-line"></div>
 
       <div className="footer-copyright">
