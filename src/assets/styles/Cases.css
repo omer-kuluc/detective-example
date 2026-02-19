@@ -86,7 +86,7 @@
   color: white;
   line-height: 1.1;
   margin-bottom: 2rem;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.1rem;
   will-change: transform, opacity;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -945,7 +945,7 @@
 
   .cases-hero-title {
     font-size: 6rem;
-    letter-spacing: -0.075em;
+    letter-spacing: 0.15rem;
   }
 
   .pre-title {
