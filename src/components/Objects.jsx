@@ -231,11 +231,6 @@ const Objects = () => {
           </div>
         </div>
       </section>
-      <footer className="main-footer">
-
-        <div className="footer-copyright">Sir Arthur Conan Doyle & Sherlock TV Tribute
-          <p>| For Educational Purposes Only</p></div>
-      </footer>
     </div>
   );
 };

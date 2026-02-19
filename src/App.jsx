@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Cases from './components/Cases';
 import About from './components/About';
 import Objects from './components/Objects';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
             </Routes>
 
           </PageWrapper>
+          <Footer />
+
         </>
       )}
     </div>
